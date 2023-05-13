@@ -27,7 +27,7 @@ public class DecompTask extends Task{
 
     }
     @Override
-    public void planifyauto(String startperiod, String endperiod, String day) {
+    public void planifyauto(String startperiod, String endperiod) {
         if (  Integer.toString((Integer.parseInt(startperiod) + Integer.parseInt(duration))).compareTo(endperiod) == 0 ){
 
             this.starttime =startperiod;
