@@ -35,11 +35,8 @@ public class Calendar implements TaskUser{
         // go to the programmed date in the calendar
         // check if there is a timeslot with the same date
 
-        String[] parts = day.split(" ");
-        String dateStr = parts[0];
-        String weekday = parts[1];
-        LocalDate date = LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        String key = date+weekday;
+
+        String key = day;
         System.out.println(this.Days.get(key) );
         this.Days.get(key).planifyman(task);
 

@@ -12,12 +12,13 @@ public class TaskController {
         SimpleTask task = new SimpleTask("Task1","30","10:00","Scheduled");
         User user = new User("Amine","Bouchoucha","lm_bouchoucha@esi.dz","passwd","5633");
 
-        String str = "2023-01-01Sunday";
+        String date = "2023-01-01Sunday";
 
-        System.out.println(user.getCalendar().getDays().get(str).getDate() );
+        System.out.println(user.getCalendar().getDays().get(date).getDate() );
+        //user.getCalendar().planifyman(task,str);
+        user.planifyman(task,date);
 
-        }
-        //user.planifyman(task,str);
+    }
 
     }
 

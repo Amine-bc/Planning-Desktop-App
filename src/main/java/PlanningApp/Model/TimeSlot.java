@@ -28,4 +28,7 @@ public class TimeSlot implements Evaluation{
         this.task = task;
     }
 
+    public Task getTask() {
+        return this.task;
+    }
 }

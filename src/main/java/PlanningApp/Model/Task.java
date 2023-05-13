@@ -7,6 +7,9 @@ public abstract class Task implements TaskUser {
     String duration ;
     String starttime;
     String endtime ;
-    
 
+
+    public String getTaskname() {
+        return this.name;
+    }
 }
