@@ -3,7 +3,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class Day {
+public class Day implements TaskUser{
 
     public Day(String date){
         this.date = date;
@@ -22,4 +22,62 @@ public class Day {
     private int nb_mintasks = 0;
     private ArrayList <TimeSlot> timeslot ;
 
+    public String getDate() {
+        return date;
+    }
+    public void setDate(String date) {
+        this.date = date;
+    }
+    public ArrayList<TimeSlot> getTimeslot() {
+        return timeslot;
+    }
+    public void setTimeslot(ArrayList<TimeSlot> timeslot) {
+        this.timeslot = timeslot;
+    }
+    public String getDayname() {
+        return dayname;
+    }
+    public void setDayname(String dayname) {
+        this.dayname = dayname;
+    }
+    public int getNb_mintasks() {
+        return nb_mintasks;
+    }
+    public void setNb_mintasks(int nb_mintasks) {
+        this.nb_mintasks = nb_mintasks;
+    }
+    @Override
+    public void planifyman(String time, String duration) {
+        // TODO Auto-generated method stub
+
+    }
+    public void planifyman(Task task){
+        //planify in the first time in the day
+        this.timeslot.get(0).setTask(task);
+    }
+    @Override
+    public void planifyauto(String startperiod, String endperiod) {
+        // TODO Auto-generated method stub
+
+    }
+    @Override
+    public void postpone(String time) {
+        // TODO Auto-generated method stub
+
+    }
+    @Override
+    public void replan(String time) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void evaluate(){
+        // TODO Auto-generated method stub
+
+    }
+
+    public void printDay() {
+        System.out.println("Day [date=" + date + ", dayname=" + dayname + ", nb_mintasks=" + nb_mintasks + ", timeslot="
+                + timeslot + "]");
+    }
 }

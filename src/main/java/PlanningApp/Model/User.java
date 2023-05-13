@@ -7,19 +7,25 @@ public class User implements TaskUser{
 
     public String minduration = "30";
 
+    public User(String name, String surname, String email, String password, String Id) {
+        this.profile = new Profile(name,surname,email,password,Id);
+        this.calendar = new Calendar();
+        this.Id = Id;
+    }
     public Task createTask(String name,String duration, String starttime,String endtime,String state){
-        return new SimpleTask(name,duration,starttime,endtime,state)    ;
+        return new SimpleTask(name,duration,starttime,state)    ;
     }
     @Override
     public void planifyman(String time, String duration) {
         // overloaded not usefull in this method
     }
-    public void planifyman(Task task){
+    public void planifyman(Task task, String day){
         // go to the calendar try to planify in the asked time
         // if it's not possible ask the user to choose another time
         // if it's possible planify it
 
-        calendar.planifyman(task);
+        calendar.planifyman(task,day);
+        // correct the day here
 
 
     } ;
@@ -44,5 +50,9 @@ public class User implements TaskUser{
     @Override
     public void evaluate() {
 
+    }
+
+    public Calendar getCalendar() {
+        return calendar;
     }
 }
