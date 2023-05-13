@@ -1,4 +1,36 @@
 package PlanningApp.Model;
 
+import java.util.HashSet;
+
 public class Project {
+
+    private String name;
+    private String description;
+    private HashSet<Task> tasks;
+
+    public Project(String name, String description, String id) {
+        this.name = name;
+        this.description = description;
+        this.tasks = new HashSet<Task>();
+    }
+
+    public void addTask(Task task){
+        tasks.add(task);
+    }
+    public void removeTask(Task task){
+        tasks.remove(task);
+    }
+    public void setName(String name){
+        this.name = name;
+    }
+    public void setDescription(String description){
+        this.description = description;
+    }
+    public String getName(){
+        return this.name;
+    }
+    public String getDescription(){
+        return this.description;
+    }
+
 }

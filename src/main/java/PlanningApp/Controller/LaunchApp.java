@@ -6,7 +6,7 @@ public class LaunchApp {
 
         public static void main(String[] args) {
             //test
-            Calendar calendar = new Calendar();
-
+            TaskController taskController = new TaskController();
+            taskController.createTask();
         }
 }

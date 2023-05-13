@@ -22,7 +22,6 @@ public class User implements TaskUser{
         calendar.planifyman(task);
 
 
-
     } ;
 
     @Override
