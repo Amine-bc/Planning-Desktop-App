@@ -15,7 +15,6 @@ public class TaskController {
         String date = "2023-01-01Sunday";
 
         System.out.println(user.getCalendar().getDays().get(date).getDate() );
-        //user.getCalendar().planifyman(task,str);
         user.planifyman(task,date);
 
     }
