@@ -17,7 +17,7 @@ public class SimpleTask extends Task{
 
     @Override
     public void planifyman(String time,String duration) {
-        this.state = State.SCHEDULED ;
+        this.state = State.notRealized ;
     }
     @Override
     public void planifyauto(String startperiod, String endperiod) {
@@ -25,8 +25,7 @@ public class SimpleTask extends Task{
         if (  Integer.toString((Integer.parseInt(startperiod) + Integer.parseInt(duration))).compareTo(endperiod) == 0 ){
 
         this.starttime =startperiod;
-        this.endtime =endperiod ;
-        this.state = State.SCHEDULED ;
+        this.state = State.notRealized ;
     }else{
             System.out.println("Error in planification down in simple task model");
         }
@@ -34,19 +33,18 @@ public class SimpleTask extends Task{
     @Override
     public void postpone(String time) {
         //change the start time and end time
-        if (Integer.parseInt(time) > Integer.parseInt(starttime)){
-            this.starttime =time;
-            this.endtime = Integer.toString(Integer.parseInt(time) + Integer.parseInt(duration)) ;}
-        else{
-            System.out.println("Error in postponing down in simple task model");
+        if (Integer.parseInt(time) > Integer.parseInt(starttime)) {
+            this.starttime = time;
+        }else{
+                System.out.println("Error in postponing down in simple task model");
+            }
         }
-    }
+
 
     @Override
     public void replan(String time) {
         //change the start time and end time
         this.starttime =time;
-        this.endtime = Integer.toString(Integer.parseInt(time) + Integer.parseInt(duration)) ;
 
     }
     @Override
@@ -79,10 +77,5 @@ public class SimpleTask extends Task{
     public String getStarttime() {
         return starttime;
     }
-    public void setEndtime(String endtime) {
-        this.endtime = endtime;
-    }
-    public String getEndtime() {
-        return endtime;
-    }
+
 }
