@@ -1,11 +1,38 @@
 package PlanningApp.Model;
 
 public class User implements TaskUser{
+
+    private String username;
+    private String password;
+
     Calendar calendar ;
     Profile profile ;
     public String Id;
 
     public String minduration = "30";
+
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     public User(String name, String surname, String email, String password, String Id) {
         this.profile = new Profile(name,surname,email,password,Id);
