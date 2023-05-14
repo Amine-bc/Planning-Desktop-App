@@ -1,6 +1,6 @@
 package PlanningApp.Model;
 
-public class User implements TaskUser{
+public class User implements TaskUser,TimeslotUser{
 
     private String username;
     private String password;
@@ -36,11 +36,13 @@ public class User implements TaskUser{
 
     public User(String name, String surname, String email, String password, String Id) {
         this.profile = new Profile(name,surname,email,password,Id);
-        this.calendar = new Calendar();
         this.Id = Id;
     }
-    public Task createTask(String name,String duration, String starttime,String endtime,String state){
-        return new SimpleTask(name,duration,starttime)    ;
+    public void createCalendar( int startyear, int endyear, int startmonth, int startday, int endmonth, int endday ){
+        this.calendar = new Calendar(startyear,endyear ,startmonth, startday, endmonth, endday, this.minduration);
+    }
+    public Task createTask(String name,String duration, String starttime){
+        return new SimpleTask(name,duration,starttime) ;
     }
     @Override
     public void planifyman(String time, String duration) {
@@ -50,10 +52,8 @@ public class User implements TaskUser{
         // go to the calendar try to planify in the asked time
         // if it's not possible ask the user to choose another time
         // if it's possible planify it
-
         calendar.planifyman(task,day);
         // correct the day here
-
 
     } ;
 
@@ -82,4 +82,17 @@ public class User implements TaskUser{
     public Calendar getCalendar() {
         return calendar;
     }
+    @Override
+    public void addtimeslot(TimeSlot timeSlot){};
+
+    public void addtimeslot(String day,String start, String end ){
+        if ( start.compareTo(end) < 0 ){
+            TimeSlot timeslot = new TimeSlot(start, end);
+            this.calendar.addtimeslot(timeslot,day);
+        }else{
+            System.out.println("Error invalid input");
+            //TODO exeption time invalid
+        }
+
+        };
 }

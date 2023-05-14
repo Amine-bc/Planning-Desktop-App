@@ -1,27 +1,52 @@
 package PlanningApp.Model;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-public class Day implements TaskUser{
-
-    public Day(String date){
+public class Day implements TaskUser,TimeCalcs,TimeslotUser{
+     private String mintimeslot;
+    public Day(String date, String mintimeslot){
         this.date = date;
         this.timeslot = new ArrayList<TimeSlot>();
-        LocalTime time = LocalTime.parse("00:00"); // Parse the initial time
-        for (int i = 0; i < 10; i++) { // Loop 10 times to add 30 minutes each time
-            String formattedTime0 = time.format(DateTimeFormatter.ofPattern("HH:mm")); // Format the time as "HH:mm"
-            time = time.plusMinutes(30); // Add 30 minutes to the time
-            String formattedTime = time.format(DateTimeFormatter.ofPattern("HH:mm")); // Format the time as "HH:mm"
-            this.timeslot.add(new TimeSlot(formattedTime,formattedTime,"30"));
-        }
+        this.tasks = new ArrayList<Task>();
+//        LocalTime time = LocalTime.parse("00:00"); // Parse the initial time
+//
+//        String[] timeParts = this.mintimeslot.split(":");
+//
+//        int hours = Integer.parseInt( timeParts[0] );
+//
+//        int minutes = Integer.parseInt(timeParts[1]);
+//
+//        // Convert the time to minutes since midnight
+//
+//        int minutesSinceMidnight = hours * 60 + minutes;
+//
+//        // Divide the minutes by the time slot to get the number of time slots
+//        int numTimeSlots = 24*60 / minutesSinceMidnight;
+//        for (int i = 0; i < numTimeSlots  ; i++) { // Loop 10 times to add 30 minutes each time
+//            String formattedTime0 = time.format(DateTimeFormatter.ofPattern("HH:mm")); // Format the time as "HH:mm"
+//            time = time.plusMinutes(Integer.parseInt(this.mintimeslot)); // Add minutes to the time
+//            String formattedTime = time.format(DateTimeFormatter.ofPattern("HH:mm")); // Format the time as "HH:mm"
+//            this.timeslot.add(new TimeSlot(formattedTime,formattedTime,this.mintimeslot));
+//        }
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+//        this.timeslot.add(new TimeSlot( LocalTime.parse(this.timeslot.get(numTimeSlots).getTask().getStarttime()).plus(Duration.parse("PT" + this.timeslot.get(numTimeSlots).getTask().getStarttime().replace(':', 'H') + "M")).format(formatter) ,"23:59", LocalTime.parse("23:59").minus(Duration.parse("PT" + this.timeslot.get(numTimeSlots).getTask().getStarttime().replace(':', 'H') + "M")).format(formatter) ));
+//
         //System.out.println(this.timeslot);
+
     }
+
+
     private String date ;
     private String dayname ;
     private int nb_mintasks = 0;
     private ArrayList <TimeSlot> timeslot ;
-
+    private ArrayList<Task> tasks ;
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+    public void setTasks(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
     public String getDate() {
         return date;
     }
@@ -46,6 +71,9 @@ public class Day implements TaskUser{
     public void setNb_mintasks(int nb_mintasks) {
         this.nb_mintasks = nb_mintasks;
     }
+
+
+
     @Override
     public void planifyman(String time, String duration) {
         // TODO Auto-generated method stub
@@ -53,8 +81,25 @@ public class Day implements TaskUser{
     }
     public void planifyman(Task task){
         //planify in the first time in the day
-        this.timeslot.get(0).setTask(task);
-        System.out.println(this.timeslot.get(0).getTask().getName());
+        if ( task.getDuration().compareTo(this.mintimeslot) > 0 ) {
+            if ( this.timeslot.isEmpty() ){
+
+                System.out.println("No timeslots");
+                //TODO here view
+
+            }else{
+
+                this.timeslot.forEach( timeSlot -> {
+                    if ( timeSlot.getstart().compareTo(task.getStarttime()) < 0 && timeSlot.getend().compareTo(task.getEndtime()) > 0 ){
+                        // simply planify add to tasks arraylist + remove time from timeslots
+                        timeSlot.setend(subtract(timeSlot.getend(),task.getDuration()));
+                    }
+                } );
+
+            }
+        }else{
+            // TODO problem in duration Exeption
+        }
 
     }
     @Override
@@ -78,8 +123,37 @@ public class Day implements TaskUser{
 
     }
 
+
+    @Override
+    public void addtimeslot(TimeSlot timeSlot){
+        //TODO add the cases where there is chauvechement
+        AtomicBoolean inserted = new AtomicBoolean(false);
+        this.timeslot.forEach( timeSlot1 -> {
+            if (  timeSlot1.getstart().compareTo(timeSlot.getstart()) >= 0 && timeSlot1.getend().compareTo(timeSlot.getend()) <= 0 ){
+                // change it
+                timeSlot1.setstart(timeSlot.getstart());
+                timeSlot1.setend(timeSlot.getend());
+                timeSlot1.setduration( subtract(timeSlot1.getend(),timeSlot1.getstart()) );
+                inserted.set(true);
+            }
+        } );
+        if ( !inserted.get() ){
+            this.timeslot.add(timeSlot);
+        }
+    }
+
+    public void removetimeslot( TimeSlot timeSlot){
+        this.timeslot.remove(timeSlot);
+    }
+
+    public void printTimeslots(){
+        this.timeslot.forEach( timeSlot -> {
+            System.out.println("Start"+timeSlot.getstart()+"End"+timeSlot.getend()+"Duration"+timeSlot.getduration());
+        } );
+    }
+
     public void printDay() {
-        System.out.println("Day [date=" + date + ", dayname=" + dayname + ", nb_mintasks=" + nb_mintasks + ", timeslot="
-                + timeslot + "]");
+        System.out.println("Day [date=" + date + ", dayname=" + dayname + ", nb_mintasks=" + nb_mintasks + ", timeslot is "+ ( timeslot.isEmpty() ? "Empty ]": "contains data here it is...") );
+        this.printTimeslots() ;
     }
 }

@@ -1,34 +1,48 @@
 package PlanningApp.Model;
 
-public class TimeSlot implements Evaluation{
+import java.util.ArrayList;
+
+public class TimeSlot implements Evaluation,TimeCalcs{
 
     private String start;
     private String state ;
     private String end;
     private String duration;
-    private Task task;
-    public TimeSlot(String start, String end, String duration){
+    public TimeSlot(String start, String end){
         this.start = start;
         this.end = end;
-        this.duration = duration;
-        this.state = "free";
+        this.duration = subtract(this.end,this.start);
     }
 
     public String checkstate(){
         return this.state;
     };
-    public void addTask(Task task){
-        this.task = task;
-    };
+
     public void evaluate(){
 
     };
 
-    public void setTask(Task task) {
-        this.task = task;
+    public String getstart(){
+        return this.start ;
     }
 
-    public Task getTask() {
-        return this.task;
+    public String getend(){
+        return this.end ;
+    }
+
+    public void setend(String end){
+        this.end = end ;
+    }
+
+    public void setstart(String start){
+        this.start = start ;
+    }
+
+    public String getduration(){
+        return this.duration ;
+    }
+
+    public void setduration(String getduration) {
+        this.duration = getduration;
     }
 }
