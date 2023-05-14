@@ -21,9 +21,9 @@ public class DecompTask extends Task{
 
     @Override
     public void planifyman(String time, String duration) {
-        this.state = State.SCHEDULED ;
+        this.state = State.notRealized ;
         this.starttime =time;
-        this.endtime = Integer.toString(Integer.parseInt(time) + Integer.parseInt(duration)) ;
+        this.duration = duration ;
 
     }
     @Override
@@ -31,8 +31,8 @@ public class DecompTask extends Task{
         if (  Integer.toString((Integer.parseInt(startperiod) + Integer.parseInt(duration))).compareTo(endperiod) == 0 ){
 
             this.starttime =startperiod;
-            this.endtime =endperiod ;
-            this.state = State.SCHEDULED ;
+            this.duration = duration ;
+            this.state = State.notRealized ;
         }else{
             System.out.println("Error in auto planification down in simple task model");
         }
@@ -41,7 +41,8 @@ public class DecompTask extends Task{
     public void postpone(String time) {
         if (Integer.parseInt(time) > Integer.parseInt(starttime)){
             this.starttime =time;
-            this.endtime = Integer.toString(Integer.parseInt(time) + Integer.parseInt(duration)) ;}
+            this.duration  = duration ;
+        }
         else{
             System.out.println("Error in postponing down in simple task model");
         }
@@ -51,7 +52,6 @@ public class DecompTask extends Task{
     public void replan(String time) {
 
         this.starttime =time;
-        this.endtime = Integer.toString(Integer.parseInt(time) + Integer.parseInt(duration)) ;
 
     }
     @Override

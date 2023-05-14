@@ -1,5 +1,9 @@
 package PlanningApp.Model;
 
 public enum State {
-    SCHEDULED
+    notRealized,
+    completed,
+    inProgress,
+    Cancelled,
+    delayed
 }

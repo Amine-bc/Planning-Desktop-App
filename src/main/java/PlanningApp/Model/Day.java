@@ -54,7 +54,7 @@ public class Day implements TaskUser{
     public void planifyman(Task task){
         //planify in the first time in the day
         this.timeslot.get(0).setTask(task);
-        System.out.println(this.timeslot.get(0).getTask().getTaskname());
+        System.out.println(this.timeslot.get(0).getTask().getName());
 
     }
     @Override
