@@ -100,10 +100,7 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser{
                         System.out.println(" starttime"+task.getStarttime() + " " + task.getEndtime() + " " + task.getDuration() + " " + task.getName());
                     }
                 }
-
-
             }
-
     }
     @Override
     public void planifyauto(String startperiod, String endperiod) {
