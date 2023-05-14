@@ -13,7 +13,7 @@ public class User implements TaskUser{
         this.Id = Id;
     }
     public Task createTask(String name,String duration, String starttime,String endtime,String state){
-        return new SimpleTask(name,duration,starttime,state)    ;
+        return new SimpleTask(name,duration,starttime)    ;
     }
     @Override
     public void planifyman(String time, String duration) {

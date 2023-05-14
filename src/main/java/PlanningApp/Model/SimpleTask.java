@@ -2,7 +2,7 @@ package PlanningApp.Model;
 
 public class SimpleTask extends Task{
 
-    public SimpleTask(String name,String duration, String starttime,String state){
+    public SimpleTask(String name,String duration, String starttime){
         // this constructor is used once someone clicks on new task
         // first we ask if he wants to auto plan it or manually
         // second we ask for its type decomp or simple
@@ -10,7 +10,7 @@ public class SimpleTask extends Task{
             this.name = name;
             this.starttime =starttime;
             this.duration =duration ;
-            this.state = State.valueOf(state.toUpperCase());
+            this.state = State.notRealized;
 
     }
 
