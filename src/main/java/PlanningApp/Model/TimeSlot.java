@@ -45,4 +45,16 @@ public class TimeSlot implements Evaluation,TimeCalcs{
     public void setduration(String getduration) {
         this.duration = getduration;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TimeSlot)) return false;
+
+        TimeSlot timeSlot = (TimeSlot) o;
+
+        if (!getstart().equals(timeSlot.getstart())) return false;
+        return getend().equals(timeSlot.getend());
+    }
+
 }

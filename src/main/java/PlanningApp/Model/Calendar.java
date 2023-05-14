@@ -90,4 +90,9 @@ public class Calendar implements TaskUser,TimeslotUser{
     public void addtimeslot(TimeSlot timeSlot, String day){
         this.Days.get(day).addtimeslot(timeSlot);
     };
-}
+    @Override
+    public void removetimeslot(String start , String end){};
+    public void removetimeslot(String day, String start , String end ) {
+     this.Days.get(day).removetimeslot(start,end);
+    }
+    }

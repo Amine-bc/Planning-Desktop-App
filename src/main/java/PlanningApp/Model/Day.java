@@ -1,13 +1,15 @@
 package PlanningApp.Model;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Day implements TaskUser,TimeCalcs,TimeslotUser{
-     private String mintimeslot;
+    private String mintimeslot;
     public Day(String date, String mintimeslot){
         this.date = date;
         this.timeslot = new ArrayList<TimeSlot>();
         this.tasks = new ArrayList<Task>();
+        this.mintimeslot = mintimeslot;
 //        LocalTime time = LocalTime.parse("00:00"); // Parse the initial time
 //
 //        String[] timeParts = this.mintimeslot.split(":");
@@ -76,50 +78,47 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser{
 
     @Override
     public void planifyman(String time, String duration) {
-        // TODO Auto-generated method stub
 
     }
     public void planifyman(Task task){
         //planify in the first time in the day
-        if ( task.getDuration().compareTo(this.mintimeslot) > 0 ) {
+        //System.out.println(task.getDuration()+" "+this.mintimeslot);
             if ( this.timeslot.isEmpty() ){
-
                 System.out.println("No timeslots");
                 //TODO here view
 
             }else{
 
-                this.timeslot.forEach( timeSlot -> {
-                    if ( timeSlot.getstart().compareTo(task.getStarttime()) < 0 && timeSlot.getend().compareTo(task.getEndtime()) > 0 ){
+                //iterate using iterator over this arraylist
+                Iterator<TimeSlot> timeSlotIterator = this.timeslot.iterator();
+                while ( timeSlotIterator.hasNext() ){
+                    TimeSlot timeSlot = timeSlotIterator.next();
+                    if ( timeSlot.getstart().compareTo(task.getStarttime()) <= 0 && timeSlot.getend().compareTo(task.getEndtime()) >= 0 ){
                         // simply planify add to tasks arraylist + remove time from timeslots
-                        timeSlot.setend(subtract(timeSlot.getend(),task.getDuration()));
+                        this.tasks.add(task);
+                        this.removetimeslot(task.getStarttime(),task.getEndtime());
+                        System.out.println(" starttime"+task.getStarttime() + " " + task.getEndtime() + " " + task.getDuration() + " " + task.getName());
                     }
-                } );
+                }
+
 
             }
-        }else{
-            // TODO problem in duration Exeption
-        }
 
     }
     @Override
     public void planifyauto(String startperiod, String endperiod) {
-        // TODO Auto-generated method stub
 
     }
     @Override
     public void postpone(String time) {
-        // TODO Auto-generated method stub
 
     }
     @Override
     public void replan(String time) {
-        // TODO Auto-generated method stub
 
     }
 
     public void evaluate(){
-        // TODO Auto-generated method stub
 
     }
 
@@ -142,9 +141,18 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser{
         }
     }
 
-    public void removetimeslot( TimeSlot timeSlot){
+    public void removetimeslot( String start , String end ){
+        TimeSlot timeSlot = new TimeSlot(start,end) ;
         this.timeslot.remove(timeSlot);
-    }
+        System.out.println("Time slot removed");
+        //TODO add the cases where there is chauvechement and where the slot to remove is in the middle of a slot
+        }
+
+public void printTasks(){
+        this.tasks.forEach( task -> {
+            System.out.println("Start"+task.getStarttime()+"End"+task.getEndtime()+"Duration"+task.getDuration()+"Name"+task.getName());
+        } );
+}
 
     public void printTimeslots(){
         this.timeslot.forEach( timeSlot -> {
@@ -155,5 +163,12 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser{
     public void printDay() {
         System.out.println("Day [date=" + date + ", dayname=" + dayname + ", nb_mintasks=" + nb_mintasks + ", timeslot is "+ ( timeslot.isEmpty() ? "Empty ]": "contains data here it is...") );
         this.printTimeslots() ;
+        if (this.tasks.isEmpty()) {
+            System.out.println("No tasks");
+        } else {
+            System.out.println("Tasks are:");
+        }
+        this.printTasks();
+        //TODO print tasks add it in view
     }
 }

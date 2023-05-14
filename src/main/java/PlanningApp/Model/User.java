@@ -9,7 +9,7 @@ public class User implements TaskUser,TimeslotUser{
     Profile profile ;
     public String Id;
 
-    public String minduration = "30";
+    public String minduration = "00:30";
 
 
 
@@ -42,7 +42,17 @@ public class User implements TaskUser,TimeslotUser{
         this.calendar = new Calendar(startyear,endyear ,startmonth, startday, endmonth, endday, this.minduration);
     }
     public Task createTask(String name,String duration, String starttime){
+        //check if task is biger then this.minduration
+        // if it's not return null
+        if ( duration.compareTo(this.minduration) < 0 ){
+            System.out.println("Task duration is smaller then the minimum duration");
+            //TODO: add view
+            return null ;
+        }else{
+            System.out.println("Task created");
+            //TODO: add view here to show the task created say if you don't plan you will leave it
         return new SimpleTask(name,duration,starttime) ;
+        }
     }
     @Override
     public void planifyman(String time, String duration) {
@@ -95,4 +105,10 @@ public class User implements TaskUser,TimeslotUser{
         }
 
         };
+    public void removetimeslot( String start , String end ) {
+    }
+    public void removetimeslot( String day, String start , String end ) {
+        this.calendar.removetimeslot(day,start,end);
+    }
+
 }
