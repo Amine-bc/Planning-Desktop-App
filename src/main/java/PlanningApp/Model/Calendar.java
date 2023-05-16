@@ -6,11 +6,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeMap;
 
+
 public class Calendar implements TaskUser{
+
+    private LocalDate currentDate;
     private TreeMap<String, Day> Days;
     private String firstday ;
     private String lastday ;
     //private ArrayList<Task> tasks; if needed use it if not it's okat it's commented
+
+
+    public LocalDate getCurrentDate() {
+        return currentDate;
+    }
+
+    public void goToPreviousMonth() {
+        currentDate = currentDate.minusMonths(1);
+    }
+
+    public void goToNextMonth() {
+        currentDate = currentDate.plusMonths(1);
+    }
 
     public Calendar(){
         // initialize the calendar with days for each day also call for the constructor
@@ -22,7 +38,11 @@ public class Calendar implements TaskUser{
         this.Days = dayMap.getDays();
         System.out.println(dayMap.getDays());
         //System.out.println(dayMap.getDays().get("2023-01-01Sunday"));
+
+        //here what i did:
+        currentDate = LocalDate.now();
     }
+
 
     public void addDay(String day){
         this.Days.put(day, new Day(day));
@@ -43,6 +63,7 @@ public class Calendar implements TaskUser{
         this.Days.get(key).printDay();
 
     }
+
     @Override
     public void planifyauto(String startperiod, String endperiod) {
 
