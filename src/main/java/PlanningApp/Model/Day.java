@@ -86,9 +86,7 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser{
             if ( this.timeslot.isEmpty() ){
                 System.out.println("No timeslots");
                 //TODO here view
-
             }else{
-
                 //iterate using iterator over this arraylist
                 Iterator<TimeSlot> timeSlotIterator = this.timeslot.iterator();
                 while ( timeSlotIterator.hasNext() ){
@@ -96,7 +94,7 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser{
                     if ( timeSlot.getstart().compareTo(task.getStarttime()) <= 0 && timeSlot.getend().compareTo(task.getEndtime()) >= 0 ){
                         // simply planify add to tasks arraylist + remove time from timeslots
                         this.tasks.add(task);
-                        this.removetimeslot(task.getStarttime(),task.getEndtime());
+                        timeSlotIterator.remove();
                         System.out.println(" starttime"+task.getStarttime() + " " + task.getEndtime() + " " + task.getDuration() + " " + task.getName());
                     }
                 }

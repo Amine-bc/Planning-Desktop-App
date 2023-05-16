@@ -10,12 +10,18 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.TreeMap;
 
+
 public class Calendar implements TaskUser,TimeslotUser{
+
+
+    private LocalDate currentDate;
     private TreeMap<String, Day> Days;
     private String mintimeslot ;
     private String firstday ;
     private String lastday ;
     //private ArrayList<Task> tasks; if needed use it if not it's okat it's commented
+
+    public Calendar(){}
 
     public Calendar( int startyear, int endyear, int startmonth, int startday, int endmonth, int endday, String mintimeslot){
         // initialize the calendar with days for each day also call for the constructor
@@ -26,7 +32,23 @@ public class Calendar implements TaskUser,TimeslotUser{
         this.mintimeslot = mintimeslot ;
         System.out.println(this.getDays());
         //System.out.println(dayMap.getDays().get("2023-01-01Sunday"));
+
+        //here what i did:
+        currentDate = LocalDate.now();
     }
+    public LocalDate getCurrentDate() {
+        return currentDate;
+    }
+
+    public void goToPreviousMonth() {
+        currentDate = currentDate.minusMonths(1);
+    }
+
+    public void goToNextMonth() {
+        currentDate = currentDate.plusMonths(1);
+    }
+
+
 
 
 
