@@ -22,8 +22,12 @@ public class DayController {
     @FXML
     private SplitPane splitPane;
 
+    @FXML
+    private Label titleLabel;
+
     public void Showday(User user, String dayname) {
         Day day = user.getCalendar().getDays().get(dayname);
+        titleLabel.setText(dayname);
         populateData(day);
     }
 
