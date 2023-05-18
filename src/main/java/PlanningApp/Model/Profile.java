@@ -6,12 +6,11 @@ import java.util.HashSet;
 public class Profile {
     // contains personel infos
 
-    public Profile(String name, String surname, String email, String password, String Id) {
+    public Profile(String name, String surname, String email, String password) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
-        this.Id = Id;
         this.badge = null;
         this.projects = null;
         this.stats = null;

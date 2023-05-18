@@ -1,14 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="PlanningApp.View.DayPage"
-            prefHeight="400.0" prefWidth="600.0" >
-
-</AnchorPane>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="PlanningApp.Controller.DayController" maxWidth="600" style="-fx-padding: 20 0 0 20">
+    <left>
+        <HBox style="-fx-padding: 10;">
+            <GridPane style="-fx-border-color: #0598FF; -fx-border-width: 2px; -fx-border-radius: 10px;">
+                <VBox spacing="10">
+                    <Label text="TimeSlots" textFill="#0598FF" style="-fx-font-weight: bold; -fx-padding: 0 0 0 70" />
+                    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" fitToHeight="true" prefWidth="250" style="-fx-padding: 10 10 10 10">
+                        <content>
+                            <VBox fx:id="timeslotPane" spacing="10" maxWidth="300" />
+                        </content>
+                    </ScrollPane>
+                </VBox>
+            </GridPane>
+        </HBox>
+    </left>
+    <center>
+        <HBox style="-fx-padding: 10;">
+            <GridPane style="-fx-border-color: #0598FF; -fx-border-width: 2px; -fx-border-radius: 10px;">
+                <VBox spacing="10">
+                    <Label text="Tasks" textFill="#0598FF" style="-fx-font-weight: bold; -fx-padding: 0 0 0 110" />
+                    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" prefWidth="250"  style="-fx-padding: 10 10 10 10">
+                        <content>
+                            <VBox fx:id="taskPane" spacing="10" maxWidth="300"/>
+                        </content>
+                    </ScrollPane>
+                </VBox>
+            </GridPane>
+        </HBox>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER" style="-fx-padding: 10;">
+            <Button text="Add Task +" style="-fx-cursor: hand;-fx-background-color: #0598FF; -fx-border-radius: 5px; -fx-text-fill: white; -fx-padding: 5px 10px;" />
+        </HBox>
+    </bottom>
+</BorderPane>

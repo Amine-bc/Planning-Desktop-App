@@ -1,13 +1,32 @@
 package PlanningApp.Model;
 
-public abstract class Task implements TaskUser {
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
-    String name ;
-    State state ;
-    String duration ;
-    String starttime;
+public abstract class Task implements TaskUser, TimeCalcs {
 
+    public Task(){}; // default constructor
+    public Task(String name, String duration, String starttime) {
+        this.name = name;
+        this.duration = duration;
+        this.starttime = starttime;
+        this.endtime = add(starttime, duration) ;
+        this.state = State.notRealized;
 
+    }
+    private String name ;
+    private State state ;
+    private String duration ;
+    private String starttime;
+    private String endtime;
+
+    public void setEndtime(String endtime) {
+        this.endtime = endtime;
+    }
+
+    public String getEndtime() {
+        return endtime;
+    }
 
     // setters and getters
     public void setName(String name) {
