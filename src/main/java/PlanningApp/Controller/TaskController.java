@@ -6,7 +6,7 @@ public class TaskController {
     public void createTask(){
 
         SimpleTask task = new SimpleTask("Task1","30","10:00");
-        User user = new User("Amine","Bouchoucha","lm_bouchoucha@esi.dz","passwd");
+        User user = new User("Amine","passwd");
 
         String date = "2023-01-01Sunday";
 

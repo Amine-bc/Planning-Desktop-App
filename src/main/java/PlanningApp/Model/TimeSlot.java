@@ -1,8 +1,9 @@
 package PlanningApp.Model;
 
+import java.io.*;
 import java.util.ArrayList;
 
-public class TimeSlot implements Evaluation,TimeCalcs{
+public class TimeSlot implements Evaluation,TimeCalcs, Serializable {
 
     private String start;
     private String state ;

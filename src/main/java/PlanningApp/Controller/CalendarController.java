@@ -148,7 +148,7 @@ public class CalendarController implements Initializable {
         String formattedDate = currentDate.format(formatter);
         System.out.println("Day clicked is " + formattedDate);
 
-        User user = new User("Amine","Bouchoucha","lm_bouchoucha@esi.dz","passwd");
+        User user = new User("Amine","passwd");
 
 
         user.createTask("Task1","02:00","04:25");

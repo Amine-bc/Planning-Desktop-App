@@ -38,7 +38,7 @@ public class LoginController {
     private void register() {
         String username = usernameField.getText();
         String password = passwordField.getText();
-        User user = new User(username,"Bouchoucha","lm_bouchoucha@esi.dz",password);
+        User user = new User(username,password);
         if (username.isEmpty() || password.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Registration Failed", "Username and password are required.");
             return;

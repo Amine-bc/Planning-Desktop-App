@@ -1,6 +1,6 @@
 package PlanningApp.Model;
 
-import java.io.Serializable;
+import java.io.*;
 
 public class User implements TaskUser,TimeslotUser, Serializable {
 
@@ -32,9 +32,28 @@ public class User implements TaskUser,TimeslotUser, Serializable {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+        this.profile = new Profile();
+        this.profile.setname(username);
+        this.profile.setpassword(password);
+    }
+    // getters and setters
+    public void setCalendar(Calendar calendar) {
+        this.calendar = calendar;
     }
 
-    public User(String name, String surname, String email, String password) {
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+   // get username
+    public String getname(){
+        return this.profile.getname();
+    }
+    public void setname(String name){
+        this.profile.setname(name);
+    }
+
+
+    public void Fillinfo(String name, String surname, String email, String password) {
         this.profile = new Profile(name,surname,email,password);
     }
     public void createCalendar( int startyear, int endyear, int startmonth, int startday, int endmonth, int endday ){
@@ -93,16 +112,7 @@ public class User implements TaskUser,TimeslotUser, Serializable {
     }
     @Override
     public void addtimeslot(TimeSlot timeSlot){};
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", calendar=" + calendar +
-                ", profile=" + profile +
-                ", minduration='" + minduration + '\'' +
-                '}';
-    }
+
     public void addtimeslot(String day,String start, String end ){
         if ( start.compareTo(end) < 0 ){
             TimeSlot timeslot = new TimeSlot(start, end);
@@ -118,5 +128,6 @@ public class User implements TaskUser,TimeslotUser, Serializable {
     public void removetimeslot( String day, String start , String end ) {
         this.calendar.removetimeslot(day,start,end);
     }
+
 
 }

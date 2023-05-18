@@ -1,9 +1,10 @@
 package PlanningApp.Model;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class Day implements TaskUser,TimeCalcs,TimeslotUser{
+public class Day implements TaskUser,TimeCalcs,TimeslotUser, Serializable {
     private String mintimeslot;
     public Day(String date, String mintimeslot){
         this.date = date;

@@ -1,9 +1,10 @@
 package PlanningApp.Model;
 
+import java.io.*;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public abstract class Task implements TaskUser, TimeCalcs {
+public abstract class Task implements TaskUser, TimeCalcs, Serializable {
 
     public Task(){}; // default constructor
     public Task(String name, String duration, String starttime) {

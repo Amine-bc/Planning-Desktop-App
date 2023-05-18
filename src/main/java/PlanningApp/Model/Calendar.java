@@ -1,5 +1,6 @@
 package PlanningApp.Model;
 
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -11,7 +12,7 @@ import java.util.Locale;
 import java.util.TreeMap;
 
 
-public class Calendar implements TaskUser,TimeslotUser{
+public class Calendar implements TaskUser,TimeslotUser, Serializable {
 
 
     private LocalDate currentDate;

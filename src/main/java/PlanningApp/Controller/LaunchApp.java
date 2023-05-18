@@ -13,7 +13,7 @@ public class LaunchApp {
 
 
 
-        User user = new User("Amine","Bouchoucha","lm_bouchoucha@esi.dz","password");
+        User user = new User("Amine","password");
         //After login and signup
         Task task = user.createTask("Task1","02:00","10:00");
 

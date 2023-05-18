@@ -1,9 +1,10 @@
 package PlanningApp.Model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class Profile {
+public class Profile implements Serializable {
     // contains personel infos
 
     public Profile(String name, String surname, String email, String password) {
@@ -26,6 +27,9 @@ public class Profile {
     private Statistics stats;
     private Calendar calendarhistory;
 
+    public Profile(){
+    }
+
     public void addProject(Project project){
         projects.put(project.getName(),project);
     }
@@ -38,5 +42,16 @@ public class Profile {
     public void addCalendar(Calendar calendar){
         this.calendarhistory = calendar;
     }
-
+    public void setpassword(String password) {
+        this.password = password;
+    }
+    public String getpassword() {
+        return password;
+    }
+    public String getname() {
+        return name;
+    }
+    public void setname(String name) {
+        this.name = name;
+    }
 }
