@@ -1,10 +1,16 @@
 package PlanningApp.Controller;
 
+import PlanningApp.Model.Task;
+import PlanningApp.Model.User;
+import PlanningApp.View.FirstPageView;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,9 +24,14 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import PlanningApp.Model.Calendar;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class CalendarController implements Initializable {
@@ -132,12 +143,70 @@ public class CalendarController implements Initializable {
 
 
     private void showAlert(int day) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Day Clicked");
-        alert.setHeaderText(null);
-        alert.setContentText("You clicked on day " + day);
-        alert.showAndWait();
+        LocalDate currentDate = LocalDate.of(calendarModel.getCurrentDate().getYear(), calendarModel.getCurrentDate().getMonth(), day);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddEEEE", Locale.ENGLISH);
+        String formattedDate = currentDate.format(formatter);
+        System.out.println("Day clicked is " + formattedDate);
+
+        User user = new User("Amine","Bouchoucha","lm_bouchoucha@esi.dz","passwd");
+
+
+        user.createTask("Task1","02:00","04:25");
+        user.createCalendar(2021,2022,2,10,10,30);
+        String date ="2021-02-11Thursday";
+        user.addtimeslot("2021-02-11Thursday","02:00","04:25");
+        user.addtimeslot("2021-02-11Thursday","10:00","12:00");
+        user.addtimeslot("2021-02-11Thursday","01:00","02:00");
+        user.addtimeslot("2021-02-11Thursday","13:00","14:00");
+        user.addtimeslot("2021-02-11Thursday","14:00","16:25");
+        user.addtimeslot("2021-02-11Thursday","17:00","19:00");
+        Task task = user.createTask("Task1","02:00","04:25");
+        user.planifyman(task,date);
+        user.getCalendar().getDays().get(date).printDay();
+
+        try {
+            int a=1;
+            if(a==0){
+                //here we make a test
+                // TODO make a test if the day is in the period
+                // ida day li khayrou luser may'existich fi la periode li kheyerha l user :
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Day Clicked");
+                alert.setHeaderText(null);
+                alert.setContentText(formattedDate+" : Day Clicked out of period");
+                alert.showAndWait();
+            }else{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/PlanningApp/View/DayPage.fxml"));
+
+                Parent root = loader.load();
+
+                // Access the DayController and set the Day object
+                DayController dayController = loader.getController();
+                dayController.Showday(user, formattedDate);
+
+                // Set the new FXML file as the scene
+                Scene scene = new Scene(root);
+
+                // Get the primary stage
+                Stage primaryStage = (Stage) monthYearLabel.getScene().getWindow();
+                primaryStage.setScene(scene);
+                primaryStage.setMinWidth(600);
+                primaryStage.setMinHeight(400);
+                primaryStage.setMaxWidth(600);
+                primaryStage.setMaxHeight(400);
+                primaryStage.show();
+            }
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+
+
+
+
     }
+
+
 
 }
 
