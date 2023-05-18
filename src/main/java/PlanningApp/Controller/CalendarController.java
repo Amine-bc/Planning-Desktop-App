@@ -176,13 +176,16 @@ public class CalendarController implements Initializable {
                 alert.setContentText(formattedDate+" : Day Clicked out of period");
                 alert.showAndWait();
             }else{
+
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/PlanningApp/View/DayPage.fxml"));
 
                 Parent root = loader.load();
 
+
                 // Access the DayController and set the Day object
                 DayController dayController = loader.getController();
                 dayController.Showday(user, formattedDate);
+
 
                 // Set the new FXML file as the scene
                 Scene scene = new Scene(root);
