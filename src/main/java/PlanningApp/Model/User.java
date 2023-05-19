@@ -9,7 +9,7 @@ public class User implements TaskUser,TimeslotUser, Serializable {
     //TODO do not forget to set the currentuser
     private String username;
     private String password;
-    private ArrayList<Task> taskslist;
+    private ArrayList<Task> taskslist = new ArrayList<Task>();
 
     public ArrayList<Task> getTaskslist() {
         return taskslist;
