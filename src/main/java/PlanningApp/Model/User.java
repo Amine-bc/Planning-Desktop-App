@@ -1,9 +1,11 @@
 package PlanningApp.Model;
 
+import PlanningApp.Com.HistoryInterface;
+
 import java.io.*;
 import java.util.ArrayList;
 
-public class User implements TaskUser,TimeslotUser, Serializable {
+public class User implements TaskUser,TimeslotUser, Serializable, HistoryInterface {
 
     public static User currentuser = App.getCurrentuser();
     //TODO do not forget to set the currentuser
@@ -15,13 +17,18 @@ public class User implements TaskUser,TimeslotUser, Serializable {
     public void addCalendar(Calendar calendar){
         History.add(calendar);
     }
-    public void bringbackcalendar( String startday, String endday){
+    @Override
+    public void bringbackcalendar( String startday, String endday){};
+
+    public Calendar bringbackcalendar( String startday, String endday, String nothing){
         for (int i = 0; i < History.size(); i++) {
             if (History.get(i).getFirstday().equals(startday) && History.get(i).getLastday().equals(endday)){
                 currentcalendar = History.get(i);
+                return History.get(i) ;
                 //TODO: add view here to show the calendar
             }
         }
+        return null ;
     }
     private String username;
     private String password;

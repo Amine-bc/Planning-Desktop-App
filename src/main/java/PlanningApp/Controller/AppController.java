@@ -1,11 +1,14 @@
 package PlanningApp.Controller;
 
+import PlanningApp.Com.HistoryInterface;
+import PlanningApp.Model.Calendar;
 import PlanningApp.Model.User;
 
 import java.io.*;
 
-public class AppController {
+public class AppController implements HistoryInterface {
     protected static User currentuser ;
+    protected static Calendar currentcalendar ;
     protected static User getcurrentuser(){
         return currentuser;
     }
@@ -41,9 +44,13 @@ public class AppController {
             // App.setCurrentuser(user);
         }
 
+
     }
 
 
+    @Override
+    public void bringbackcalendar(String startday, String endday) {
+        currentcalendar = User.currentuser.bringbackcalendar(startday,endday,"");
 
-
+    }
 }
