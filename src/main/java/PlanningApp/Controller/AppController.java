@@ -51,6 +51,7 @@ public class AppController implements HistoryInterface {
     @Override
     public void bringbackcalendar(String startday, String endday) {
         currentcalendar = User.currentuser.bringbackcalendar(startday,endday,"");
-
     }
+    //TODO: add view here to show the calendar
+    // but after executing this method you have to reset the current calendar to currentuser.calendar
 }

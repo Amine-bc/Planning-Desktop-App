@@ -23,7 +23,7 @@ public class User implements TaskUser,TimeslotUser, Serializable, HistoryInterfa
     public Calendar bringbackcalendar( String startday, String endday, String nothing){
         for (int i = 0; i < History.size(); i++) {
             if (History.get(i).getFirstday().equals(startday) && History.get(i).getLastday().equals(endday)){
-                currentcalendar = History.get(i);
+                //currentcalendar = History.get(i);
                 return History.get(i) ;
                 //TODO: add view here to show the calendar
             }
