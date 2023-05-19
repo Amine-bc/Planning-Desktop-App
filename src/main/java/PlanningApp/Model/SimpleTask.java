@@ -6,7 +6,14 @@ public class SimpleTask extends Task{
         super();
     };
     public SimpleTask(String name,String duration, String starttime){
-        super(name,duration,starttime);
+        super(name,duration,starttime,0);
+        // this constructor is used once someone clicks on new task
+        // first we ask if he wants to auto plan it or manually
+        // second we ask for its type decomp or simple
+        // Then create an instance then
+    }
+    public SimpleTask(String name,String duration,int Priority){
+        super(name,duration,Priority);
         // this constructor is used once someone clicks on new task
         // first we ask if he wants to auto plan it or manually
         // second we ask for its type decomp or simple
@@ -17,6 +24,7 @@ public class SimpleTask extends Task{
     @Override
     public void planifyman(String time,String duration) {
     };
+
     @Override
     public void planifyauto(String startperiod, String endperiod) {
 

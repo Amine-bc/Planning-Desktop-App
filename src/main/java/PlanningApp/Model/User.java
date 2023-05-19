@@ -1,17 +1,25 @@
 package PlanningApp.Model;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class User implements TaskUser,TimeslotUser, Serializable {
 
+    public static User currentuser = null;
+    //TODO do not forget to set the currentuser
     private String username;
     private String password;
+    private ArrayList<Task> taskslist;
 
+    public ArrayList<Task> getTaskslist() {
+        return taskslist;
+    }
+    public void addTask(Task task){
+        this.taskslist.add(task);
+    }
     Calendar calendar ;
     Profile profile ;
     public String minduration = "00:30";
-
-
 
     public String getUsername() {
         return username;
@@ -33,8 +41,10 @@ public class User implements TaskUser,TimeslotUser, Serializable {
         this.username = username;
         this.password = password;
         this.profile = new Profile();
+        this.calendar = new Calendar();
         this.profile.setname(username);
         this.profile.setpassword(password);
+        User.currentuser = this;
     }
     // getters and setters
     public void setCalendar(Calendar calendar) {
