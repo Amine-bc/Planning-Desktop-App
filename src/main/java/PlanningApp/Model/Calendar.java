@@ -185,7 +185,7 @@ public class Calendar implements TaskUser,TimeslotUser, Serializable, TimeCalcs 
                             day.getTimeslot().remove(i);
                             i--; // Decrement the index to adjust for the removed element
                             Calendar.addtask(task);
-                            System.out.println("----------------------------------------------------Task created--------------------------------------------------------------------");
+                            System.out.println("-----------------------------------------------------Task created--------------------------------------------------------------------");
                             System.out.println(" starttime" + task.getStarttime() + " " + task.getEndtime() + " " + task.getDuration() + " " + task.getName());
                             System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
 
