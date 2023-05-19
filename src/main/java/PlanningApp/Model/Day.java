@@ -151,7 +151,6 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser, Serializable {
             }
         }
         return nb_taskscompleted/nb_tasks;
-
     }
 
 

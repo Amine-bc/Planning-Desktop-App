@@ -6,9 +6,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.TextStyle;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 
-public class Calendar implements TaskUser,TimeslotUser, Serializable {
+public class Calendar implements TaskUser,TimeslotUser, Serializable, TimeCalcs {
 
     static ArrayList<Task> tasks = new ArrayList<Task>();
     private LocalDate currentDate;
@@ -159,13 +160,64 @@ public class Calendar implements TaskUser,TimeslotUser, Serializable {
             currentDate = currentDate.plusDays(1);
         }
 
-        int i = 0;
-        while (i < 10) {
-            Day day = Days.get(daysList.get(i));
-            // Your code logic here
+        // for tasks in the arraylist taskstobeplanned
+        for (int j = 0; j < taskstobeplanned.size(); j++) {
+            Task task = taskstobeplanned.get(j);
+            // for each day in the arraylist dayslist
+            int k = 0;
+            while (k < daysList.size()) {
+                Day day = Days.get(daysList.get(k));
+                // Your code logic here
+                AtomicBoolean planified = new AtomicBoolean(false);
+                System.out.println(task.getStarttime()+" "+task.getEndtime()+" "+task.getDuration()+" "+task.getName());
+                //TODO fix this
+                if ( day.getTimeslot().isEmpty() ){
+                    System.out.println("No timeslots");
+                    //TODO here view
+                }else{
+                    for (int i = 0; i < day.getTimeslot().size() && !planified.get(); i++) {
+                        TimeSlot timeSlot = day.getTimeslot().get(i) ;
+                        if (timeSlot.getstart().compareTo(task.getStarttime()) == 0 && timeSlot.getend().compareTo(task.getEndtime()) == 0) {
+                            // simply planify add to tasks arraylist + remove time from timeslots
 
+                            this.tasks.add(task);
+                            User.currentuser.addTask(task);
+                            day.getTimeslot().remove(i);
+                            i--; // Decrement the index to adjust for the removed element
+                            Calendar.addtask(task);
+                            System.out.println("----------------------------------------------------Task created--------------------------------------------------------------------");
+                            System.out.println(" starttime" + task.getStarttime() + " " + task.getEndtime() + " " + task.getDuration() + " " + task.getName());
+                            System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
 
-            i++;
+                            planified.set(true);
+                        } else if (timeSlot.getstart().compareTo(task.getStarttime()) < 0 && timeSlot.getend().compareTo(task.getEndtime()) > 0) {
+                            System.out.println("Here the task starttime" + task.getStarttime() + " " + task.getEndtime() + " " + task.getDuration() + " " + task.getName());
+                            this.tasks.add(task);
+                            User.currentuser.addTask(task);
+                            day.getTimeslot().remove(i);
+                            i--; // Decrement the index to adjust for the removed element
+                            if (subtract(task.getStarttime(), timeSlot.getstart()).compareTo("00:30") > 0) {
+                                addtimeslot(new TimeSlot(timeSlot.getstart(), add( timeSlot.getstart(), subtract(task.getStarttime(), timeSlot.getstart()))));
+                                System.out.println("Time slot added");
+                                System.out.println(day.getTimeslot().get(0).getstart()+day.getTimeslot().get(0).getend());
+                            }
+                            if (subtract(task.getEndtime(), timeSlot.getend()).compareTo("00:30") < 0) {
+                                addtimeslot(new TimeSlot(timeSlot.getend(), add (timeSlot.getend(),subtract(task.getEndtime(), timeSlot.getend()))));
+                            }
+                            planified.set(true);
+                            System.out.println("Task created");
+                            System.out.println(" starttime" + task.getStarttime() + " " + task.getEndtime() + " " + task.getDuration() + " " + task.getName());
+                        } else {
+                            // Error message or exception
+                            System.out.println("Error Cannot planify task");
+
+                        }
+                    }
+                }
+
+                k++;
+            }
+
         }
 
 
