@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #0598FF;" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fitHeight="45.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../Assets/to-do-list2.png" />
+                    </image>
+                    <HBox.margin>
+                        <Insets left="150.0" top="28.0" />
+                    </HBox.margin>
+                </ImageView>
+                <Label text="New Task" textFill="WHITE">
+                    <HBox.margin>
+                        <Insets left="40.0" top="20.0" />
+                    </HBox.margin>
+                    <font>
+                        <Font name="Myanmar Text Bold" size="25.0" />
+                    </font>
+                </Label>
+            </children>
+        </HBox>
+    </top>
+    <center>
+        <HBox prefHeight="200.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets />
+            </BorderPane.margin>
+         <children>
+            <GridPane prefHeight="260.0" prefWidth="579.0" style="-fx-border-color: #0598FF; -fx-border-style: solid; -fx-border-width: 5px; -fx-border-radius: 20;">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
+               </HBox.margin>
+               <children>
+                  <Label text="Name:" textFill="#0598ff" underline="true">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="Book Antiqua" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label text="Duration:" textFill="#0598ff" underline="true" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="20.0" top="50.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="StartTime:" textFill="#0598ff" underline="true" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="50.0" left="20.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Color:" textFill="#0598ff" underline="true" GridPane.rowIndex="2">
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Category:" textFill="#0598ff" underline="true" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Decomp:" textFill="#0598ff" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="20.0" top="50.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Priority:" textFill="#0598ff" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="50.0" left="20.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Repeated:" textFill="#0598ff" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </Label>
+                  <TextField prefHeight="25.0" prefWidth="194.0" promptText="Name" style="-fx-border-color: #0598ff;">
+                     <GridPane.margin>
+                        <Insets left="80.0" right="50.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField prefHeight="25.0" prefWidth="194.0" promptText="HH:MM" style="-fx-border-color: #0598ff;" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="50.0" left="80.0" right="50.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField prefHeight="25.0" prefWidth="194.0" promptText="HH:MM" style="-fx-border-color: #0598ff;" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="80.0" right="50.0" top="50.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <MenuButton mnemonicParsing="false" style="-fx-background-color: #0598FF;" text="Category" textFill="WHITE" GridPane.columnIndex="1">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                     <GridPane.margin>
+                        <Insets left="120.0" />
+                     </GridPane.margin>
+                  </MenuButton>
+                  <MenuButton mnemonicParsing="false" style="-fx-background-color: #0598FF;" text="Priority" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                     <GridPane.margin>
+                        <Insets bottom="50.0" left="120.0" />
+                     </GridPane.margin>
+                  </MenuButton>
+                  <MenuButton mnemonicParsing="false" style="-fx-background-color: #0598FF;" text="Periode" textFill="#fffdfd" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                     <GridPane.margin>
+                        <Insets left="120.0" />
+                     </GridPane.margin>
+                  </MenuButton>
+                  <MenuButton mnemonicParsing="false" style="-fx-background-color: #0598FF;" text="Yes/No" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                     <GridPane.margin>
+                        <Insets left="120.0" top="50.0" />
+                     </GridPane.margin>
+                  </MenuButton>
+                  <ColorPicker GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="80.0" />
+                     </GridPane.margin>
+                  </ColorPicker>
+               </children>
+            </GridPane>
+         </children>
+        </HBox>
+    </center>
+    <right>
+        <HBox prefHeight="0.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+    </right>
+    <bottom>
+        <HBox prefHeight="0.0" prefWidth="0.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" style="-fx-background-color: #0598FF;" text="ADD" textFill="WHITE">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="270.0" right="15.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children></HBox>
+    </bottom>
+   <left>
+      <HBox prefHeight="0.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+   </left>
+</BorderPane>

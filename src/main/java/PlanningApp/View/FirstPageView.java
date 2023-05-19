@@ -18,7 +18,6 @@ public class FirstPageView extends Application {
     public void start(Stage stage) throws IOException {
 
         //Authentification
-//
         FXMLLoader fxmlLoader = new FXMLLoader(FirstPageView.class.getResource("Calendar.fxml"));
         Parent root = fxmlLoader.load();
         stage.setTitle("Calendar Application");
@@ -49,6 +48,8 @@ public class FirstPageView extends Application {
 //         stage.setScene(scene);
 //         stage.show();
     }
+
+
     public static void main(String[] args) {
         launch();
     }

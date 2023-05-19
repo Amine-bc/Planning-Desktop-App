@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PlanningApp.Controller.TimeslotController">
+    <top>
+        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #0598FF;" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fitHeight="45.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../Assets/to-do-list2.png" />
+                    </image>
+                    <HBox.margin>
+                        <Insets left="150.0" top="28.0" />
+                    </HBox.margin>
+                </ImageView>
+                <Label text="Day Name" textFill="WHITE">
+                    <HBox.margin>
+                        <Insets left="40.0" top="20.0" />
+                    </HBox.margin>
+                    <font>
+                        <Font name="Myanmar Text Bold" size="25.0" />
+                    </font>
+                </Label>
+            </children>
+        </HBox>
+    </top>
+    <center>
+        <HBox prefHeight="200.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+            <children>
+                <VBox prefHeight="190.0" prefWidth="120.0">
+                    <children>
+                        <Label prefHeight="19.0" prefWidth="166.0" text="Starting Time:" textFill="#0598ff">
+                            <VBox.margin>
+                                <Insets left="15.0" top="10.0" />
+                            </VBox.margin>
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </Label>
+                        <Label text="Ending Time :" textFill="#0598ff">
+                            <VBox.margin>
+                                <Insets left="15.0" top="25.0" />
+                            </VBox.margin>
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </Label>
+                    </children>
+                    <HBox.margin>
+                        <Insets left="40.0" right="40.0" top="130.0" />
+                    </HBox.margin>
+                </VBox>
+                <VBox prefHeight="175.0" prefWidth="196.0">
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin>
+                    <children>
+                        <ImageView fitHeight="58.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../Assets/time.png" />
+                            </image>
+                            <VBox.margin>
+                                <Insets left="70.0" top="10.0" />
+                            </VBox.margin>
+                        </ImageView>
+                        <Label text="New Timeslot" textFill="#0598ff">
+                            <VBox.margin>
+                                <Insets bottom="20.0" left="20.0" top="10.0" />
+                            </VBox.margin>
+                            <font>
+                                <Font name="Myanmar Text Bold" size="22.0" />
+                            </font>
+                        </Label>
+                        <VBox prefHeight="62.0" prefWidth="100.0">
+                            <children>
+                                <HBox prefHeight="26.0" prefWidth="154.0">
+                                    <children>
+                                        <MenuButton text="Select Month">
+                                            <items>
+                                                <MenuItem text="January" />
+                                                <MenuItem text="February" />
+                                                <MenuItem text="March" />
+                                                <MenuItem text="April" />
+                                                <MenuItem text="May" />
+                                                <MenuItem text="June" />
+                                                <MenuItem text="July" />
+                                                <MenuItem text="August" />
+                                                <MenuItem text="September" />
+                                                <MenuItem text="October" />
+                                                <MenuItem text="November" />
+                                                <MenuItem text="December" />
+                                            </items>
+                                        </MenuButton>
+                                    </children>
+                                    <VBox.margin>
+                                        <Insets bottom="20.0" />
+                                    </VBox.margin>
+                                </HBox>
+                                <HBox prefHeight="26.0" prefWidth="154.0">
+                                    <children>
+                                        <ChoiceBox prefHeight="25.0" prefWidth="90.0">
+                                            <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                    <String fx:value="00:00" />
+                                                    <String fx:value="00:30" />
+                                                    <String fx:value="01:00" />
+                                                    <String fx:value="01:30" />
+                                                    <String fx:value="02:00" />
+                                                    <String fx:value="02:30" />
+                                                    <String fx:value="03:00" />
+                                                    <String fx:value="03:30" />
+                                                    <String fx:value="04:00" />
+                                                    <String fx:value="04:30" />
+                                                    <String fx:value="05:00" />
+                                                    <String fx:value="05:30" />
+                                                    <String fx:value="06:00" />
+                                                    <String fx:value="06:30" />
+                                                    <String fx:value="07:00" />
+                                                    <String fx:value="07:30" />
+                                                    <String fx:value="08:00" />
+                                                    <String fx:value="08:30" />
+                                                    <String fx:value="09:00" />
+                                                    <String fx:value="09:30" />
+                                                    <String fx:value="10:00" />
+                                                    <String fx:value="10:30" />
+                                                    <String fx:value="11:00" />
+                                                    <String fx:value="11:30" />
+                                                    <String fx:value="12:00" />
+                                                    <String fx:value="12:30" />
+                                                    <String fx:value="13:00" />
+                                                    <String fx:value="13:30" />
+                                                    <String fx:value="14:00" />
+                                                    <String fx:value="14:30" />
+                                                    <String fx:value="15:00" />
+                                                    <String fx:value="15:30" />
+                                                    <String fx:value="16:00" />
+                                                    <String fx:value="16:30" />
+                                                    <String fx:value="17:00" />
+                                                    <String fx:value="17:30" />
+                                                    <String fx:value="18:00" />
+                                                    <String fx:value="18:30" />
+                                                    <String fx:value="19:00" />
+                                                    <String fx:value="19:30" />
+                                                    <String fx:value="20:00" />
+                                                    <String fx:value="20:30" />
+                                                    <String fx:value="21:00" />
+                                                    <String fx:value="21:30" />
+                                                    <String fx:value="22:00" />
+                                                    <String fx:value="22:30" />
+                                                    <String fx:value="23:00" />
+                                                    <String fx:value="23:30" />
+
+                                                    <!-- Add more year options as needed -->
+                                                </FXCollections>
+                                            </items>
+                                            <HBox.margin>
+                                                <Insets bottom="10.0" />
+                                            </HBox.margin>
+                                        </ChoiceBox>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                        <Button mnemonicParsing="false" style="-fx-background-color: #0598FF;" text="Create" textFill="WHITE">
+                            <VBox.margin>
+                                <Insets left="80.0" top="10" />
+                            </VBox.margin>
+                        </Button>
+                    </children>
+                </VBox>
+            </children>
+            <BorderPane.margin>
+                <Insets />
+            </BorderPane.margin>
+        </HBox>
+    </center>
+    <right>
+        <HBox prefHeight="0.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+    </right>
+    <bottom>
+        <HBox prefHeight="0.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+    </bottom>
+</BorderPane>

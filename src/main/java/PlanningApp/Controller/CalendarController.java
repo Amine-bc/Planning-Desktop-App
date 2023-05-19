@@ -56,9 +56,12 @@ public class CalendarController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //TODO user Calendar is a static proprety it must called :
         calendarModel = new Calendar();
         updateView();
     }
+
+
 
     public void handlePreviousMonthButton() {
         calendarModel.goToPreviousMonth();
@@ -152,6 +155,8 @@ public class CalendarController implements Initializable {
 
 
         user.createTask("Task1","02:00","04:25");
+        user.createTask("Task2","10:00","12:00");
+        user.createTask("Task3","01:00","02:00");
         user.createCalendar(2021,2022,2,10,10,30);
         String date ="2021-02-11Thursday";
         user.addtimeslot("2021-02-11Thursday","02:00","04:25");
@@ -160,15 +165,26 @@ public class CalendarController implements Initializable {
         user.addtimeslot("2021-02-11Thursday","13:00","14:00");
         user.addtimeslot("2021-02-11Thursday","14:00","16:25");
         user.addtimeslot("2021-02-11Thursday","17:00","19:00");
+        user.addtimeslot("2021-02-11Thursday","22:00","22:45");
+        user.addtimeslot("2021-02-11Thursday","22:50","23:30");
         Task task = user.createTask("Task1","02:00","04:25");
+        Task task2= user.createTask("Task2","02:00","12:00");
+        //Task task4= user.createTask("Task2","02:00","14:00");
+        Task task3= user.createTask("Task2","02:00","20:00");
+        //Task task5= user.createTask("Task2","02:00","18:00");
+        user.createTask("Task3","02:00","04:25");
         user.planifyman(task,date);
+        user.planifyman(task2,date);
+        //user.planifyman(task3,date);
+        //user.planifyman(task4,date);
+        //user.planifyman(task5,date);
         user.getCalendar().getDays().get(date).printDay();
 
         try {
             int a=1;
             if(a==0){
                 //here we make a test
-                // TODO make a test if the day is in the period
+                // TODO make a test if the day is in the period:
                 // ida day li khayrou luser may'existich fi la periode li kheyerha l user :
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Day Clicked");
@@ -184,6 +200,7 @@ public class CalendarController implements Initializable {
 
                 // Access the DayController and set the Day object
                 DayController dayController = loader.getController();
+
                 dayController.Showday(user, formattedDate);
 
 
