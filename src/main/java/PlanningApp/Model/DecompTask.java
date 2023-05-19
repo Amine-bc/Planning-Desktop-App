@@ -5,8 +5,8 @@ public class DecompTask extends Task{
         public DecompTask(){
             super();
         };
-        public DecompTask(String name,String duration, String starttime){
-            super(name,duration,starttime,0);
+        public DecompTask(String name,String duration, String starttime, String day){
+            super(name,duration,starttime,0,day);
             // this constructor is used once someone clicks on new task
             // first we ask if he wants to auto plan it or manually
             // second we ask for its type decomp or simple
@@ -41,7 +41,7 @@ public class DecompTask extends Task{
     }
 
     @Override
-    public void evaluate() {
-
+    public int  evaluate() {
+        return 0 ;
     }
 }

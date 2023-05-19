@@ -18,17 +18,37 @@ public class Calendar implements TaskUser,TimeslotUser, Serializable {
     private String lastday ;
     //private ArrayList<Task> tasks; if needed use it if not it's okat it's commented
     private ArrayList<Task> taskstobeplanned;
+    private ArrayList<Project> Projects;
     public static void addtask(Task task){
         tasks.add(task);
     }
-    public void introducetaskstobeplanned(int numtasks, ArrayList<Task> tasks){
-        //COPY TASK In taskstobeplanned
-        for (int i = 0; i < numtasks; i++) {
-            this.taskstobeplanned.add(tasks.get(i));
-            //TODO in view enter the tasks and get only duration priority from 0 to 10 and name
-        }
-        Collections.sort(taskstobeplanned);
+    public static ArrayList<Task> getTasks() {
+        return tasks;
     }
+    public static void setTasks(ArrayList<Task> tasks) {
+        Calendar.tasks = tasks;
+    }
+
+    public String getFirstday() {
+        return firstday;
+    }
+
+    public String getLastday() {
+        return lastday;
+    }
+
+    public void setCurrentDate(LocalDate currentDate) {
+        this.currentDate = currentDate;
+    }
+
+    public void setFirstday(String firstday) {
+        this.firstday = firstday;
+    }
+
+    public void setLastday(String lastday) {
+        this.lastday = lastday;
+    }
+
     public Calendar(){
         Days = new TreeMap<String, Day>();
         currentDate = LocalDate.now();
@@ -57,7 +77,12 @@ public class Calendar implements TaskUser,TimeslotUser, Serializable {
     public void goToNextMonth() {
         currentDate = currentDate.plusMonths(1);
     }
-
+    public ArrayList<Project> getProjects() {
+        return Projects;
+    }
+    public void setProjects(ArrayList<Project> projects) {
+        Projects = projects;
+    }
 
     public void addDay(String day){
         this.Days.put(day, new Day(day,mintimeslot));
@@ -94,48 +119,56 @@ public class Calendar implements TaskUser,TimeslotUser, Serializable {
     public void planifyauto(String startperiod, String endperiod) {
 
     }
-    public void planifyauto(String startperiod, String endperiod, int numtasks, ArrayList<Task> tasks) {
-        //check if there is a task in the list
+    public void introducetaskstobeplanned(int numtasks, ArrayList<Task> tasks){
+        //COPY TASK In taskstobeplanned
+        for (int i = 0; i < numtasks; i++) {
+            this.taskstobeplanned.add(tasks.get(i));
+            //TODO in view enter the tasks and get only duration priority from 0 to 10 and name
+        }
+        Collections.sort(taskstobeplanned);
+    }
+    public void planifyauto(String startDate, String endDate, int numtasks, ArrayList<Task> tasks) {
+        // IMPORTANT before planifying auto you have to fill tasks is an arraylist
+//        if (this.tasks.isEmpty()){
+//            throw new IllegalArgumentException("There is no tasks to be planned");
+//        }else{
+            Createtasklist(); // this is used to test
+            //this.introducetaskstobeplanned(numtasks,tasks);
+
+       // }
         //for each task in the list go search if there is time
-        this.introducetaskstobeplanned(numtasks,tasks);
         // iterate over the period of time
         // through days
         // and planify manually in that day
+        // give a simple for loop
+        ArrayList <Task> taskstobeplanned = new ArrayList<Task>();
+        taskstobeplanned.addAll(tasks);
+        // generate array list of days
 
-    }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddEEEE");
 
-    @Override
-    public void postpone(String time) {
+        // Parse the start and end dates into LocalDate objects
+        LocalDate start = LocalDate.parse(startDate, formatter);
+        LocalDate end = LocalDate.parse(endDate, formatter);
 
-    }
+        // Generate the list of days between the start and end dates
+        ArrayList<String> daysList = new ArrayList<>();
+        LocalDate currentDate = start;
+        while (!currentDate.isAfter(end)) {
+            daysList.add(currentDate.format(formatter));
+            currentDate = currentDate.plusDays(1);
+        }
 
-    @Override
-    public void replan(String time) {
-
-    }
-
-    @Override
-    public void evaluate() {
-
-    }
+        int i = 0;
+        while (i < 10) {
+            Day day = Days.get(daysList.get(i));
+            // Your code logic here
 
 
-    public TreeMap<String, Day> getDays() {
-        return Days;
-    }
-    @Override
-    public void addtimeslot(TimeSlot timeSlot){};
+            i++;
+        }
 
-    public void addtimeslot(TimeSlot timeSlot, String day){
-        this.Days.get(day).addtimeslot(timeSlot);
-    };
-    @Override
-    public void removetimeslot(String start , String end){};
-    public void removetimeslot(String day, String start , String end ) {
-     this.Days.get(day).removetimeslot(start,end);
-    }
-    public void setCalendar(TreeMap<String, Day> days) {
-        Days = days;
+
     }
     public void Createtasklist(){
         //TODO to be deleted just created to test
@@ -163,5 +196,44 @@ public class Calendar implements TaskUser,TimeslotUser, Serializable {
             }
         }
         Collections.sort(taskstobeplanned);
+    }
+
+    @Override
+    public void postpone(String time) {
+
+    }
+
+    @Override
+    public void replan(String time) {
+
+    }
+
+    @Override
+    public int evaluate() {
+        return 0 ;
+    }
+
+
+    public TreeMap<String, Day> getDays() {
+        return Days;
+    }
+    @Override
+    public void addtimeslot(TimeSlot timeSlot){};
+
+    public void addtimeslot(TimeSlot timeSlot, String day){
+        this.Days.get(day).addtimeslot(timeSlot);
+    };
+    @Override
+    public void removetimeslot(String start , String end){};
+    public void removetimeslot(String day, String start , String end ) {
+     this.Days.get(day).removetimeslot(start,end);
+    }
+    public void setCalendar(TreeMap<String, Day> days) {
+        Days = days;
+    }
+
+    public void History(){
+        //TODO add it to history arraylist in user
+        User.currentuser.addCalendar(this);
     }
 }

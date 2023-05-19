@@ -12,7 +12,7 @@ public class LaunchApp {
         LoginController loginController = new LoginController();
         User user = new User("Amine","password");
         //After login and signup
-        Task task = user.createTask("Task1","00:45","10:00");
+        Task task = user.createTask("Task1","00:45","10:00",1);
         // just to test here it will be edited
         user.createCalendar(2021,2022,2,10,10,30);
         String date ="2021-02-11Thursday";

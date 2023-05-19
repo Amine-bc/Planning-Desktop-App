@@ -5,8 +5,8 @@ public class SimpleTask extends Task{
     public SimpleTask(){
         super();
     };
-    public SimpleTask(String name,String duration, String starttime){
-        super(name,duration,starttime,0);
+    public SimpleTask(String name,String duration, String day, String starttime){
+        super(name,duration,starttime,0,day);
         // this constructor is used once someone clicks on new task
         // first we ask if he wants to auto plan it or manually
         // second we ask for its type decomp or simple
@@ -48,8 +48,8 @@ public class SimpleTask extends Task{
 
     }
     @Override
-    public void evaluate() {
-
+    public int evaluate() {
+        return 0 ;
     }
 
     // setter and getters for the attributes

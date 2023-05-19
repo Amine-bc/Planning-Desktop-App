@@ -8,7 +8,7 @@ interface TaskUser {
 
     public void replan(String time);
     public void postpone(String time);
-    public void evaluate();
+    public int evaluate();
 
 
 }

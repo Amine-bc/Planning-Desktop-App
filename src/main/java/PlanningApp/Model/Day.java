@@ -126,14 +126,10 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser, Serializable {
 
                 }
             }
-
         }
     }
     @Override
     public void planifyauto(String startperiod, String endperiod) {
-
-
-
 
     }
     @Override
@@ -145,7 +141,16 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser, Serializable {
 
     }
 
-    public void evaluate(){
+    public int evaluate(){
+        // number of tasks completed over number of all tasks
+        int nb_tasks = this.tasks.size();
+        int nb_taskscompleted = 0;
+        for (int i = 0; i < nb_tasks; i++) {
+            if (this.tasks.get(i).getState() == State.completed){
+                nb_taskscompleted++;
+            }
+        }
+        return nb_taskscompleted/nb_tasks;
 
     }
 
@@ -216,3 +221,6 @@ public void printTasks(){
         this.printTasks();
     }
 }
+
+
+

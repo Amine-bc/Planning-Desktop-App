@@ -1,6 +1,7 @@
 package PlanningApp.Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -22,7 +23,7 @@ public class Profile implements Serializable {
     private String email;
     private String password;
     private String Id;
-    private Badge badge ;
+    private ArrayList<Badge> badge ;
     private HashMap<String,Project> projects;
     private Statistics stats;
     private Calendar calendarhistory;
@@ -30,11 +31,15 @@ public class Profile implements Serializable {
     public Profile(){
     }
 
+    public ArrayList<Badge> getBadge() {
+        return badge;
+    }
+
     public void addProject(Project project){
         projects.put(project.getName(),project);
     }
     public void addBadge(Badge badge){
-        this.badge = badge;
+        this.badge.add( badge);
     }
     public void addStats(Statistics stats){
         this.stats = stats;

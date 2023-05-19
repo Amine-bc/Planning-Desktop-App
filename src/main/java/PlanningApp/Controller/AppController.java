@@ -38,6 +38,7 @@ public class AppController {
             //TODO Read the users Arraylist from the file
             // load login controller after login happens do this
             // AppController.setcurrentuser(user);
+            // App.setCurrentuser(user);
         }
 
     }

@@ -1,5 +1,11 @@
 package PlanningApp.Model;
 
-public class Badge {
+public enum Badge {
+
+        Good,
+
+        VeryGood,
+
+        Excellent,
 
 }

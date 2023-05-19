@@ -3,7 +3,7 @@ package PlanningApp.Model;
 import java.io.*;
 import java.util.ArrayList;
 
-public class TimeSlot implements Evaluation,TimeCalcs, Serializable {
+public class TimeSlot implements TimeCalcs, Serializable {
 
     private String start;
     private String state ;
@@ -19,9 +19,7 @@ public class TimeSlot implements Evaluation,TimeCalcs, Serializable {
         return this.state;
     };
 
-    public void evaluate(){
 
-    };
 
     public String getstart(){
         return this.start ;

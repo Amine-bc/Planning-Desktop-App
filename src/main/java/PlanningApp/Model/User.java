@@ -5,11 +5,27 @@ import java.util.ArrayList;
 
 public class User implements TaskUser,TimeslotUser, Serializable {
 
-    public static User currentuser = null;
+    public static User currentuser = App.getCurrentuser();
     //TODO do not forget to set the currentuser
+    public static Calendar currentcalendar ;
+    public ArrayList<Calendar> History ;
+    public ArrayList<Calendar> getHistorylist(){
+        return History;
+    }
+    public void addCalendar(Calendar calendar){
+        History.add(calendar);
+    }
+    public void bringbackcalendar( String startday, String endday){
+        for (int i = 0; i < History.size(); i++) {
+            if (History.get(i).getFirstday().equals(startday) && History.get(i).getLastday().equals(endday)){
+                currentcalendar = History.get(i);
+                //TODO: add view here to show the calendar
+            }
+        }
+    }
     private String username;
     private String password;
-    private ArrayList<Task> taskslist = new ArrayList<Task>();
+    private ArrayList<Task> taskslist = new ArrayList<Task>(); //TODO this task list will be filled while the person creates tasks
 
     public ArrayList<Task> getTaskslist() {
         return taskslist;
@@ -69,7 +85,7 @@ public class User implements TaskUser,TimeslotUser, Serializable {
     public void createCalendar( int startyear, int endyear, int startmonth, int startday, int endmonth, int endday ){
         this.calendar = new Calendar(startyear,endyear ,startmonth, startday, endmonth, endday, this.minduration);
     }
-    public Task createTask(String name,String duration, String starttime){
+    public Task createTask(String name,String duration, String starttime, int priority){
         //check if task is biger then this.minduration
         // if it's not return null
         if ( duration.compareTo(this.minduration) < 0 ){
@@ -79,7 +95,8 @@ public class User implements TaskUser,TimeslotUser, Serializable {
         }else{
             System.out.println("Task created");
             //TODO: add view here to show the task created say if you don't plan you will leave it
-        return new SimpleTask(name,duration,starttime) ;
+            Calendar.addtask(new SimpleTask(name,duration,priority));
+        return new SimpleTask(name,duration,priority) ;
         }
     }
     @Override
@@ -113,8 +130,8 @@ public class User implements TaskUser,TimeslotUser, Serializable {
 
     }
     @Override
-    public void evaluate() {
-
+    public int evaluate() {
+        return 0 ;
     }
 
     public Calendar getCalendar() {

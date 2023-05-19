@@ -1,23 +1,29 @@
 package PlanningApp.Model;
 
+import javafx.scene.paint.Color;
+
 import java.io.*;
 
 public abstract class Task implements TaskUser, TimeCalcs, Serializable,Comparable<Task> {
 
     public Task(){}; // default constructor
-    public Task(String name, String duration, String starttime, int Priority) {
+    public Task(String name, String duration, String starttime, int Priority, String day) {
         this.name = name;
         this.duration = duration;
         this.starttime = starttime;
         this.endtime = add(starttime, duration) ;
         this.state = State.notRealized;
         this.Priority = Priority;
+        this.day = day;
     }
     public Task(String name, String duration,int Priority) {
         this.name = name;
         this.duration = duration;
         this.state = State.notRealized;
         this.Priority = Priority;
+        this.endtime = null;
+        this.starttime = null;
+        this.day = null;
     }
     private String name ;
     private State state ;
@@ -25,7 +31,9 @@ public abstract class Task implements TaskUser, TimeCalcs, Serializable,Comparab
     private String starttime;
     private String endtime;
     private String Category ;
+    private String Color ;
     private int Priority;
+    private String day ;
 
     public void setCategory(String category) {
         Category = category;

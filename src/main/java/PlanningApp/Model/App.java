@@ -6,11 +6,24 @@ import java.util.HashMap;
 public class App {
     // this class is the main class of the model part of the application
     HashMap<String,User> users;
+    public static User currentuser = null;
+
+
+    //TODO do not forget to set the currentuser
+    public static void setCurrentuser(User user){
+        currentuser = user;
+    }
+    public static User getCurrentuser(){
+        return currentuser;
+    }
     public App(){
         this.users = new HashMap<String,User>();
     }
     public void addUser(User user){
         users.put(user.getname(),user);
+    }
+    public void setUsers(HashMap<String,User> users){
+        this.users = users;
     }
     public void removeUser(User user){
         users.remove(user.getname());
