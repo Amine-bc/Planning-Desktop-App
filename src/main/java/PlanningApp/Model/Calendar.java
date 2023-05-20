@@ -53,6 +53,7 @@ public class Calendar implements TaskUser,TimeslotUser, Serializable, TimeCalcs 
     public Calendar(){
         Days = new TreeMap<String, Day>();
         currentDate = LocalDate.now();
+        taskstobeplanned = new ArrayList<Task>();
     };
     public Calendar( int startyear, int endyear, int startmonth, int startday, int endmonth, int endday, String mintimeslot){
         // initialize the calendar with days for each day also call for the constructor
@@ -62,6 +63,7 @@ public class Calendar implements TaskUser,TimeslotUser, Serializable, TimeCalcs 
         this.fillYear(startyear,endyear,startmonth,startday,endmonth,endday);
         this.mintimeslot = mintimeslot ;
         System.out.println(this.getDays());
+        taskstobeplanned = new ArrayList<Task>();
         //System.out.println(dayMap.getDays().get("2023-01-01Sunday"));
 
         //Here is what I did:
@@ -70,7 +72,9 @@ public class Calendar implements TaskUser,TimeslotUser, Serializable, TimeCalcs 
     public LocalDate getCurrentDate() {
         return currentDate;
     }
-
+    public ArrayList<Task> getTaskstobeplanned() {
+        return taskstobeplanned;
+    }
     public void goToPreviousMonth() {
         currentDate = currentDate.minusMonths(1);
     }
@@ -89,8 +93,8 @@ public class Calendar implements TaskUser,TimeslotUser, Serializable, TimeCalcs 
         this.Days.put(day, new Day(day,mintimeslot));
     }
     @Override
-    public void planifyman(String time, String duration) {
-
+    public boolean planifyman(String time, String duration) {
+        return false;
     }
     public void planifyman(Task task, String day){
         // go to the programmed date in the calendar
@@ -101,8 +105,9 @@ public class Calendar implements TaskUser,TimeslotUser, Serializable, TimeCalcs 
             LocalTime period = LocalTime.parse(task.getDuration());
             LocalTime starttime = LocalTime.parse(task.getStarttime());
             LocalTime endtime = LocalTime.parse(task.getEndtime());
-            this.Days.get(day).planifyman(task);
-        } catch (DateTimeParseException e) {
+            boolean planifyed = this.Days.get(day).planifyman(task);
+            if (planifyed){System.out.println("Task planified");}
+        } catch (Exception e) {
             System.out.println("Invalid time string: " + task.getDuration());
         }
 
@@ -116,10 +121,6 @@ public class Calendar implements TaskUser,TimeslotUser, Serializable, TimeCalcs 
             Days.put(key.toString(), new Day(date.toString(),mintimeslot));
         }
     }
-    @Override
-    public void planifyauto(String startperiod, String endperiod) {
-
-    }
     public void introducetaskstobeplanned(int numtasks, ArrayList<Task> tasks){
         //COPY TASK In taskstobeplanned
         for (int i = 0; i < numtasks; i++) {
@@ -128,12 +129,11 @@ public class Calendar implements TaskUser,TimeslotUser, Serializable, TimeCalcs 
         }
         Collections.sort(taskstobeplanned);
     }
-    public void planifyauto(String startDate, String endDate, int numtasks, ArrayList<Task> tasks) {
+    public boolean planifyauto(String startDate, String endDate) {
         // IMPORTANT before planifying auto you have to fill tasks is an arraylist
 //        if (this.tasks.isEmpty()){
 //            throw new IllegalArgumentException("There is no tasks to be planned");
 //        }else{
-            Createtasklist(); // this is used to test
             //this.introducetaskstobeplanned(numtasks,tasks);
 
        // }
@@ -142,84 +142,20 @@ public class Calendar implements TaskUser,TimeslotUser, Serializable, TimeCalcs 
         // through days
         // and planify manually in that day
         // give a simple for loop
-        ArrayList <Task> taskstobeplanned = new ArrayList<Task>();
-        taskstobeplanned.addAll(tasks);
-        // generate array list of days
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddEEEE");
-
-        // Parse the start and end dates into LocalDate objects
-        LocalDate start = LocalDate.parse(startDate, formatter);
-        LocalDate end = LocalDate.parse(endDate, formatter);
-
-        // Generate the list of days between the start and end dates
-        ArrayList<String> daysList = new ArrayList<>();
-        LocalDate currentDate = start;
-        while (!currentDate.isAfter(end)) {
-            daysList.add(currentDate.format(formatter));
-            currentDate = currentDate.plusDays(1);
-        }
-
+//        ArrayList <Task> taskstobeplanned = new ArrayList<Task>();
+//        taskstobeplanned.addAll(tasks);
         // for tasks in the arraylist taskstobeplanned
-        for (int j = 0; j < taskstobeplanned.size(); j++) {
-            Task task = taskstobeplanned.get(j);
+        boolean planified =false ;
+        while ( !taskstobeplanned.isEmpty()) {
+            System.out.println("\n\n\nThe tasks to be planned are");
+            taskstobeplanned.forEach((n) -> System.out.println(n.getName()));
+            Task task = taskstobeplanned.get(0);
             // for each day in the arraylist dayslist
-            int k = 0;
-            while (k < daysList.size()) {
-                Day day = Days.get(daysList.get(k));
-                // Your code logic here
-                AtomicBoolean planified = new AtomicBoolean(false);
-                System.out.println(task.getStarttime()+" "+task.getEndtime()+" "+task.getDuration()+" "+task.getName());
-                //TODO fix this
-                if ( day.getTimeslot().isEmpty() ){
-                    System.out.println("No timeslots");
-                    //TODO here view
-                }else{
-                    for (int i = 0; i < day.getTimeslot().size() && !planified.get(); i++) {
-                        TimeSlot timeSlot = day.getTimeslot().get(i) ;
-                        if (timeSlot.getstart().compareTo(task.getStarttime()) == 0 && timeSlot.getend().compareTo(task.getEndtime()) == 0) {
-                            // simply planify add to tasks arraylist + remove time from timeslots
-
-                            this.tasks.add(task);
-                            User.currentuser.addTask(task);
-                            day.getTimeslot().remove(i);
-                            i--; // Decrement the index to adjust for the removed element
-                            Calendar.addtask(task);
-                            System.out.println("-----------------------------------------------------Task created--------------------------------------------------------------------");
-                            System.out.println(" starttime" + task.getStarttime() + " " + task.getEndtime() + " " + task.getDuration() + " " + task.getName());
-                            System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
-
-                            planified.set(true);
-                        } else if (timeSlot.getstart().compareTo(task.getStarttime()) < 0 && timeSlot.getend().compareTo(task.getEndtime()) > 0) {
-                            System.out.println("Here the task starttime" + task.getStarttime() + " " + task.getEndtime() + " " + task.getDuration() + " " + task.getName());
-                            this.tasks.add(task);
-                            User.currentuser.addTask(task);
-                            day.getTimeslot().remove(i);
-                            i--; // Decrement the index to adjust for the removed element
-                            if (subtract(task.getStarttime(), timeSlot.getstart()).compareTo("00:30") > 0) {
-                                addtimeslot(new TimeSlot(timeSlot.getstart(), add( timeSlot.getstart(), subtract(task.getStarttime(), timeSlot.getstart()))));
-                                System.out.println("Time slot added");
-                                System.out.println(day.getTimeslot().get(0).getstart()+day.getTimeslot().get(0).getend());
-                            }
-                            if (subtract(task.getEndtime(), timeSlot.getend()).compareTo("00:30") < 0) {
-                                addtimeslot(new TimeSlot(timeSlot.getend(), add (timeSlot.getend(),subtract(task.getEndtime(), timeSlot.getend()))));
-                            }
-                            planified.set(true);
-                            System.out.println("Task created");
-                            System.out.println(" starttime" + task.getStarttime() + " " + task.getEndtime() + " " + task.getDuration() + " " + task.getName());
-                        } else {
-                            // Error message or exception
-                            System.out.println("Error Cannot planify task");
-
-                        }
-                    }
-                }
-
-                k++;
-            }
-
+            planified &= task.planifyauto(startDate,endDate);
+            System.out.println("\n\n\n");
         }
-
+        return planified;
 
     }
     public void Createtasklist(){
@@ -228,7 +164,6 @@ public class Calendar implements TaskUser,TimeslotUser, Serializable, TimeCalcs 
         System.out.println("Enter the number of tasks you want to enter");
         Scanner scanner = new Scanner(System.in);
         int numtasks = scanner.nextInt();
-        ArrayList<Task> tasks = new ArrayList<Task>();
         for (int i = 0; i < numtasks; i++) {
             System.out.println("Enter the name of the task");
             String name = scanner.next();
@@ -236,18 +171,22 @@ public class Calendar implements TaskUser,TimeslotUser, Serializable, TimeCalcs 
             String duration = scanner.next();
             System.out.println("Enter the priority of the task");
             int priority = scanner.nextInt();
+            // ask how many times repeated
+            System.out.println("Enter the repetition");
+            int repetition = scanner.nextInt() ;
             // ask if decomposable or not
             System.out.println("Is the task decomposable? (yes/no)");
             String decomposable = scanner.next();
             if (decomposable.equals("yes")) {
-                Task task = new DecompTask(name,duration,priority);
+                Task task = new DecompTask(name,duration,priority,repetition);
                 taskstobeplanned.add(task);
             }else{
-                Task task = new SimpleTask(name,duration,priority);
-                tasks.add(task);
+                Task task = new SimpleTask(name,duration,priority, repetition);
+                taskstobeplanned.add(task);
             }
         }
         Collections.sort(taskstobeplanned);
+        //print this arraylist
     }
 
     @Override
@@ -259,12 +198,6 @@ public class Calendar implements TaskUser,TimeslotUser, Serializable, TimeCalcs 
     public void replan(String time) {
 
     }
-
-    @Override
-    public int evaluate() {
-        return 0 ;
-    }
-
 
     public TreeMap<String, Day> getDays() {
         return Days;
@@ -287,5 +220,9 @@ public class Calendar implements TaskUser,TimeslotUser, Serializable, TimeCalcs 
     public void History(){
         //TODO add it to history arraylist in user
         User.currentuser.addCalendar(this);
+    }
+    @Override
+    public int evaluate(Object o) {
+        return 0;
     }
 }

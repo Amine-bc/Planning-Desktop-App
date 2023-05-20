@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class User implements TaskUser,TimeslotUser, Serializable, HistoryInterface {
 
-    public static User currentuser = App.getCurrentuser();
+    public static User currentuser ;
     //TODO do not forget to set the currentuser
     public static Calendar currentcalendar ;
     public ArrayList<Calendar> History ;
@@ -91,8 +91,9 @@ public class User implements TaskUser,TimeslotUser, Serializable, HistoryInterfa
     }
     public void createCalendar( int startyear, int endyear, int startmonth, int startday, int endmonth, int endday ){
         this.calendar = new Calendar(startyear,endyear ,startmonth, startday, endmonth, endday, this.minduration);
+        User.currentcalendar = this.calendar ;
     }
-    public Task createTask(String name,String duration, String starttime, int priority){
+    public Task createTask(String name,String duration, String starttime, int priority, int repetition){
         //check if task is biger then this.minduration
         // if it's not return null
         if ( duration.compareTo(this.minduration) < 0 ){
@@ -102,13 +103,14 @@ public class User implements TaskUser,TimeslotUser, Serializable, HistoryInterfa
         }else{
             System.out.println("Task created");
             //TODO: add view here to show the task created say if you don't plan you will leave it
-            Calendar.addtask(new SimpleTask(name,duration,priority));
-        return new SimpleTask(name,duration,priority) ;
+            Calendar.addtask(new SimpleTask(name,duration,priority,repetition));
+        return new SimpleTask(name,duration,priority,repetition) ;
         }
     }
     @Override
-    public void planifyman(String time, String duration) {
+    public boolean planifyman(String time, String duration) {
         // overloaded not usefull in this method
+        return false;
     }
     public void planifyman(Task task, String day){
         // go to the calendar try to planify in the asked time
@@ -117,15 +119,11 @@ public class User implements TaskUser,TimeslotUser, Serializable, HistoryInterfa
         calendar.planifyman(task,day);
         // correct the day here
 
-    } ;
+    };
 
     @Override
-    public void planifyauto(String startperiod, String endperiod) {
-
-
-    }
-    public void planifyauto(String startperiod, String endperiod, String day) {
-
+    public boolean planifyauto(String startperiod, String endperiod) {
+            return User.currentcalendar.planifyauto(startperiod,endperiod);
     }
     @Override
     public void postpone(String time) {
@@ -136,9 +134,10 @@ public class User implements TaskUser,TimeslotUser, Serializable, HistoryInterfa
     public void replan(String time) {
 
     }
+
     @Override
-    public int evaluate() {
-        return 0 ;
+    public int evaluate(Object o) {
+        return 0;
     }
 
     public Calendar getCalendar() {
@@ -158,6 +157,10 @@ public class User implements TaskUser,TimeslotUser, Serializable, HistoryInterfa
 
         };
     public void removetimeslot( String start , String end ) {
+    }
+
+    public Profile getProfile() {
+        return profile;
     }
     public void removetimeslot( String day, String start , String end ) {
         this.calendar.removetimeslot(day,start,end);

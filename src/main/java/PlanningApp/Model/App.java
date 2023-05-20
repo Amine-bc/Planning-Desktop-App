@@ -32,8 +32,8 @@ public class App {
         // this method is the main method of the model part of the application
         // it is used to test the model classes
         App app = new App();
-        User user = new User("Amine","Mimi");
-        User user2 = new User("Hamid","mimi2");
+        User user = new User("Amine","9876");
+        User user2 = new User("Hamid","2");
         app.addUser(user);
         app.addUser(user2);
         app.SaveToDb("src/main/java/PlanningApp/Files/users.ser");
@@ -73,6 +73,30 @@ public class App {
         }
 
 
+    }
+    public static void ShowCalendar()
+    {
+        System.out.println("---------------------Calendar----------------------");
+        System.out.println("<----------------------Days----------------------->");
+        User.currentcalendar.getDays().forEach(
+                (dayname,day) -> {
+                    System.out.println(">    -   -       "+dayname+"     -    -    <\n"+"Timeslots");
+                    if ( day.getTimeslot().isEmpty() ){ System.out.println("\nNo timeslots for this day\n");}
+                    day.getTimeslot().forEach(
+                            (timeslot) -> {
+                                System.out.println("Start:   "+timeslot.getstart()+"    End:   "+timeslot.getend()+" \n");
+                                }
+                                );
+                    System.out.println("Tasks");
+                    if ( day.getTasks().isEmpty() ){ System.out.println("\nNo tasks for this day\n");}
+                    day.getTasks().forEach(
+                            (task) -> {
+                                System.out.println("Task: "+task.getName()+"    Start: "+task.getStarttime()+"    End: "+task.getEndtime()+" \n");
+                            }
+                    );
+                    System.out.println("<----------------------------------------------->");
+                }
+        );
     }
 
 

@@ -2,13 +2,12 @@ package PlanningApp.Model;
 
 interface TaskUser {
 
-    public void planifyman(String time, String duration) ;
+    public boolean planifyman(String time, String duration) ;
 
-    public void planifyauto(String startperiod, String endperiod);
+    public boolean planifyauto(String startperiod, String endperiod);
 
     public void replan(String time);
     public void postpone(String time);
-    public int evaluate();
 
-
+    int evaluate(Object o);
 }

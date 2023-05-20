@@ -68,8 +68,8 @@ public class Statistics {
         for (Project project: User.currentuser.calendar.getProjects()) {
             System.out.println("project name: "+project.getName()+" project state: "+project.getState());
         }
-        System.out.println("Badges:\nThere are "+ User.currentuser.profile.getBadge().size() +"Badges");
-        for (Badge badge: User.currentuser.profile.getBadge()) {
+        System.out.println("Badges:\nThere are "+ User.currentuser.getProfile().getBadge().size() +"Badges");
+        for (Badge badge: User.currentuser.getProfile().getBadge()) {
             System.out.println("Badge: "+badge);
         }
         // evaluation of days now

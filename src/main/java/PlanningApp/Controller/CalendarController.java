@@ -151,7 +151,7 @@ public class CalendarController implements Initializable {
         User user = new User("Amine","passwd");
 
 
-        user.createTask("Task1","02:00","04:25",2);
+        user.createTask("Task1","02:00","04:25",2,0);
         user.createCalendar(2021,2022,2,10,10,30);
         String date ="2021-02-11Thursday";
         user.addtimeslot("2021-02-11Thursday","02:00","04:25");
@@ -160,7 +160,7 @@ public class CalendarController implements Initializable {
         user.addtimeslot("2021-02-11Thursday","13:00","14:00");
         user.addtimeslot("2021-02-11Thursday","14:00","16:25");
         user.addtimeslot("2021-02-11Thursday","17:00","19:00");
-        Task task = user.createTask("Task1","02:00","04:25",3);
+        Task task = user.createTask("Task1","02:00","04:25",3,0);
         user.planifyman(task,date);
         user.getCalendar().getDays().get(date).printDay();
 

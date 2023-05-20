@@ -59,4 +59,5 @@ public class Profile implements Serializable {
     public void setname(String name) {
         this.name = name;
     }
+
 }

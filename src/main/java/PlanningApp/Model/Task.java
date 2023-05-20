@@ -7,7 +7,7 @@ import java.io.*;
 public abstract class Task implements TaskUser, TimeCalcs, Serializable,Comparable<Task> {
 
     public Task(){}; // default constructor
-    public Task(String name, String duration, String starttime, int Priority, String day) {
+    public Task(String name, String duration, String starttime, int Priority, String day, int repetition){
         this.name = name;
         this.duration = duration;
         this.starttime = starttime;
@@ -15,28 +15,55 @@ public abstract class Task implements TaskUser, TimeCalcs, Serializable,Comparab
         this.state = State.notRealized;
         this.Priority = Priority;
         this.day = day;
+        this.calendar = User.currentcalendar;
+        this.repetition = repetition ;
     }
-    public Task(String name, String duration,int Priority) {
+    public Task(String name, String duration,int Priority, int repetition){
         this.name = name;
         this.duration = duration;
         this.state = State.notRealized;
         this.Priority = Priority;
-        this.endtime = null;
-        this.starttime = null;
-        this.day = null;
+        this.endtime = "00";
+        this.starttime = "00";
+        this.day = "00";
+        this.calendar = User.currentcalendar;
+        this.repetition = repetition ;
     }
     private String name ;
     private State state ;
     private String duration ;
     private String starttime;
     private String endtime;
+    private int repetition;
     private String Category ;
     private String Color ;
     private int Priority;
     private String day ;
+    private Calendar calendar ;
+    public void setRepetition(int repetition) {
+        this.repetition = repetition;
+    }
+    public int getRepetition() {
+        return repetition;
+    }
+    public void setDay(String day) {
+        this.day = day;
+    }
+    public String getDay() {
+        return day;
+    }
+    public void setCalendar(Calendar calendar) {
+        this.calendar = calendar;
+    }
+    public Calendar getCalendar() {
+        return calendar;
+    }
 
     public void setCategory(String category) {
         Category = category;
+    }
+    public int getPriority() {
+        return Priority;
     }
     public void setEndtime(String endtime) {
         this.endtime = endtime;
@@ -81,9 +108,9 @@ public abstract class Task implements TaskUser, TimeCalcs, Serializable,Comparab
         if ( this.getStarttime() == task.getStarttime()){
 
             if (this.Priority > task.Priority) {
-                return 1;
-            } else if (this.Priority < task.Priority) {
                 return -1;
+            } else if (this.Priority < task.Priority) {
+                return 1;
             } else if (this.Priority == task.Priority) {
                 return 1;
             }

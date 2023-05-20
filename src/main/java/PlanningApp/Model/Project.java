@@ -2,7 +2,7 @@ package PlanningApp.Model;
 
 import java.util.HashSet;
 
-public class Project implements Evaluation {
+public class Project {
 
     private String name;
     private String description;
@@ -44,9 +44,4 @@ public class Project implements Evaluation {
         return this.tasks;
     }
 
-
-    @Override
-    public int evaluate(Object evaluatable) {
-        return 0 ;
-    }
 }
