@@ -219,7 +219,7 @@ public class Calendar implements TaskUser,TimeslotUser, Serializable, TimeCalcs 
 
     public void History(){
         //TODO add it to history arraylist in user
-        User.currentuser.addCalendar(this);
+        User.currentuser.addCalendartoHistory(this);
     }
     @Override
     public int evaluate(Object o) {

@@ -18,7 +18,7 @@ public class LaunchApp {
 
         User user = new User("Amine","password");
         user.createCalendar(2021,2022,2,10,10,30);
-        Task task = new SimpleTask("task1","01:00",date,"03:00",0);
+        Task task = new SimpleTask("task1","02:00",date,"03:00",0);
 //        System.out.println("name"+task.getName()+"duration"+task.getDuration()+"priority"+task.getPriority()+"starttime"+task.getStarttime()+"endtime"+task.getEndtime());
         user.addtimeslot(date,"02:00","04:30");
         user.addtimeslot(date,"10:00","12:00");
@@ -36,21 +36,21 @@ public class LaunchApp {
         user.getCalendar().getDays().get(date).printDay();
 //        System.out.println("Day2"+date2+"\n");
 
-//        user.getCalendar().getDays().get(date2).printDay();
-//        user.planifyman(task,date);
-//        System.out.println("Afterplanifying");
-//        user.getCalendar().getDays().get(date).printDay();
-
-
-
-        User.currentcalendar.Createtasklist();
-        User.currentcalendar.getTaskstobeplanned().forEach(
-                k-> System.out.println(k.getName()+" "+k.getDuration()+" "+k.getPriority()+" "+k.getStarttime()+" "+k.getEndtime())
-        );
-        user.planifyauto(date,date3);
-        user.getCalendar().getDays().get(date).printDay();
+        user.getCalendar().getDays().get(date2).printDay();
+        user.planifyman(task,date);
         System.out.println("Afterplanifying");
-        System.out.println("\n\n\n\n\n\n");
-        App.ShowCalendar();
+        user.getCalendar().getDays().get(date).printDay();
+
+
+//
+//        User.currentcalendar.Createtasklist();
+//        User.currentcalendar.getTaskstobeplanned().forEach(
+//                k-> System.out.println(k.getName()+" "+k.getDuration()+" "+k.getPriority()+" "+k.getStarttime()+" "+k.getEndtime())
+//        );
+//        user.planifyauto(date,date3);
+//        user.getCalendar().getDays().get(date).printDay();
+//        System.out.println("Afterplanifying");
+//        System.out.println("\n\n\n\n\n\n");
+//        App.ShowCalendar();
     }
 }

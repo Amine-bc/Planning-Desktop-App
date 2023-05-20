@@ -14,8 +14,19 @@ public class User implements TaskUser,TimeslotUser, Serializable, HistoryInterfa
     public ArrayList<Calendar> getHistorylist(){
         return History;
     }
-    public void addCalendar(Calendar calendar){
+    public void addCalendartoHistory(Calendar calendar){
         History.add(calendar);
+        //then serialize the list to the file
+        try {
+            FileOutputStream fileOut = new FileOutputStream("History"+profile.getname()+".ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(History);
+            out.close();
+            fileOut.close();
+            System.out.printf("Serialized data is saved in History.ser");
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
     }
     @Override
     public void bringbackcalendar( String startday, String endday){};
