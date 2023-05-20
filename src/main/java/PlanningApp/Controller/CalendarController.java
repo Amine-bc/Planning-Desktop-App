@@ -180,6 +180,10 @@ public class CalendarController implements Initializable {
         //user.planifyman(task5,date);
         user.getCalendar().getDays().get(date).printDay();
 
+        // set it to static :
+        AppController.user=user;
+        AppController.day=user.getCalendar().getDays().get(date);
+        AppController.day.setDayname(formattedDate);
         try {
             int a=1;
             if(a==0){
@@ -201,7 +205,7 @@ public class CalendarController implements Initializable {
                 // Access the DayController and set the Day object
                 DayController dayController = loader.getController();
 
-                dayController.Showday(user, formattedDate);
+                dayController.Showday( formattedDate);
 
 
                 // Set the new FXML file as the scene

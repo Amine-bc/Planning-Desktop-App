@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
@@ -17,7 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="hero" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PlanningApp.Controller.TaskController">
     <top>
         <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #0598FF;" BorderPane.alignment="CENTER">
             <children>
@@ -103,22 +104,22 @@
                         <Insets left="20.0" />
                      </padding>
                   </Label>
-                  <TextField prefHeight="25.0" prefWidth="194.0" promptText="Name" style="-fx-border-color: #0598ff;">
+                  <TextField fx:id="TaskName" prefHeight="25.0" prefWidth="194.0" promptText="Name" style="-fx-border-color: #0598ff;">
                      <GridPane.margin>
                         <Insets left="80.0" right="50.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField prefHeight="25.0" prefWidth="194.0" promptText="HH:MM" style="-fx-border-color: #0598ff;" GridPane.rowIndex="1">
+                  <TextField fx:id="TaskStartTime" prefHeight="25.0" prefWidth="194.0" promptText="HH:MM" style="-fx-border-color: #0598ff;" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets bottom="50.0" left="80.0" right="50.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField prefHeight="25.0" prefWidth="194.0" promptText="HH:MM" style="-fx-border-color: #0598ff;" GridPane.rowIndex="1">
+                  <TextField fx:id="TaskDuration" prefHeight="25.0" prefWidth="194.0" promptText="HH:MM" style="-fx-border-color: #0598ff;" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="80.0" right="50.0" top="50.0" />
                      </GridPane.margin>
                   </TextField>
-                  <MenuButton mnemonicParsing="false" style="-fx-background-color: #0598FF;" text="Category" textFill="WHITE" GridPane.columnIndex="1">
+                  <MenuButton fx:id="TaskCategory" mnemonicParsing="false" style="-fx-background-color: #0598FF;" text="Category" textFill="WHITE" GridPane.columnIndex="1">
                     <items>
                       <MenuItem mnemonicParsing="false" text="Action 1" />
                       <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -127,7 +128,7 @@
                         <Insets left="120.0" />
                      </GridPane.margin>
                   </MenuButton>
-                  <MenuButton mnemonicParsing="false" style="-fx-background-color: #0598FF;" text="Priority" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <MenuButton fx:id="TaskPriority" mnemonicParsing="false" style="-fx-background-color: #0598FF;" text="Priority" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <items>
                       <MenuItem mnemonicParsing="false" text="Action 1" />
                       <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -136,7 +137,7 @@
                         <Insets bottom="50.0" left="120.0" />
                      </GridPane.margin>
                   </MenuButton>
-                  <MenuButton mnemonicParsing="false" style="-fx-background-color: #0598FF;" text="Periode" textFill="#fffdfd" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <MenuButton fx:id="TaskPeriode" mnemonicParsing="false" style="-fx-background-color: #0598FF;" text="Periode" textFill="#fffdfd" GridPane.columnIndex="1" GridPane.rowIndex="2">
                     <items>
                       <MenuItem mnemonicParsing="false" text="Action 1" />
                       <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -145,7 +146,7 @@
                         <Insets left="120.0" />
                      </GridPane.margin>
                   </MenuButton>
-                  <MenuButton mnemonicParsing="false" style="-fx-background-color: #0598FF;" text="Yes/No" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <MenuButton fx:id="TaskIsDecomp" mnemonicParsing="false" style="-fx-background-color: #0598FF;" text="Yes/No" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <items>
                       <MenuItem mnemonicParsing="false" text="Action 1" />
                       <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -154,7 +155,7 @@
                         <Insets left="120.0" top="50.0" />
                      </GridPane.margin>
                   </MenuButton>
-                  <ColorPicker GridPane.rowIndex="2">
+                  <ColorPicker fx:id="TaskColor" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="80.0" />
                      </GridPane.margin>
@@ -169,19 +170,32 @@
     </right>
     <bottom>
         <HBox prefHeight="0.0" prefWidth="0.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button mnemonicParsing="false" style="-fx-background-color: #0598FF;" text="ADD" textFill="WHITE">
-               <HBox.margin>
-                  <Insets bottom="5.0" left="270.0" right="15.0" />
-               </HBox.margin>
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
+            <Button onAction="#handleAddTask" mnemonicParsing="false" style="-fx-background-color: #0598FF;" text="ADD"
+                    textFill="WHITE">
+                <HBox.margin>
+                    <Insets bottom="5.0" left="270.0" right="15.0"/>
+                </HBox.margin>
+                <font>
+                    <Font name="System Bold" size="13.0"/>
+                </font>
+                <cursor>
+                    <Cursor fx:constant="HAND"/>
+                </cursor>
             </Button>
-         </children></HBox>
+            <Label text="AUTO" textFill="#0598ff">
+                <opaqueInsets>
+                    <Insets/>
+                </opaqueInsets>
+                <HBox.margin>
+                    <Insets left="30.0"/>
+                </HBox.margin>
+            </Label>
+            <CheckBox fx:id="CheckBox" mnemonicParsing="false" onAction="#handleCustomSettingsToggle">
+                <HBox.margin>
+                    <Insets left="10.0"/>
+                </HBox.margin>
+            </CheckBox>
+        </HBox>
     </bottom>
    <left>
       <HBox prefHeight="0.0" prefWidth="0.0" BorderPane.alignment="CENTER" />

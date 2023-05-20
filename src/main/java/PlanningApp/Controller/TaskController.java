@@ -1,19 +1,123 @@
 package PlanningApp.Controller;
-import PlanningApp.Model.*;
+
+import PlanningApp.Model.SimpleTask;
+import PlanningApp.Model.Task;
+import PlanningApp.Model.User;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class TaskController {
     //create task and then plan it
-    public void createTask(){
+    @FXML
+    private TextField TaskName;
+    @FXML
+    private TextField TaskStartTime;
 
-        SimpleTask task = new SimpleTask("Task1","30","10:00");
-        User user = new User("Amine","Bouchoucha","lm_bouchoucha@esi.dz","passwd");
+    @FXML
+    private TextField TaskDuration;
 
-        String date = "2023-01-01Sunday";
+    @FXML
+    private CheckBox CheckBox;
 
-        System.out.println(user.getCalendar().getDays().get(date).getDate() );
-        user.planifyman(task,date);
+    @FXML
+    private MenuButton TaskIsDecomp;
+
+    @FXML
+    private MenuButton TaskPriority;
+
+    @FXML
+    private MenuButton TaskPeriode;
+
+    @FXML
+    private BorderPane hero;
+
+    @FXML
+    private void handleCustomSettingsToggle() {
+        boolean customSettingsEnabled = CheckBox.isSelected();
+
+        TaskIsDecomp.setVisible(!customSettingsEnabled);
+        TaskIsDecomp.setDisable(customSettingsEnabled);
+
+        TaskPriority.setVisible(!customSettingsEnabled);
+        TaskPriority.setDisable(customSettingsEnabled);
+
+        TaskPeriode.setVisible(!customSettingsEnabled);
+        TaskPeriode.setDisable(customSettingsEnabled);
 
     }
 
+    @FXML
+    private void handleAddTask() throws IOException {
+        String name = TaskName.getText();
+        String startTime = TaskStartTime.getText();
+        String duration = TaskDuration.getText();
+        System.out.println(name + " " + startTime + " " + duration);
+
+        try {
+            //User user = new User("Amine","Bouchoucha","lm_bouchoucha@esi.dz","passwd");
+            System.out.println("i'm here 1");
+            Task task2 = AppController.user.createTask(name, duration, startTime);
+            //Task task2 = AppController.user.createTask("Task1","02:00","04:25");
+
+            //System.out.println("hnaaya");
+            //SimpleTask task = new SimpleTask();
+            //task.setName("eheh");
+            //task.setDuration("01:00");
+            //task.setStarttime("01:00");
+            //System.out.println("9bel matetkhelet");
+
+            //those also are not working here i d'ont know why :
+            AppController.user.planifyman(task2, "2021-02-11Thursday");
+            //AppController.user.planifyman(task,"2021-02-11Thursday");
+            System.out.println("i'm here 2");
+
+
+
+
+            Stage stage = (Stage) hero.getScene().getWindow();
+            stage.close();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/PlanningApp/View/DayPage.fxml"));
+
+            Parent root = loader.load();
+
+
+            // Access the DayController and set the Day object
+            DayController dayController = loader.getController();
+            dayController.Showday(AppController.day.getDayname());
+
+
+            // Set the new FXML file as the scene
+            Scene scene = new Scene(root);
+
+            // Get the primary stage
+            Stage primaryStage = new Stage();
+            primaryStage.setScene(scene);
+            primaryStage.setMinWidth(600);
+            primaryStage.setMinHeight(400);
+            primaryStage.setMaxWidth(600);
+            primaryStage.setMaxHeight(400);
+            primaryStage.show();
+
+
+
+        } catch (Exception e) {
+            Warning();
+        }
     }
+
+    private void Warning(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Time entered");
+        alert.setHeaderText(null);
+        alert.setContentText("Ensure that time is HH:MM like this : 02:00");
+        alert.showAndWait();
+    }
+}
 

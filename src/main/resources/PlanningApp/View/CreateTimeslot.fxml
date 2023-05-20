@@ -15,7 +15,7 @@
 
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PlanningApp.Controller.TimeslotController">
+<BorderPane fx:id="Home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PlanningApp.Controller.TimeslotController">
     <top>
         <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #0598FF;" BorderPane.alignment="CENTER">
             <children>
@@ -89,22 +89,65 @@
                             <children>
                                 <HBox prefHeight="26.0" prefWidth="154.0">
                                     <children>
-                                        <MenuButton text="Select Month">
+                                        <ChoiceBox prefHeight="25.0" prefWidth="90.0" fx:id="startingTimeChoiceBox">
                                             <items>
-                                                <MenuItem text="January" />
-                                                <MenuItem text="February" />
-                                                <MenuItem text="March" />
-                                                <MenuItem text="April" />
-                                                <MenuItem text="May" />
-                                                <MenuItem text="June" />
-                                                <MenuItem text="July" />
-                                                <MenuItem text="August" />
-                                                <MenuItem text="September" />
-                                                <MenuItem text="October" />
-                                                <MenuItem text="November" />
-                                                <MenuItem text="December" />
+                                                <FXCollections fx:factory="observableArrayList">
+                                                    <String fx:value="00:00" />
+                                                    <String fx:value="00:30" />
+                                                    <String fx:value="01:00" />
+                                                    <String fx:value="01:30" />
+                                                    <String fx:value="02:00" />
+                                                    <String fx:value="02:30" />
+                                                    <String fx:value="03:00" />
+                                                    <String fx:value="03:30" />
+                                                    <String fx:value="04:00" />
+                                                    <String fx:value="04:30" />
+                                                    <String fx:value="05:00" />
+                                                    <String fx:value="05:30" />
+                                                    <String fx:value="06:00" />
+                                                    <String fx:value="06:30" />
+                                                    <String fx:value="07:00" />
+                                                    <String fx:value="07:30" />
+                                                    <String fx:value="08:00" />
+                                                    <String fx:value="08:30" />
+                                                    <String fx:value="09:00" />
+                                                    <String fx:value="09:30" />
+                                                    <String fx:value="10:00" />
+                                                    <String fx:value="10:30" />
+                                                    <String fx:value="11:00" />
+                                                    <String fx:value="11:30" />
+                                                    <String fx:value="12:00" />
+                                                    <String fx:value="12:30" />
+                                                    <String fx:value="13:00" />
+                                                    <String fx:value="13:30" />
+                                                    <String fx:value="14:00" />
+                                                    <String fx:value="14:30" />
+                                                    <String fx:value="15:00" />
+                                                    <String fx:value="15:30" />
+                                                    <String fx:value="16:00" />
+                                                    <String fx:value="16:30" />
+                                                    <String fx:value="17:00" />
+                                                    <String fx:value="17:30" />
+                                                    <String fx:value="18:00" />
+                                                    <String fx:value="18:30" />
+                                                    <String fx:value="19:00" />
+                                                    <String fx:value="19:30" />
+                                                    <String fx:value="20:00" />
+                                                    <String fx:value="20:30" />
+                                                    <String fx:value="21:00" />
+                                                    <String fx:value="21:30" />
+                                                    <String fx:value="22:00" />
+                                                    <String fx:value="22:30" />
+                                                    <String fx:value="23:00" />
+                                                    <String fx:value="23:30" />
+
+                                                    <!-- Add more year options as needed -->
+                                                </FXCollections>
                                             </items>
-                                        </MenuButton>
+                                            <HBox.margin>
+                                                <Insets bottom="10.0" />
+                                            </HBox.margin>
+                                        </ChoiceBox>
                                     </children>
                                     <VBox.margin>
                                         <Insets bottom="20.0" />
@@ -112,7 +155,7 @@
                                 </HBox>
                                 <HBox prefHeight="26.0" prefWidth="154.0">
                                     <children>
-                                        <ChoiceBox prefHeight="25.0" prefWidth="90.0">
+                                        <ChoiceBox prefHeight="25.0" prefWidth="90.0" fx:id="endingTimeChoiceBox">
                                             <items>
                                                 <FXCollections fx:factory="observableArrayList">
                                                     <String fx:value="00:00" />
@@ -175,7 +218,7 @@
                                 </HBox>
                             </children>
                         </VBox>
-                        <Button mnemonicParsing="false" style="-fx-background-color: #0598FF;" text="Create" textFill="WHITE">
+                        <Button mnemonicParsing="false" style="-fx-cursor: hand;-fx-background-color: #0598FF;" text="Create" textFill="WHITE" fx:id="createButton" onAction="#AddTimeslot" >
                             <VBox.margin>
                                 <Insets left="80.0" top="10" />
                             </VBox.margin>

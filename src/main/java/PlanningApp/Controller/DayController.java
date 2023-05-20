@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -34,18 +35,21 @@ public class DayController {
     @FXML
     private Label titleLabel;
 
-    public void Showday(User user, String dayname) {
-        Day day = user.getCalendar().getDays().get(dayname);
+
+
+    public void Showday( String dayname) {
+
         titleLabel.setText(dayname);
-        populateData(day);
+        populateData();
     }
 
 
-    private void populateData(Day day) {
+    private void populateData() {
         taskPane.getChildren().clear();
         timeslotPane.getChildren().clear();
 
-        for (TimeSlot timeslot : day.getTimeslot()) {
+
+        for (TimeSlot timeslot : AppController.day.getTimeslot()) {
             HBox timeslotBox = new HBox();
             Label startLabel = new Label("      "+timeslot.getstart());
             Label endLabel = new Label("  --   "+timeslot.getend()+"                   ");
@@ -68,15 +72,15 @@ public class DayController {
                 // Remove the task from the task pane
                 timeslotPane.getChildren().remove(timeslotBox);
                 // Remove the task from the day's tasks
-                day.getTimeslot().remove(timeslot);
+                AppController.day.getTimeslot().remove(timeslot);
                 // update viw
-                populateData(day);
+                populateData();
             });
             timeslotBox.getChildren().addAll(removeButton);
         }
 
 
-        for (Task task : day.getTasks()) {
+        for (Task task : AppController.day.getTasks()) {
             HBox taskBox = new HBox();
             Label nameLabel = new Label(task.getName());
             Label startLabel = new Label(task.getStarttime());
@@ -120,9 +124,9 @@ public class DayController {
                 // Remove the task from the task pane
                 taskPane.getChildren().remove(taskBox);
                 // Remove the task from the day's tasks
-                day.getTasks().remove(task);
+                AppController.day.getTasks().remove(task);
                 // update viw
-                populateData(day);
+                populateData();
             });
 
             taskBox.getChildren().addAll(removeButton);
@@ -159,7 +163,19 @@ public class DayController {
         stage.setTitle("CreateTimeslot");
         stage.setScene(new Scene(roo));
         stage.show();
+    }
 
+    public void AddTask() throws IOException {
+        // close the previous Page:
+        Stage stage1 = (Stage) titleLabel.getScene().getWindow();
+        stage1.close();
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/PlanningApp/View/CreateTask.fxml"));
+        Parent roo = loader.load();
+        Stage stage = new Stage();
+        TaskController tasController = loader.getController();
+        stage.setTitle("CreateTimeslot");
+        stage.setScene(new Scene(roo));
+        stage.show();
     }
 }
