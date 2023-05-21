@@ -1,6 +1,7 @@
 package PlanningApp.Model;
 
 import PlanningApp.Com.HistoryInterface;
+import javafx.scene.chart.CategoryAxis;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -80,6 +81,7 @@ public class User implements TaskUser,TimeslotUser, Serializable, HistoryInterfa
         this.profile.setname(username);
         this.profile.setpassword(password);
         User.currentuser = this;
+        Category.initcategory();
     }
     // getters and setters
     public void setCalendar(Calendar calendar) {
@@ -178,5 +180,12 @@ public class User implements TaskUser,TimeslotUser, Serializable, HistoryInterfa
         this.calendar.removetimeslot(day,start,end);
     }
 
-
+    public void settaskasdone(Task task)
+    {
+        // set the state to done
+        // increment the counter of done tasks in day
+        // compare it to the min done tasks in the day to give a badge or not
+        // if give yes then give the badge and check how many badge of good he has
+        // ..etc
+    }
 }

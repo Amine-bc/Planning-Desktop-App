@@ -14,8 +14,8 @@ import java.io.IOException;
 public class FirstPageView extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        AppController.setFilePath("C:\\Users\\admin\\IdeaProjects\\PlanningAppJavaProject\\src\\main\\java\\PlanningApp\\Files\\users.ser");
-
+        AppController.setFilePath(Util.getPlatformIndependentFilePath());
+        System.out.println(AppController.FilePath);
         App.ReadfromDb(AppController.FilePath);
         System.out.println("hmmmmm");
         //Authentification
