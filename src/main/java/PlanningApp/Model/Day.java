@@ -1,9 +1,12 @@
 package PlanningApp.Model;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class Day implements TaskUser,TimeCalcs,TimeslotUser{
+public class Day implements TaskUser,TimeCalcs,TimeslotUser, Serializable {
     private String mintimeslot;
     public Day(String date, String mintimeslot){
         this.date = date;
@@ -76,34 +79,66 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser{
 
 
     @Override
-    public void planifyman(String time, String duration) {
-
+    public boolean planifyman(String time, String duration) {
+        return false;
     }
-    public void planifyman(Task task){
-        //planify in the first time in the day
-        //System.out.println(task.getDuration()+" "+this.mintimeslot);
+    public boolean planifyman(Task task){
+        //  planify in the first time in the day
+        //  System.out.println(task.getDuration()+" "+this.mintimeslot);
         AtomicBoolean planified = new AtomicBoolean(false);
+        System.out.println(task.getStarttime()+" "+task.getEndtime()+" "+task.getDuration()+" "+task.getName());
+        //TODO fix this
         if ( this.timeslot.isEmpty() ){
                 System.out.println("No timeslots");
                 //TODO here view
             }else{
-                //iterate using iterator over this arraylist
-                Iterator<TimeSlot> timeSlotIterator = this.timeslot.iterator();
-                while ( timeSlotIterator.hasNext() && !planified.get()){
-                    TimeSlot timeSlot = timeSlotIterator.next();
-                    if ( timeSlot.getstart().compareTo(task.getStarttime()) <= 0 && timeSlot.getend().compareTo(task.getEndtime()) <= 0 ){
-                        // simply planify add to tasks arraylist + remove time from timeslots
-                        this.tasks.add(task);
-                        timeSlotIterator.remove();
-                        System.out.println(" starttime"+task.getStarttime() + " " + task.getEndtime() + " " + task.getDuration() + " " + task.getName());
-                        planified.set(true);
+            for (int i = 0; i < timeslot.size() && !planified.get(); i++) {
+                TimeSlot timeSlot = timeslot.get(i) ;
+                if (timeSlot.getstart().compareTo(task.getStarttime()) == 0 && timeSlot.getend().compareTo(task.getEndtime()) == 0) {
+                    // simply planify add to tasks arraylist + remove time from timeslots
+                    this.tasks.add(task);
+                    User.currentuser.addTask(task);
+                    timeslot.remove(i);
+                    Collections.sort(timeslot);
+                    i--; // Decrement the index to adjust for the removed element
+                    Calendar.addtask(task);
+                    System.out.println("----------------------------------------------------Task created--------------------------------------------------------------------");
+                    System.out.println(" starttime" + task.getStarttime() + " " + task.getEndtime() + " " + task.getDuration() + " " + task.getName());
+                    System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
+                    planified.set(true);
+                    return true;
+                } else if (timeSlot.getstart().compareTo(task.getStarttime()) <= 0 && timeSlot.getend().compareTo(task.getEndtime()) >= 0) {
+                    System.out.println("Here the task starttime" + task.getStarttime() + " " + task.getEndtime() + " " + task.getDuration() + " " + task.getName());
+                    this.tasks.add(task);
+                    User.currentuser.addTask(task);
+                    timeslot.remove(i);
+                    i--; // Decrement the index to adjust for the removed element
+                    if (subtract(task.getStarttime(), timeSlot.getstart()).compareTo("00:30") >= 0) {
+                        addtimeslot(new TimeSlot(timeSlot.getstart(), add( timeSlot.getstart(), subtract(timeSlot.getstart(),task.getStarttime()))));
+                        System.out.println("Time slot added------");
+                        System.out.println(timeSlot.getstart()+add( timeSlot.getstart(), subtract(timeSlot.getstart(),task.getStarttime())));
                     }
+                    if (subtract(task.getEndtime(), timeSlot.getend()).compareTo("00:30") >= 0) {
+                        addtimeslot(new TimeSlot(add (timeSlot.getend(),subtract(task.getEndtime(), timeSlot.getend())),timeSlot.getend()));
+                        System.out.println("Time slot added------2");
+                    }
+                    planified.set(true);
+                    Collections.sort(timeslot);
+                    System.out.println("Task created");
+                    System.out.println(" starttime" + task.getStarttime() + " " + task.getEndtime() + " " + task.getDuration() + " " + task.getName());
+                    return true;
+                } else {
+                    // Error message or exception
+                    System.out.println("Error Cannot planify task");
+                    return false;
                 }
             }
+        }
+        return false;
     }
     @Override
-    public void planifyauto(String startperiod, String endperiod) {
-
+    public boolean planifyauto(String startperiod, String endperiod) {
+        return false ;
     }
     @Override
     public void postpone(String time) {
@@ -114,14 +149,30 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser{
 
     }
 
-    public void evaluate(){
+    public int evaluate(){
+        // number of tasks completed over number of all tasks
+        int nb_tasks = this.tasks.size();
+        int nb_taskscompleted = 0;
+        for (int i = 0; i < nb_tasks; i++) {
+            if (this.tasks.get(i).getState() == State.completed){
+                nb_taskscompleted++;
+            }
+        }
+        return nb_taskscompleted/nb_tasks;
+    }
 
+    @Override
+    public int evaluate(Object o) {
+        return 0;
     }
 
 
     @Override
     public void addtimeslot(TimeSlot timeSlot){
         //TODO add the cases where there is chauvechement
+        if (timeSlot.getduration().compareTo("00:30") < 0){
+            //System.out.println("Error cannot add timeslot");
+        }else{
         AtomicBoolean inserted = new AtomicBoolean(false);
         for (int i = 0; i < timeslot.size()-1; i++) {
             TimeSlot timeSlot1 = timeslot.get(i);
@@ -139,7 +190,6 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser{
                 //System.out.println("-----------------------------------------------------------------------------TEDKHOUL");
                 //TODO FIX this
             }else {
-
                 if (timeSlot1.getstart().compareTo(timeSlot.getstart()) >= 0 && timeSlot1.getend().compareTo(timeSlot.getend()) <= 0) {
                     // change it
                     timeSlot1.setstart(timeSlot.getstart());
@@ -147,7 +197,7 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser{
                     timeSlot1.setduration(subtract(timeSlot1.getend(), timeSlot1.getstart()));
                     inserted.set(true);
                 }else {
-                    // throw exeption here
+                    //TODO throw exeption here
                     
 
                 }
@@ -156,7 +206,7 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser{
         if ( !inserted.get() ){
             this.timeslot.add(timeSlot);
         }
-    }
+    }}
 
     public void removetimeslot( String start , String end ){
         TimeSlot timeSlot = new TimeSlot(start,end) ;
@@ -184,6 +234,8 @@ public void printTasks(){
             System.out.println("Tasks are:");
         }
         this.printTasks();
-        //TODO print tasks add it in view
     }
 }
+
+
+

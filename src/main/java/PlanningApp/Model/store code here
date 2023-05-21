@@ -1,0 +1,41 @@
+<----------------------------------------------->
+>    -   -       2021-02-11Thursday     -    -    <
+Timeslots
+Start: 10:00 ---End: 12:00
+
+Start: 14:00 ---End: 16:00
+
+Tasks
+Task: pa ---Start: 02:00 ---End: 03:00
+
+<----------------------------------------------->
+
+
+Day [date=2021-02-11, dayname=null, nb_mintasks=0, timeslot is contains data here it is...
+     Start   02:00     End  04:30
+
+     Start   10:00     End  12:00
+     Start   14:00     End  16:00
+
+No tasks
+
+
+
+
+
+
+pa 01:00 5 null null
+
+02:00 03:00 01:00 pa
+
+Here the task starttime 02:00 03:00 01:00 pa
+Task created
+ starttime 02:00 03:00 01:00 pa
+ 02:00 03:00 01:00 pa
+ Here the task starttime02:00 03:00 01:00 pa
+ Task created
+ starttime02:00 03:00 01:00 pa
+ 02:00 03:00 01:00 pa
+ Here the task starttime02:00 03:00 01:00 pa
+ Task created
+ starttime02:00 03:00 01:00 pa

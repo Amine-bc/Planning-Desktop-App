@@ -20,8 +20,13 @@ public class TaskController {
     @FXML
     private TextField TaskStartTime;
 
+
     @FXML
     private TextField TaskDuration;
+
+        SimpleTask task = new SimpleTask("Task1","30","2021-02-11Thursday","10:00",0);
+        User user = new User("Amine","passwd");
+
 
     @FXML
     private CheckBox CheckBox;
@@ -63,7 +68,7 @@ public class TaskController {
         try {
             //User user = new User("Amine","Bouchoucha","lm_bouchoucha@esi.dz","passwd");
             System.out.println("i'm here 1");
-            Task task2 = AppController.user.createTask(name, duration, startTime);
+            Task task2 = AppController.currentuser.createTask(name, duration, startTime,0,0);
             //Task task2 = AppController.user.createTask("Task1","02:00","04:25");
 
             //System.out.println("hnaaya");
@@ -74,7 +79,7 @@ public class TaskController {
             //System.out.println("9bel matetkhelet");
 
             //those also are not working here i d'ont know why :
-            AppController.user.planifyman(task2, "2021-02-11Thursday");
+            AppController.currentuser.planifyman(task2, "2021-02-11Thursday");
             //AppController.user.planifyman(task,"2021-02-11Thursday");
             System.out.println("i'm here 2");
 
@@ -90,7 +95,7 @@ public class TaskController {
 
             // Access the DayController and set the Day object
             DayController dayController = loader.getController();
-            dayController.Showday(AppController.day.getDayname());
+            dayController.Showday(AppController.currentday.getDayname());
 
 
             // Set the new FXML file as the scene

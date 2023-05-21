@@ -39,7 +39,7 @@ public class TimeslotController {
                 // Create the timeslot using the selected start and end times
                 TimeSlot timeSlot = new TimeSlot(startTime, endTime);
 
-                AppController.day.addtimeslot(timeSlot);
+                AppController.currentday.addtimeslot(timeSlot);
 
                 // Optionally, you can perform additional actions after creating the timeslot
 
@@ -47,7 +47,7 @@ public class TimeslotController {
                 startingTimeChoiceBox.getSelectionModel().clearSelection();
                 endingTimeChoiceBox.getSelectionModel().clearSelection();
             }
-        AppController.day.printTimeslots();
+        AppController.currentday.printTimeslots();
 
         Stage stage = (Stage) Home.getScene().getWindow();
         stage.close();
@@ -58,7 +58,7 @@ public class TimeslotController {
 
         // Access the DayController and set the Day object
         DayController dayController = loader.getController();
-        dayController.Showday(AppController.day.getDayname());
+        dayController.Showday(AppController.currentday.getDayname());
 
 
         // Set the new FXML file as the scene

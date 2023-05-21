@@ -151,12 +151,16 @@ public class CalendarController implements Initializable {
         String formattedDate = currentDate.format(formatter);
         System.out.println("Day clicked is " + formattedDate);
 
-        User user = new User("Amine","Bouchoucha","lm_bouchoucha@esi.dz","passwd");
+        User user = new User("Amine","passwd");
 
 
-        user.createTask("Task1","02:00","04:25");
-        user.createTask("Task2","10:00","12:00");
-        user.createTask("Task3","01:00","02:00");
+
+        user.createTask("Task1","02:00","04:25",0,0);
+        user.createTask("Task2","10:00","12:00",0,0);
+        user.createTask("Task3","01:00","02:00",0,0);
+
+        user.createTask("Task1","02:00","04:25",2,0);
+
         user.createCalendar(2021,2022,2,10,10,30);
         String date ="2021-02-11Thursday";
         user.addtimeslot("2021-02-11Thursday","02:00","04:25");
@@ -165,14 +169,18 @@ public class CalendarController implements Initializable {
         user.addtimeslot("2021-02-11Thursday","13:00","14:00");
         user.addtimeslot("2021-02-11Thursday","14:00","16:25");
         user.addtimeslot("2021-02-11Thursday","17:00","19:00");
+
         user.addtimeslot("2021-02-11Thursday","22:00","22:45");
         user.addtimeslot("2021-02-11Thursday","22:50","23:30");
-        Task task = user.createTask("Task1","02:00","04:25");
-        Task task2= user.createTask("Task2","02:00","12:00");
+        Task task = user.createTask("Task1","02:00","04:25",0,0);
+        Task task2= user.createTask("Task2","02:00","12:00",0,0);
         //Task task4= user.createTask("Task2","02:00","14:00");
-        Task task3= user.createTask("Task2","02:00","20:00");
+        Task task3= user.createTask("Task2","02:00","20:00",0,0);
         //Task task5= user.createTask("Task2","02:00","18:00");
-        user.createTask("Task3","02:00","04:25");
+        user.createTask("Task3","02:00","04:25",0,0);
+
+        Task task5 = user.createTask("Task1","02:00","04:25",3,0);
+
         user.planifyman(task,date);
         user.planifyman(task2,date);
         //user.planifyman(task3,date);
@@ -181,9 +189,9 @@ public class CalendarController implements Initializable {
         user.getCalendar().getDays().get(date).printDay();
 
         // set it to static :
-        AppController.user=user;
-        AppController.day=user.getCalendar().getDays().get(date);
-        AppController.day.setDayname(formattedDate);
+        AppController.currentuser=user;
+        AppController.currentday=user.getCalendar().getDays().get(date);
+        AppController.currentday.setDayname(formattedDate);
         try {
             int a=1;
             if(a==0){

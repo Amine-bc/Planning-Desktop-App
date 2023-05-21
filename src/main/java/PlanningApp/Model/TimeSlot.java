@@ -1,8 +1,11 @@
 package PlanningApp.Model;
 
-import java.util.ArrayList;
 
-public class TimeSlot implements Evaluation,TimeCalcs{
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Objects;
+
+public class TimeSlot implements TimeCalcs, Serializable, Comparable<TimeSlot> {
 
     private String start;
     private String state ;
@@ -18,9 +21,7 @@ public class TimeSlot implements Evaluation,TimeCalcs{
         return this.state;
     };
 
-    public void evaluate(){
 
-    };
 
     public String getstart(){
         return this.start ;
@@ -56,5 +57,25 @@ public class TimeSlot implements Evaluation,TimeCalcs{
         if (!getstart().equals(timeSlot.getstart())) return false;
         return getend().equals(timeSlot.getend());
     }
+    @Override
+    public int compareTo(TimeSlot timeSlot) {
+        if (Objects.equals(this.getstart(), timeSlot.getstart())){
+
+            if (this.getduration().compareTo(timeSlot.getduration()) > 0) {
+                return -1;
+            } else if (this.getduration().compareTo(timeSlot.getduration()) < 0) {
+                return 1;
+            } else if (this.getduration().compareTo(timeSlot.getduration()) == 0) {
+                return 1;
+            }
+            return 0;
+
+        }else if ( this.getstart().compareTo(timeSlot.getstart()) < 0 ){
+            return -1 ;
+        }else{
+            return 1 ;
+        }
+    }
+
 
 }

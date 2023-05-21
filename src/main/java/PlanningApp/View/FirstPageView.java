@@ -26,20 +26,6 @@ public class FirstPageView extends Application {
 
         //------------------------------------------------------------------------------------------
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //
 //        FXMLLoader fxmlLoader = new FXMLLoader(FirstPageView.class.getResource("FirstPage.fxml"));
 //

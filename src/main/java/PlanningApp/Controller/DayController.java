@@ -49,7 +49,7 @@ public class DayController {
         timeslotPane.getChildren().clear();
 
 
-        for (TimeSlot timeslot : AppController.day.getTimeslot()) {
+        for (TimeSlot timeslot : AppController.currentday.getTimeslot()) {
             HBox timeslotBox = new HBox();
             Label startLabel = new Label("      "+timeslot.getstart());
             Label endLabel = new Label("  --   "+timeslot.getend()+"                   ");
@@ -72,7 +72,7 @@ public class DayController {
                 // Remove the task from the task pane
                 timeslotPane.getChildren().remove(timeslotBox);
                 // Remove the task from the day's tasks
-                AppController.day.getTimeslot().remove(timeslot);
+                AppController.currentday.getTimeslot().remove(timeslot);
                 // update viw
                 populateData();
             });
@@ -80,7 +80,7 @@ public class DayController {
         }
 
 
-        for (Task task : AppController.day.getTasks()) {
+        for (Task task : AppController.currentday.getTasks()) {
             HBox taskBox = new HBox();
             Label nameLabel = new Label(task.getName());
             Label startLabel = new Label(task.getStarttime());
@@ -124,7 +124,7 @@ public class DayController {
                 // Remove the task from the task pane
                 taskPane.getChildren().remove(taskBox);
                 // Remove the task from the day's tasks
-                AppController.day.getTasks().remove(task);
+                AppController.currentday.getTasks().remove(task);
                 // update viw
                 populateData();
             });

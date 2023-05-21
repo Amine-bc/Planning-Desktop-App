@@ -1,6 +1,8 @@
 # Compiled class files
 *.class
-
+#files
+*.txt
+*.ser
 # IntelliJ project files
 .idea/
 
