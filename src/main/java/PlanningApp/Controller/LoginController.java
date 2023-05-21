@@ -4,6 +4,7 @@ import PlanningApp.Model.App;
 import PlanningApp.Model.Task;
 import PlanningApp.Model.User;
 import PlanningApp.View.FirstPageView;
+import PlanningApp.View.Util;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -35,7 +36,7 @@ public class LoginController  {
     private PasswordField passwordField;
 
     private static final String USERS_FILE = "src/main/java/PlanningApp/Files/users.txt";
-    private static final String USERS_FILEpath = "C:\\Users\\admin\\IdeaProjects\\PlanningAppJavaProject\\src\\main\\java\\PlanningApp\\Files\\users.ser";
+    private static final String USERS_FILEpath = Util.getPlatformIndependentFilePath();
 
 
 
@@ -49,12 +50,13 @@ public class LoginController  {
         if (validateLogin(username, password)) {
             System.out.println(App.users.isEmpty());
             for (String key : App.users.keySet()) {
-
                 System.out.println("Key: " + key );
             }
             AppController.currentuser = App.users.get(username);
+            App.setCurrentuser(App.users.get(username));
             System.out.println("user form DB"+AppController.currentuser.getname());
             AppController.currentcalendar= AppController.currentuser.getCalendar();
+            //TODO nothing
 
             System.out.println("Correct");
             showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome, " + username + "!");

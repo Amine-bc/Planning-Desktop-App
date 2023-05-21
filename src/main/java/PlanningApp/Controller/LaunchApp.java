@@ -21,7 +21,7 @@ public class LaunchApp {
         user.createCalendar(2021,2022,2,10,10,30);
         Task task = new SimpleTask("task1","02:00",date,"10:00",0);
 
-//        System.out.println("name"+task.getName()+"duration"+task.getDuration()+"priority"+task.getPriority()+"starttime"+task.getStarttime()+"endtime"+task.getEndtime());
+//      System.out.println("name"+task.getName()+"duration"+task.getDuration()+"priority"+task.getPriority()+"starttime"+task.getStarttime()+"endtime"+task.getEndtime());
         user.addtimeslot(date,"02:00","04:30" );
         user.addtimeslot(date,"10:00","12:00" );
         user.addtimeslot(date,"14:00","16:00" );
