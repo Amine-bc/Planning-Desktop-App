@@ -41,14 +41,13 @@ public class TimeslotController {
                 // Create the timeslot using the selected start and end times
                 TimeSlot timeSlot = new TimeSlot(startTime, endTime);
 
+                //TODO when close
                 AppController.currentday.addtimeslot(timeSlot);
-                TreeMap<String, Day> daysMap = App.currentuser.getCalendar().getDays();
 
-                daysMap.put(AppController.currentday.getDayname(), AppController.currentday);
-                //App.currentuser.getCalendar().getDays().put(AppController.currentday.getDayname(),AppController.currentday);
-                //App.users.put(App.currentuser.getname(),App.currentuser);
-                //App.SaveToDb("src/main/java/PlanningApp/Files/users.ser");
-                // Optionally, you can perform additional actions after creating the timeslot
+                System.out.println("APP user"+App.currentuser);
+                System.out.println("App Conrtroler"+AppController.currentuser);
+
+                App.SaveToDb("src/main/java/PlanningApp/Files/users.ser");
 
                 // Reset the choice boxes to their initial state
                 startingTimeChoiceBox.getSelectionModel().clearSelection();

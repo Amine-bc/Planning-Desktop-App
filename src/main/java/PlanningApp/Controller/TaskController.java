@@ -65,7 +65,8 @@ public class TaskController {
         try {
             //User user = new User("Amine","Bouchoucha","lm_bouchoucha@esi.dz","passwd");
             System.out.println("i'm here 1");
-            Task task2 = new SimpleTask(name, duration ,"2021-02-11Thursday",startTime,0);
+
+            Task task2 = new SimpleTask(name, duration ,AppController.currentday.getDayname(),startTime,0);
             System.out.println(task2.getName()+" "+task2.getStarttime()+" "+task2.getDuration());
             //Task task2 = AppController.user.createTask("Task1","02:00","04:25");
 
@@ -78,9 +79,9 @@ public class TaskController {
 
             //those also are not working here i d'ont know why :
             AppController.currentuser.planifyman(task2, "2021-02-11Thursday");
-            AppController.currentday=AppController.currentuser.getCalendar().getDays().get("2021-02-11Thursday");
+
             //AppController.user.planifyman(task,"2021-02-11Thursday");
-            System.out.println("i'm here 2");
+
 
 
 

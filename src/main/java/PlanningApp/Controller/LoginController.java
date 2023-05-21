@@ -53,6 +53,7 @@ public class LoginController  {
                 System.out.println("Key: " + key );
             }
             AppController.currentuser = App.users.get(username);
+            App.currentuser=AppController.currentuser;
             System.out.println("user form DB"+AppController.currentuser.getname());
             AppController.currentcalendar= AppController.currentuser.getCalendar();
 
@@ -98,18 +99,18 @@ public class LoginController  {
             writer.newLine();
             writer.flush();
             App.init();
+            //check if user calendar is not to null :
             App.users.put(username,user);
 
             for (String key : App.users.keySet()) {
 
                 System.out.println("Key: " + key );
             }
-
+            App.currentuser=user;
             AppController.currentuser=user;
             App.SaveToDb(USERS_FILEpath);
             showAlert(Alert.AlertType.INFORMATION, "Registration Successful", "User registered successfully.");
             System.out.println("APP user"+AppController.currentuser.getname());
-            App.users = null ;
             App.ReadfromDb("src/main/java/PlanningApp/Files/users.ser");
             System.out.println("after");
             for (String key : App.users.keySet()) {
