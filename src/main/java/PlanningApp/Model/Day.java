@@ -148,6 +148,7 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser, Serializable {
                     i--; // Decrement the index to adjust for the removed element
                     if (compareTimes(subtract(task.getStarttime(), timeSlot.getstart()),("00:30")) >= 0) {
                         addtimeslot(new TimeSlot(timeSlot.getstart(), add( timeSlot.getstart(), subtract(timeSlot.getstart(),task.getStarttime()))));
+
                         System.out.println("Time slot added------");
                         System.out.println(timeSlot.getstart()+add( timeSlot.getstart(), subtract(timeSlot.getstart(),task.getStarttime())));
                     }
@@ -163,7 +164,6 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser, Serializable {
                 } else {
                     // Error message or exception
                     System.out.println("Error Cannot planify task");
-                    planified.set( false || planified.get()); ;
                 }
             }
         }
@@ -219,6 +219,7 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser, Serializable {
                 timeSlot1.setend(timeSlot.getend());
                 timeSlot1.setduration(subtract(timeSlot1.getend(),timeSlot1.getstart()));
                 timeslot.remove(i + 1);
+                Collections.sort(timeslot);
                 inserted.set(true);
                 //System.out.println("-----------------------------------------------------------------------------TEDKHOUL");
                 //TODO FIX this
@@ -228,6 +229,7 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser, Serializable {
                     timeSlot1.setstart(timeSlot.getstart());
                     timeSlot1.setend(timeSlot.getend());
                     timeSlot1.setduration(subtract(timeSlot1.getend(), timeSlot1.getstart()));
+                    Collections.sort(timeslot);
                     inserted.set(true);
 
                 }else {
@@ -238,6 +240,7 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser, Serializable {
         }
         if ( !inserted.get() ){
             this.timeslot.add(timeSlot);
+            Collections.sort(timeslot);
         }
     }}
 

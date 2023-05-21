@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class App {
     // this class is the main class of the model part of the application
-    HashMap<String,User> users;
+    public static HashMap<String,User> users ;
     public static User currentuser = null;
 
 
@@ -17,9 +17,9 @@ public class App {
         return currentuser;
     }
     public App(){
-        this.users = new HashMap<String,User>();
+        users = new HashMap<String,User>();
     }
-    public void addUser(User user){
+    static public void addUser(User user){
         users.put(user.getname(),user);
     }
     public void setUsers(HashMap<String,User> users){
@@ -28,6 +28,11 @@ public class App {
     public void removeUser(User user){
         users.remove(user.getname());
     }
+
+
+   public static void init(){
+       users = new HashMap<String,User>();
+   }
     public static void main(String[] args) {
         // this method is the main method of the model part of the application
         // it is used to test the model classes
@@ -43,26 +48,29 @@ public class App {
 
         }
 
-    public void ReadfromDb(String FilePath)
+    public static void ReadfromDb(String FilePath)
     {
         try
         {
             FileInputStream fileOut2 = new FileInputStream(FilePath);
             ObjectInputStream objectIn = new ObjectInputStream(fileOut2);
             // read the user object
-            this.users = (HashMap<String,User>) objectIn.readObject();
+            users = (HashMap<String,User>) objectIn.readObject();
             System.out.println("users list deserialized successfully.");
 
         }
-        catch (Exception e)
+        catch (FileNotFoundException e)
         {
-            System.out.println("Exception is caught");
+            System.out.println("File not Found");
+        }
+        catch (Exception e1){
+            System.out.println(e1.getStackTrace());
         }
 
 
     }
 
-    public void SaveToDb(String FilePath){
+    public static void SaveToDb(String FilePath){
         try {
             FileOutputStream fileOut = new FileOutputStream(FilePath);
             ObjectOutputStream usersmap = new ObjectOutputStream(fileOut);

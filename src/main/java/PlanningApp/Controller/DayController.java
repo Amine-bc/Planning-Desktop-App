@@ -1,9 +1,6 @@
 package PlanningApp.Controller;
 
-import PlanningApp.Model.User;
-import PlanningApp.Model.Day;
-import PlanningApp.Model.Task;
-import PlanningApp.Model.TimeSlot;
+import PlanningApp.Model.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -49,6 +46,7 @@ public class DayController {
         timeslotPane.getChildren().clear();
 
 
+
         for (TimeSlot timeslot : AppController.currentday.getTimeslot()) {
             HBox timeslotBox = new HBox();
             Label startLabel = new Label("      "+timeslot.getstart());
@@ -75,12 +73,18 @@ public class DayController {
                 AppController.currentday.getTimeslot().remove(timeslot);
                 // update viw
                 populateData();
+                //TODO update this:
+                //App.currentuser.getCalendar().getDays().put(AppController.currentday.getDayname(),AppController.currentday);
+                //App.users.put(App.currentuser.getname(),App.currentuser);
+                //App.SaveToDb("src/main/java/PlanningApp/Files/users.ser");
             });
             timeslotBox.getChildren().addAll(removeButton);
         }
 
 
         for (Task task : AppController.currentday.getTasks()) {
+
+            AppController.currentday.printTasks();
             HBox taskBox = new HBox();
             Label nameLabel = new Label(task.getName());
             Label startLabel = new Label(task.getStarttime());
@@ -127,6 +131,11 @@ public class DayController {
                 AppController.currentday.getTasks().remove(task);
                 // update viw
                 populateData();
+
+                //TODO update this
+                //App.currentuser.getCalendar().getDays().put(AppController.currentday.getDayname(),AppController.currentday);
+                //App.users.put(App.currentuser.getname(),App.currentuser);
+                //App.SaveToDb("src/main/java/PlanningApp/Files/users.ser");
             });
 
             taskBox.getChildren().addAll(removeButton);
@@ -154,6 +163,7 @@ public class DayController {
     }
 
     public void AddTimeslot() throws IOException {
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/PlanningApp/View/CreateTimeslot.fxml"));
         Parent roo = loader.load();
           //hadi teftaha fi nafss el window:
@@ -163,6 +173,9 @@ public class DayController {
         stage.setTitle("CreateTimeslot");
         stage.setScene(new Scene(roo));
         stage.show();
+        System.out.println("i'm here ");
+        //those lines
+
     }
 
     public void AddTask() throws IOException {

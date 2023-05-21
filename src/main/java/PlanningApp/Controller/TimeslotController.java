@@ -1,5 +1,6 @@
 package PlanningApp.Controller;
 
+import PlanningApp.Model.App;
 import PlanningApp.Model.Day;
 import PlanningApp.Model.TimeSlot;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.io.IOException;
+import java.util.TreeMap;
 
 public class TimeslotController {
     @FXML
@@ -40,12 +42,18 @@ public class TimeslotController {
                 TimeSlot timeSlot = new TimeSlot(startTime, endTime);
 
                 AppController.currentday.addtimeslot(timeSlot);
+                TreeMap<String, Day> daysMap = App.currentuser.getCalendar().getDays();
 
+                daysMap.put(AppController.currentday.getDayname(), AppController.currentday);
+                //App.currentuser.getCalendar().getDays().put(AppController.currentday.getDayname(),AppController.currentday);
+                //App.users.put(App.currentuser.getname(),App.currentuser);
+                //App.SaveToDb("src/main/java/PlanningApp/Files/users.ser");
                 // Optionally, you can perform additional actions after creating the timeslot
 
                 // Reset the choice boxes to their initial state
                 startingTimeChoiceBox.getSelectionModel().clearSelection();
                 endingTimeChoiceBox.getSelectionModel().clearSelection();
+
             }
         AppController.currentday.printTimeslots();
 

@@ -18,23 +18,25 @@ public class AppController implements HistoryInterface {
     protected static void setcurrentuser(User user){
         currentuser = user;
     }
-    protected static String FilePath ;
-    protected static void setFilePath(String path){
+     public  static String FilePath ;
+     public  static void setFilePath(String path){
         FilePath = path;
     }
-    protected static String getFilePath(){
+     static String getFilePath(){
         return FilePath;
     }
-    protected void AppController(){
+     void AppController(){
         // Do I need it ??
     }
 
     public static void main(String[] args) {
         //check if the file is empty or not
         //if not empty then load login controller
+        AppController.setFilePath("src/main/java/PlanningApp/Files/user.ser");
         File file = new File(AppController.FilePath);
         if (file.exists() && file.length() == 0) {
             System.out.println("File is empty.");
+
             //TODO Ask for registration
             // after registrations add the user to the arraylist in app
             // and do this
