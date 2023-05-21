@@ -66,13 +66,25 @@ public class SimpleTask extends Task{
                         TimeSlot timeSlot = iterator.next();
                         if (timeSlot.getduration().compareTo(this.getDuration()) >= 0) {
                             Task taskToPlan = new SimpleTask(this.getName(), this.getDuration(), day, timeSlot.getstart(), this.getRepetition());
-                            int repet = 0;
-                            while ( repet < this.getRepetition()+1){
+                            if (this.getRepetition() ==0 ){
                                 planned = this.getCalendar().getDays().get(day).planifyman(taskToPlan);
-                                day = getNextDay(day);
-                                repet++;
+
+                            }else{
+                                int i = 0 ;
+                                while ( i < daysList.size()){
+                                int repet = 1;
+                                planned = this.getCalendar().getDays().get(day).planifyman(taskToPlan);
+                                while ( repet < this.getRepetition()+1){
+                                    System.out.println("Repetition"+repet);
+                                    System.out.println("day"+day);
+                                    day = getNextDay(day);
+                                    repet++;
+                                }
+                                taskToPlan.setDay(day);
+                                i += this.getRepetition() ;
                             }
-                            // remove the task from taskstobeplanified
+                            }
+//                             remove the task from taskstobeplanified
                             User.currentcalendar.getTaskstobeplanned().remove(this);
                             break;
                         }

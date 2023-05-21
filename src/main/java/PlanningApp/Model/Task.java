@@ -35,7 +35,7 @@ public abstract class Task implements TaskUser, TimeCalcs, Serializable,Comparab
     private String starttime;
     private String endtime;
     private int repetition;
-    private String Category ;
+    private String category ;
     private String Color ;
     private int Priority;
     private String day ;
@@ -60,7 +60,8 @@ public abstract class Task implements TaskUser, TimeCalcs, Serializable,Comparab
     }
 
     public void setCategory(String category) {
-        Category = category;
+        this.category = category;
+        Category.addtoCategory(category);
     }
     public int getPriority() {
         return Priority;

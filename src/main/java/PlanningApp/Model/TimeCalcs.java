@@ -47,5 +47,13 @@ public interface TimeCalcs {
         // Format the next day using the formatter and return it as a string
         return nextDate.format(formatter);
     }
+    public default int compareTimes(String time1, String time2) {
+        // Parse the time strings into LocalTime objects
+        LocalTime t1 = LocalTime.parse(time1);
+        LocalTime t2 = LocalTime.parse(time2);
+
+        // Compare the LocalTime objects using the compareTo method
+        return t1.compareTo(t2);
+    }
 
 }

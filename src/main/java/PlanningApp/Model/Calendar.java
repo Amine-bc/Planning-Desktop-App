@@ -146,13 +146,13 @@ public class Calendar implements TaskUser,TimeslotUser, Serializable, TimeCalcs 
 //        ArrayList <Task> taskstobeplanned = new ArrayList<Task>();
 //        taskstobeplanned.addAll(tasks);
         // for tasks in the arraylist taskstobeplanned
-        boolean planified =false ;
+        boolean planified = true ;
         while ( !taskstobeplanned.isEmpty()) {
             System.out.println("\n\n\nThe tasks to be planned are");
             taskstobeplanned.forEach((n) -> System.out.println(n.getName()));
             Task task = taskstobeplanned.get(0);
             // for each day in the arraylist dayslist
-            planified &= task.planifyauto(startDate,endDate);
+            planified = task.planifyauto(startDate,endDate) && planified;
             System.out.println("\n\n\n");
         }
         return planified;
