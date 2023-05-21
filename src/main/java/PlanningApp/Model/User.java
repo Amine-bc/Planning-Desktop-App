@@ -14,6 +14,7 @@ public class User implements TaskUser,TimeslotUser, Serializable, HistoryInterfa
     public ArrayList<Calendar> getHistorylist(){
         return History;
     }
+
     public void addCalendartoHistory(Calendar calendar){
         History.add(calendar);
         //then serialize the list to the file

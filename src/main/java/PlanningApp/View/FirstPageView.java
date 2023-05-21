@@ -1,10 +1,8 @@
 package PlanningApp.View;
 
+import PlanningApp.Controller.AppController;
 import PlanningApp.Controller.DayController;
-import PlanningApp.Model.Day;
-import PlanningApp.Model.SimpleTask;
-import PlanningApp.Model.Task;
-import PlanningApp.Model.User;
+import PlanningApp.Model.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,11 +14,14 @@ import java.io.IOException;
 public class FirstPageView extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        AppController.setFilePath("C:\\Users\\admin\\IdeaProjects\\PlanningAppJavaProject\\src\\main\\java\\PlanningApp\\Files\\users.ser");
 
+        App.ReadfromDb(AppController.FilePath);
+        System.out.println("hmmmmm");
         //Authentification
-        FXMLLoader fxmlLoader = new FXMLLoader(FirstPageView.class.getResource("Calendar.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(FirstPageView.class.getResource("FirstPage.fxml"));
         Parent root = fxmlLoader.load();
-        stage.setTitle("Calendar Application");
+        stage.setTitle("Application");
         stage.setScene(new Scene(root));
         stage.show();
 

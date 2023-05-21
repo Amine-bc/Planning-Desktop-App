@@ -1,16 +1,32 @@
 package PlanningApp.Controller;
 
+import PlanningApp.Model.App;
 import PlanningApp.Model.Task;
 import PlanningApp.Model.User;
+import PlanningApp.View.FirstPageView;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class LoginController {
+public class LoginController  {
+
+    @FXML
+    private BorderPane firstPage;
+
+    //@FXML
+    //private BorderPane Periode;
 
     @FXML
     private TextField usernameField;
@@ -19,26 +35,56 @@ public class LoginController {
     private PasswordField passwordField;
 
     private static final String USERS_FILE = "src/main/java/PlanningApp/Files/users.txt";
-    private static final String USERS_FILEdat = "src/main/java/PlanningApp/Files/user.dat";
+    private static final String USERS_FILEpath = "C:\\Users\\admin\\IdeaProjects\\PlanningAppJavaProject\\src\\main\\java\\PlanningApp\\Files\\users.ser";
+
+
+
 
     @FXML
-    private void login() {
+    private void login() throws IOException {
+
         String username = usernameField.getText();
         String password = passwordField.getText();
+
         if (validateLogin(username, password)) {
+            System.out.println(App.users.isEmpty());
+            for (String key : App.users.keySet()) {
+
+                System.out.println("Key: " + key );
+            }
+            AppController.currentuser = App.users.get(username);
+            System.out.println("user form DB"+AppController.currentuser.getname());
+            AppController.currentcalendar= AppController.currentuser.getCalendar();
+
             System.out.println("Correct");
             showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome, " + username + "!");
             //TODO load user object from memory
+
+
+            Stage stage = (Stage) firstPage.getScene().getWindow();
+            stage.close();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/PlanningApp/View/Calendar.fxml"));
+
+            Parent root = loader.load();
+            Stage stage1=new Stage();
+            stage1.setTitle("Calendar Application");
+            stage1.setScene(new Scene(root));
+            stage1.show();
+
+
         } else {
             System.out.println("false");
             showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid username or password.");
         }
+
     }
     @FXML
     private void register() {
         String username = usernameField.getText();
         String password = passwordField.getText();
         User user = new User(username,password);
+        user.createCalendar(2021,2022,2,10,10,30);
+
         if (username.isEmpty() || password.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Registration Failed", "Username and password are required.");
             return;
@@ -51,14 +97,36 @@ public class LoginController {
             writer.write(username + "," + password);
             writer.newLine();
             writer.flush();
+            App.init();
+            App.users.put(username,user);
+
+            for (String key : App.users.keySet()) {
+
+                System.out.println("Key: " + key );
+            }
+
+            AppController.currentuser=user;
+            App.SaveToDb(USERS_FILEpath);
             showAlert(Alert.AlertType.INFORMATION, "Registration Successful", "User registered successfully.");
-            //Call writeListToFile
-            ArrayList<User> list = new ArrayList<>();
-            list.add(user);
-            writeListToFile(list,USERS_FILEdat);
-            // Call readListFromFile
-            ArrayList<User> list2 = readListFromFile(USERS_FILEdat);
-            System.out.println(list2.size());
+            System.out.println("APP user"+AppController.currentuser.getname());
+            App.users = null ;
+            App.ReadfromDb("src/main/java/PlanningApp/Files/users.ser");
+            System.out.println("after");
+            for (String key : App.users.keySet()) {
+
+                System.out.println("Key: " + key );
+            }
+
+            Stage stage = (Stage) firstPage.getScene().getWindow();
+            stage.close();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/PlanningApp/View/PeriodePage.fxml"));
+
+            Parent root = loader.load();
+            Stage stage1=new Stage();
+            stage1.setTitle("periode");
+            stage1.setScene(new Scene(root));
+            stage1.show();
+
         } catch (IOException e) {
             showAlert(Alert.AlertType.ERROR, "Registration Failed", "Failed to register user.");
         }
@@ -123,4 +191,6 @@ public class LoginController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+
 }
