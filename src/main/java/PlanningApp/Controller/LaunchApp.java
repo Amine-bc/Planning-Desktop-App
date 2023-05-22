@@ -22,7 +22,7 @@ public class LaunchApp {
         Task task = new SimpleTask("task1","02:00",date,"10:00",0);
 
 //      System.out.println("name"+task.getName()+"duration"+task.getDuration()+"priority"+task.getPriority()+"starttime"+task.getStarttime()+"endtime"+task.getEndtime());
-        user.addtimeslot(date,"02:00","04:30" );
+        user.addtimeslot(date,"07:00","08:00" );
         user.addtimeslot(date,"10:00","12:00" );
         user.addtimeslot(date,"14:00","16:00" );
         user.addtimeslot(date2,"02:00","05:00");
@@ -35,31 +35,7 @@ public class LaunchApp {
 
         user.planifyman(task,date);
         System.out.println("time slots");
-        user.getCalendar().getDays().get(date).printTimeslots();
 
-//        user.planifyman(task,date2);
-//        user.planifyman(task,date);
-//        System.out.println("Beforeplanifying");
-//        System.out.println("Day1"+date+"\n");
-//        user.getCalendar().getDays().get(date).printDay();
-////        System.out.println("Day2"+date2+"\n");
-//
-//        user.getCalendar().getDays().get(date2).printDay();
-//        user.planifyman(task,date);
-//        System.out.println("Afterplanifying");
-//        user.getCalendar().getDays().get(date).printDay();
-//
-//
-
-        User.currentcalendar.Createtasklist();
-        User.currentcalendar.getTaskstobeplanned().forEach(
-                k-> System.out.println(k.getName()+" duration"+k.getDuration()+" priority"+k.getPriority()+" starttime"+k.getStarttime()+" endtime"+k.getEndtime())
-        );
-
-        System.out.println("RESULT OF PLAN AUTO"+user.planifyauto(date,date4));
-        user.getCalendar().getDays().get(date).printDay();
-        System.out.println("Afterplanifying");
-        System.out.println("\n\n\n\n\n\n");
         App.ShowCalendar();
     }
 }

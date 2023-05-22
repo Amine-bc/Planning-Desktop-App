@@ -129,9 +129,9 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser, Serializable {
                 System.out.println("--------------------------------------------------------------");
                 if (compareTimes(timeSlot.getstart(),(task.getStarttime())) == 0 && compareTimes(timeSlot.getend(),(task.getEndtime())) == 0) {
                     // simply planify add to tasks arraylist + remove time from timeslots
+                    timeslot.remove(i);
                     this.tasks.add(task);
                     User.currentuser.addTask(task);
-                    timeslot.remove(i);
                     Collections.sort(timeslot);
                     i--; // Decrement the index to adjust for the removed element
                     Calendar.addtask(task);
@@ -142,10 +142,11 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser, Serializable {
                     return true;
                 } else if (compareTimes(timeSlot.getstart(),(task.getStarttime())) <= 0 && compareTimes(timeSlot.getend(),(task.getEndtime())) >= 0) {
                     System.out.println("Here the task starttime" + task.getStarttime() + " " + task.getEndtime() + " " + task.getDuration() + " " + task.getName());
+                    timeslot.remove(i);
                     this.tasks.add(task);
                     User.currentuser.addTask(task);
-                    timeslot.remove(i);
                     i--; // Decrement the index to adjust for the removed element
+                    timeslot.remove(i);
                     if (compareTimes(subtract(task.getStarttime(), timeSlot.getstart()),("00:30")) >= 0) {
                         addtimeslot(new TimeSlot(timeSlot.getstart(), add( timeSlot.getstart(), subtract(timeSlot.getstart(),task.getStarttime()))));
 

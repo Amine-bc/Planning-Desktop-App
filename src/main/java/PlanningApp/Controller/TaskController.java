@@ -67,7 +67,12 @@ public class TaskController {
 
             Task task2 = new SimpleTask(name, duration ,AppController.currentday.getDayname(),startTime,0);
 
-            AppController.currentuser.planifyman(task2, AppController.currentday.getDayname());
+            System.out.println("hhhhhhhhhhhhhhhh");
+            System.out.println();
+            System.out.println("hhhhhhhhhhhhhhhh");
+            System.out.println(" day name :");
+            System.out.println(AppController.currentday.getDayname());
+            AppController.currentuser.planifyman(task2,AppController.currentday.getDayname());
             App.SaveToDb("src/main/java/PlanningApp/Files/users.ser");
 
             Stage stage = (Stage) hero.getScene().getWindow();
