@@ -141,8 +141,7 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser, Serializable {
                     planified.set(true);
                     return true;
                 } else if (compareTimes(timeSlot.getstart(),(task.getStarttime())) <= 0 && compareTimes(timeSlot.getend(),(task.getEndtime())) >= 0) {
-                    System.out.println("Here the task starttime" + task.getStarttime() + " " + task.getEndtime() + " " + task.getDuration() + " " + task.getName());
-                    timeslot.remove(i);
+                    System.out.println("Here the task starttime" + task.getStarttime() + " " + task.getEndtime() + " " + task.getDuration() + " " + task.getName());timeslot.remove(i);
                     this.tasks.add(task);
                     User.currentuser.addTask(task);
                     i--; // Decrement the index to adjust for the removed element

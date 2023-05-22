@@ -78,8 +78,8 @@ public class InfoTaskController implements Initializable {
     @FXML
     public void handleDone() throws IOException {
         AppController.currenttask.setName(TaskName.getText());
-        AppController.currenttask.setStarttime(TaskStartTime.getText());
-        AppController.currenttask.setDuration(TaskDuration.getText());
+        //AppController.currenttask.setStarttime(TaskStartTime.getText());
+        //AppController.currenttask.setDuration(TaskDuration.getText());
 
 
         App.SaveToDb("src/main/java/PlanningApp/Files/users.ser");
