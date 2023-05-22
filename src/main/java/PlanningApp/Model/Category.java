@@ -1,9 +1,10 @@
 package PlanningApp.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Category {
+public class Category implements Serializable {
     private static HashMap<String,Integer> categories ;
     public static void initcategory(){
         Category cate = new Category() ;

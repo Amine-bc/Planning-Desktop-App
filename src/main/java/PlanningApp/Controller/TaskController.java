@@ -1,5 +1,6 @@
 package PlanningApp.Controller;
 
+import PlanningApp.Model.App;
 import PlanningApp.Model.SimpleTask;
 import PlanningApp.Model.Task;
 import PlanningApp.Model.User;
@@ -63,28 +64,11 @@ public class TaskController {
         System.out.println(name + " " + startTime + " " + duration);
 
         try {
-            //User user = new User("Amine","Bouchoucha","lm_bouchoucha@esi.dz","passwd");
-            System.out.println("i'm here 1");
 
             Task task2 = new SimpleTask(name, duration ,AppController.currentday.getDayname(),startTime,0);
-            System.out.println(task2.getName()+" "+task2.getStarttime()+" "+task2.getDuration());
-            //Task task2 = AppController.user.createTask("Task1","02:00","04:25");
 
-            //System.out.println("hnaaya");
-            //SimpleTask task = new SimpleTask();
-            //task.setName("eheh");
-            //task.setDuration("01:00");
-            //task.setStarttime("01:00");
-            //System.out.println("9bel matetkhelet");
-
-            //those also are not working here i d'ont know why :
-            AppController.currentuser.planifyman(task2, "2021-02-11Thursday");
-
-            //AppController.user.planifyman(task,"2021-02-11Thursday");
-
-
-
-
+            AppController.currentuser.planifyman(task2, AppController.currentday.getDayname());
+            App.SaveToDb("src/main/java/PlanningApp/Files/users.ser");
 
             Stage stage = (Stage) hero.getScene().getWindow();
             stage.close();

@@ -73,18 +73,19 @@ public class DayController {
                 AppController.currentday.getTimeslot().remove(timeslot);
                 // update viw
                 populateData();
-                //TODO update this:
-                //App.currentuser.getCalendar().getDays().put(AppController.currentday.getDayname(),AppController.currentday);
-                //App.users.put(App.currentuser.getname(),App.currentuser);
-                //App.SaveToDb("src/main/java/PlanningApp/Files/users.ser");
+                App.SaveToDb("src/main/java/PlanningApp/Files/users.ser");
             });
             timeslotBox.getChildren().addAll(removeButton);
-        }
 
+
+        }
+        System.out.println("T_im__________________________________________________________________________________________________hna tbdlet");
+        AppController.currentday.printTimeslots();
+        System.out.println("T_im__________________________________________________________________________________________________hna tbdlet");
 
         for (Task task : AppController.currentday.getTasks()) {
 
-            AppController.currentday.printTasks();
+            //AppController.currentday.printTasks();
             HBox taskBox = new HBox();
             Label nameLabel = new Label(task.getName());
             Label startLabel = new Label(task.getStarttime());
@@ -131,11 +132,20 @@ public class DayController {
                 AppController.currentday.getTasks().remove(task);
                 // update viw
                 populateData();
-
+                App.SaveToDb("src/main/java/PlanningApp/Files/users.ser");
                 //TODO update this
-                //App.currentuser.getCalendar().getDays().put(AppController.currentday.getDayname(),AppController.currentday);
-                //App.users.put(App.currentuser.getname(),App.currentuser);
-                //App.SaveToDb("src/main/java/PlanningApp/Files/users.ser");
+
+            });
+            taskBox.setStyle("-fx-cursor: hand;");
+            taskBox.setOnMouseClicked(event -> {
+                AppController.currenttask=task;
+                // Call your function here
+                System.out.println("click");
+                try {
+                    ModifyTask();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             });
 
             taskBox.getChildren().addAll(removeButton);
@@ -190,5 +200,19 @@ public class DayController {
         stage.setTitle("CreateTimeslot");
         stage.setScene(new Scene(roo));
         stage.show();
+    }
+
+    public void ModifyTask()throws IOException{
+
+        Stage stage1 = (Stage) titleLabel.getScene().getWindow();
+        stage1.close();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/PlanningApp/View/Taskinfo.fxml"));
+        Parent roo = loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("TaskInfo");
+        stage.setScene(new Scene(roo));
+        stage.show();
+
+
     }
 }

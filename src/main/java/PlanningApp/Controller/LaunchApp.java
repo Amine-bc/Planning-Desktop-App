@@ -31,6 +31,12 @@ public class LaunchApp {
         user.addtimeslot(date3,"02:00","05:00");
         user.addtimeslot(date3,"10:00","11:00");
         user.addtimeslot(date3,"14:00","16:00");
+
+
+        user.planifyman(task,date);
+        System.out.println("time slots");
+        user.getCalendar().getDays().get(date).printTimeslots();
+
 //        user.planifyman(task,date2);
 //        user.planifyman(task,date);
 //        System.out.println("Beforeplanifying");
@@ -49,6 +55,7 @@ public class LaunchApp {
         User.currentcalendar.getTaskstobeplanned().forEach(
                 k-> System.out.println(k.getName()+" duration"+k.getDuration()+" priority"+k.getPriority()+" starttime"+k.getStarttime()+" endtime"+k.getEndtime())
         );
+
         System.out.println("RESULT OF PLAN AUTO"+user.planifyauto(date,date4));
         user.getCalendar().getDays().get(date).printDay();
         System.out.println("Afterplanifying");

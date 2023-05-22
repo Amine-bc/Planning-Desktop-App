@@ -35,7 +35,7 @@
       <AnchorPane prefHeight="400.0" prefWidth="332.0" BorderPane.alignment="CENTER">
          <TextField fx:id="usernameField" layoutX="71.0" layoutY="152.0" promptText="Username" style="-fx-background-color: transparetn; -fx-border-color: #0589ff; -fx-border-radius: 10;" />
          <PasswordField fx:id="passwordField" layoutX="71.0" layoutY="200.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #0589ff; -fx-border-radius: 10;" />
-         <Button layoutX="114.0" layoutY="255.0" mnemonicParsing="false" onAction="#login" style="-fx-background-color: #0598ff; -fx-border-radius: 5;" text="Connect" textFill="WHITE">
+         <Button layoutX="114.0" layoutY="255.0" mnemonicParsing="false" onAction="#login" style="-fx-background-color: #0598ff; -fx-border-radius: 5;-fx-cursor: HAND" text="Connect" textFill="WHITE">
             <font>
                <Font name="System Bold" size="12.0" />
             </font>

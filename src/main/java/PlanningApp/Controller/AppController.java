@@ -2,6 +2,7 @@ package PlanningApp.Controller;
 
 import PlanningApp.Com.HistoryInterface;
 import PlanningApp.Model.Calendar;
+import PlanningApp.Model.Task;
 import PlanningApp.Model.User;
 import PlanningApp.Model.Day;
 
@@ -12,6 +13,8 @@ public class AppController implements HistoryInterface {
      static Calendar currentcalendar ;
 
       static Day currentday;
+
+      static Task currenttask;
     protected static User getcurrentuser(){
         return currentuser;
     }

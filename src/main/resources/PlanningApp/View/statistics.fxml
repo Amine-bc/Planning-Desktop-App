@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.chart.CategoryAxis?>
+<BorderPane fx:controller="PlanningApp.Controller.ProfileStatisticsController" prefHeight="500" prefWidth="700" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" >
+
+    <left>
+        <VBox fx:id="navigationVBox" prefHeight="500.0" prefWidth="167.0" spacing="10" style="-fx-background-color: #0598FF;">
+            <ImageView fx:id="profileImage" fitHeight="135.0" fitWidth="131.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../../Assets/uti.png" />
+                </image>
+                <VBox.margin>
+                    <Insets left="15.0" top="30.0" />
+                </VBox.margin>
+            </ImageView>
+            <HBox style="-fx-padding: 10px; -fx-background-color: #0598FF;" onMouseClicked="#handleMyWeekInfoClicked">
+                <Label fx:id="myWeekInfo" style="-fx-font-weight: bold;-fx-cursor: HAND"  text="My Week" textFill="white">
+                    <HBox.margin>
+                        <Insets bottom="20.0" left="10.0" top="20.0" />
+                    </HBox.margin>
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                </Label>
+            </HBox>
+            <HBox style="-fx-padding: 10px; -fx-background-color: #0598FF;">
+                <Label fx:id="myBadgesLabel" style="-fx-font-weight: bold;" text="My Badges" textFill="white">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                    <HBox.margin>
+                        <Insets left="10.0" />
+                    </HBox.margin>
+                </Label>
+                <VBox.margin>
+                    <Insets bottom="20.0" />
+                </VBox.margin>
+            </HBox>
+            <HBox style="-fx-padding: 10px; -fx-background-color: #0598FF;">
+                <Label fx:id="historyLabel" style="-fx-font-weight: bold;" text="History" textFill="white">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                    <HBox.margin>
+                        <Insets left="10.0" />
+                    </HBox.margin>
+                </Label>
+                <VBox.margin>
+                    <Insets bottom="20.0" />
+                </VBox.margin>
+                <padding>
+                    <Insets left="20.0" />
+                </padding>
+            </HBox>
+            <HBox style="-fx-padding: 10px; -fx-background-color: #0598FF;">
+                <Label fx:id="logoutLabel" style="-fx-font-weight: bold;" text="Logout" textFill="white">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                    <padding>
+                        <Insets left="20.0" />
+                    </padding>
+                </Label>
+                <VBox.margin>
+                    <Insets top="60.0" />
+                </VBox.margin>
+            </HBox>
+        </VBox>
+    </left>
+
+    <center>
+        <LineChart fx:id="lineChart" prefHeight="400.0" prefWidth="600.0"
+                   style="-fx-border-color: #0598FF; -fx-border-radius: 25; -fx-border-width: 4;"
+                   BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </BorderPane.margin>
+            <xAxis>
+                <CategoryAxis side="BOTTOM" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis side="LEFT" />
+            </yAxis>
+        </LineChart>
+    </center>
+
+    <bottom>
+        <VBox prefHeight="0.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+    </bottom>
+
+    <top>
+        <VBox prefHeight="0.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+    </top>
+
+    <right>
+        <VBox prefHeight="0.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+    </right>
+
+</BorderPane>
