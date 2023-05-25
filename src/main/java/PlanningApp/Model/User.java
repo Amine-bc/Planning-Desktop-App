@@ -5,6 +5,7 @@ import javafx.scene.chart.CategoryAxis;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class User implements TaskUser,TimeslotUser, Serializable, HistoryInterface {
 
@@ -15,6 +16,21 @@ public class User implements TaskUser,TimeslotUser, Serializable, HistoryInterfa
     public ArrayList<Calendar> getHistorylist(){
         return History;
     }
+    private HashMap<Badge,Integer> badgemap ;
+
+    public void initbadgemap(){
+        badgemap = new HashMap<>() ;
+        badgemap.put(Badge.Good,0);
+        badgemap.put(Badge.Excellent,0);
+        badgemap.put(Badge.VeryGood,0);
+    }
+    public void addbadge( Badge badge){
+        badgemap.put(badge, badgemap.get(badge)+1);
+    }
+    public int getbadgenum(Badge badge){
+        return badgemap.get(badge);
+    }
+
 
     public void addCalendartoHistory(Calendar calendar){
         History.add(calendar);
@@ -82,6 +98,8 @@ public class User implements TaskUser,TimeslotUser, Serializable, HistoryInterfa
         this.profile.setpassword(password);
         User.currentuser = this;
         Category.initcategory();
+        initbadgemap();
+        History = new ArrayList<>() ;
     }
     // getters and setters
     public void setCalendar(Calendar calendar) {
@@ -132,7 +150,6 @@ public class User implements TaskUser,TimeslotUser, Serializable, HistoryInterfa
         // if it's possible planify it
         calendar.planifyman(task,day);
         // correct the day here
-
     };
 
     @Override
@@ -171,6 +188,7 @@ public class User implements TaskUser,TimeslotUser, Serializable, HistoryInterfa
         }
 
         };
+
     public void removetimeslot( String start , String end ) {
     }
 
@@ -181,12 +199,57 @@ public class User implements TaskUser,TimeslotUser, Serializable, HistoryInterfa
         this.calendar.removetimeslot(day,start,end);
     }
 
+    private int numfelecitations = 0 ;
+    //setters and getters for this attribute
+    public int getnumfelecitations(){
+        return this.numfelecitations;
+    }
+    public void incnumfelecitations(){
+        this.numfelecitations ++ ;
+    }
     public void settaskasdone(Task task)
     {
         // set the state to done
+        task.setState(State.completed);
         // increment the counter of done tasks in day
+        calendar.getDays().get(task.getDay()).incrementdonetasks();
         // compare it to the min done tasks in the day to give a badge or not
+        if ( calendar.getDays().get(task.getDay()).gettaskdone() >= calendar.getDays().get(task.getDay()).getNb_mintasks() ) {
+            // give a badge
+
+            incnumfelecitations();
+            if ( getnumfelecitations() >=  5 ) {
+                // give a badge
+                this.addbadge(Badge.Good);
+                setnumfelecitations(0);
+                if ( getbadgenum(Badge.Good) >=  5 ) {
+                    // give a badge
+                    this.addbadge(Badge.VeryGood);
+                    setbadgenum(0,Badge.Good);
+                 if ( getbadgenum(Badge.VeryGood) >=  5 ) {
+                    // give a badge
+                    this.addbadge(Badge.Excellent);
+                     setbadgenum(0,Badge.VeryGood);
+
+                 }
+                }
+            }
+
+        }
+
         // if give yes then give the badge and check how many badge of good he has
-        // ..etc
+//        // ..etc
+//        3andi un attribut f user ta3 nombre de felicitations et nombre de tache realisées
+//        - when the user click on complete the task , i set it's ETAT to completed and then nbr de tache realisees++
+//            -if nbr tache realisees >= nbr min de tache par jour , we send a felicitation message and nombre de felicitations++
+//            - if nombre de felicitation == 5 the user will have a badge GOOD and nombre de felicitation must be reset To 0
+//            - if we have 3 badges good we will have a badge veryGOOD and if we have 3 badges veryGOOd we will have a badge excellent
+    }
+
+    public void setnumfelecitations(int i) {
+        this.numfelecitations = i ;
+    }
+    public void setbadgenum(int num, Badge badge){
+        this.badgemap.put(badge,num);
     }
 }

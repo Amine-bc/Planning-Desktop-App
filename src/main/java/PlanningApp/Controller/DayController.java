@@ -225,4 +225,15 @@ public class DayController {
         stage.setScene(new Scene(roo));
         stage.show();
     }
+
+    public void returntocalendar() throws IOException {
+        Stage stage1 = (Stage) titleLabel.getScene().getWindow();
+        stage1.close();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/PlanningApp/View/Calendar.fxml"));
+        Parent roo = loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("TaskInfo");
+        stage.setScene(new Scene(roo));
+        stage.show();
+    }
 }

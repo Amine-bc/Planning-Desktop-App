@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxWidth="600" style="-fx-padding: 20 0 0 20" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="PlanningApp.Controller.DayController">
+<BorderPane maxWidth="600" style="-fx-padding: 20 0 0 20" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PlanningApp.Controller.DayController">
     <top>
         <HBox alignment="CENTER" style="-fx-padding: 10;">
 
@@ -67,6 +67,7 @@
     </center>
     <bottom>
         <HBox alignment="CENTER" spacing="10" style="-fx-padding: 10;">
+         <Button onAction="#returntocalendar" mnemonicParsing="false" style="-fx-background-color: RED;-fx-cursor: HAND" text="Back" textFill="WHITE" />
             <Button onAction="#AddTimeslot" style="-fx-cursor: hand; -fx-background-color: #0598FF; -fx-border-radius: 5px; -fx-text-fill: white;" text="+ Add TimeSlot" />
             <Button onAction="#AddTask" style="-fx-cursor: hand; -fx-background-color: #0598FF; -fx-border-radius: 5px; -fx-text-fill: white;" text="+Add Task" />
          <Button onAction="#AutoTask" style="-fx-cursor: hand; -fx-background-color: #0598FF; -fx-border-radius: 5px; -fx-text-fill: white;" text="+ Add Task Auto" />

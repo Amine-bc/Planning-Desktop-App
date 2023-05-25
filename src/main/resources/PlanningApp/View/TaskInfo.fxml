@@ -191,7 +191,7 @@
                <Insets left="30.0" right="40.0" />
             </HBox.margin>
          </Button>
-         <Button mnemonicParsing="false" onAction="#handleModifyButtonClick" style="-fx-background-color: #1BE985;" text="Finished" textFill="WHITE">
+         <Button mnemonicParsing="false" onAction="#finished" style="-fx-background-color: #1BE985;" text="Finished" textFill="WHITE">
             <font>
                <Font name="System Bold" size="13.0" />
             </font>

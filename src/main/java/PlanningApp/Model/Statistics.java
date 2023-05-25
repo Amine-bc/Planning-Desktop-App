@@ -11,6 +11,7 @@ import java.util.Map;
 public class Statistics {
 
     static ArrayList<Tasksstates> taskstate = new ArrayList<>();
+    static ArrayList<Float> days = new ArrayList<>();
     public static Statistics Createstats( String day){
         Statistics stats = new Statistics();
         // iterate over the tasks in the day

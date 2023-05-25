@@ -110,4 +110,9 @@ public class InfoTaskController implements Initializable {
         primaryStage.show();
 
     }
+    public void finished(){
+        AppController.currentuser.settaskasdone(AppController.currenttask);
+        System.out.println(" task done ");
+        System.out.println(AppController.currenttask.getState());
+    }
 }
