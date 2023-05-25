@@ -13,5 +13,6 @@ public interface Util {
             // Linux and other Unix-like operating systems
             return "/home/am1n3/Projects/JavaPooTp/src/main/java/PlanningApp/Files/users.ser";
         }
-}
+    }
+
 }

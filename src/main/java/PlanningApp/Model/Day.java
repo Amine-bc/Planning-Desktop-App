@@ -10,7 +10,6 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser, Serializable {
         this.timeslot = new ArrayList<TimeSlot>();
         this.tasks = new ArrayList<Task>();
         this.mintimeslot = mintimeslot;
-        initbadgemap();
 //        LocalTime time = LocalTime.parse("00:00"); // Parse the initial time
 //
 //        String[] timeParts = this.mintimeslot.split(":");
@@ -40,7 +39,7 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser, Serializable {
 
     private String date ;
     private String dayname ;
-    private int nb_mintasks = 0;
+    private int nb_mintasks = 1;
     // add setter and getter for this attribute
     public void incMintimeslot()
     {
@@ -50,24 +49,10 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser, Serializable {
         return this.nb_mintasks ;
     }
     private int Tasksdone ;
-    public void incTasksdone(){
-        this.Tasksdone ++;
-    }
-    private HashMap<Badge,Integer> badgemap ;
 
-    public void initbadgemap(){
-        badgemap = new HashMap<>() ;
-        badgemap.put(Badge.Good,0);
-        badgemap.put(Badge.Excellent,0);
-        badgemap.put(Badge.VeryGood,0);
+    public int gettaskdone(){
+        return this.Tasksdone ;
     }
-    public void addbadge( Badge badge){
-        badgemap.put(badge, badgemap.get(badge)+1);
-    }
-    public int getbadgenum(Badge badge){
-        return badgemap.get(badge);
-    }
-
     public int getTasksdone(){
         return this.Tasksdone ;
     }
@@ -103,9 +88,9 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser, Serializable {
     public void setNb_mintasks(int nb_mintasks) {
         this.nb_mintasks = nb_mintasks;
     }
-
-
-
+    public void incrementdonetasks(){
+        this.Tasksdone++;
+    }
     @Override
     public boolean planifyman(String time, String duration) {
         return false;
