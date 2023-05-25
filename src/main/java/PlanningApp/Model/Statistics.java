@@ -11,7 +11,7 @@ import java.util.Map;
 public class Statistics {
 
     static ArrayList<Tasksstates> taskstate = new ArrayList<>();
-    static ArrayList<Float> days = new ArrayList<>();
+    static ArrayList<Float> dayseval = new ArrayList<>();
     public static Statistics Createstats( String day){
         Statistics stats = new Statistics();
         // iterate over the tasks in the day
@@ -19,11 +19,17 @@ public class Statistics {
        Day daytostats = User.currentuser.calendar.getDays().get(day) ;
        System.out.println("Daytostats: \nTask state");
        System.out.println("Number of tasks in this day: "+daytostats.getTasks().size());
+       int numtasksdone = 0 ;
         for (Task task: daytostats.getTasks()) {
             taskstate.add(new Tasksstates(task.getName(),task.getState())) ;
             //print taskstate
             System.out.println("task name: "+task.getName()+" task state: "+task.getState());
+            if ( task.getState() == State.completed ){
+                numtasksdone ++ ;
+            }
         }
+        float evaluation = (float) numtasksdone / (float)daytostats.getTasks().size() ;
+        Statistics.dayseval.add( evaluation);
         // no projects stats in a day
         return stats;
     }
