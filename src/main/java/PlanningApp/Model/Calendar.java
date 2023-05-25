@@ -17,6 +17,12 @@ public class Calendar implements TaskUser,TimeslotUser, Serializable, TimeCalcs 
     private String mintimeslot ;
     private String firstday ;
     private String lastday ;
+
+    public void setTaskstobeplanned(ArrayList<Task> taskstobeplanned) {
+        this.taskstobeplanned = taskstobeplanned;
+    }
+
+
     //private ArrayList<Task> tasks; if needed use it if not it's okat it's commented
     private ArrayList<Task> taskstobeplanned;
     private ArrayList<Project> Projects;

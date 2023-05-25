@@ -65,6 +65,7 @@ public class LoginController  {
             showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome, " + username + "!");
             //TODO load user object from memory
 
+            User.currentcalendar=AppController.currentuser.getCalendar();
 
             Stage stage = (Stage) firstPage.getScene().getWindow();
             stage.close();
@@ -88,8 +89,8 @@ public class LoginController  {
         String username = usernameField.getText();
         String password = passwordField.getText();
         User user = new User(username,password);
-        user.createCalendar(2021,2022,2,10,10,30);
-
+        user.createCalendar(2021,2028,2,10,10,30);
+        User.currentcalendar=user.getCalendar();
         if (username.isEmpty() || password.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Registration Failed", "Username and password are required.");
             return;

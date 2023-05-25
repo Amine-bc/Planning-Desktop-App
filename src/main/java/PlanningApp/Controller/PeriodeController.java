@@ -1,6 +1,7 @@
 package PlanningApp.Controller;
 
 import PlanningApp.Model.App;
+import PlanningApp.Model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -52,7 +53,8 @@ public class PeriodeController {
 
 
            AppController.currentuser.createCalendar(startingYear,endingYear,startingMonth,startingDay,endingMonth,endingDay);
-            App.users.put(AppController.currentuser.getname(),AppController.currentuser);
+           User.currentcalendar=AppController.currentuser.getCalendar();
+           App.users.put(AppController.currentuser.getname(),AppController.currentuser);
             App.SaveToDb("src/main/java/PlanningApp/Files/users.ser");
 
             Stage stage = (Stage) Periode.getScene().getWindow();
