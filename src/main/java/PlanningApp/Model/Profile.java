@@ -24,7 +24,7 @@ public class Profile implements Serializable {
     private String password;
     private String Id;
     private ArrayList<Badge> badge ;
-    private HashMap<String,Project> projects;
+    private HashMap<String,Project> projects=new HashMap<>();
     private Statistics stats;
     private Calendar calendarhistory;
 
@@ -60,4 +60,22 @@ public class Profile implements Serializable {
         this.name = name;
     }
 
+    public void showProject() {
+        for (String key : projects.keySet()) {
+            System.out.println("\n________________________________________________________________ \n");
+            System.out.println("Project Name: " + projects.get(key).getName());
+            System.out.println("Project Description: " + projects.get(key).getDescription());
+            projects.get(key).showTasks();
+            System.out.println("\n________________________________________________________________ \n");
+        }
+
+    }
+
+    public HashMap<String, Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(HashMap<String, Project> projects) {
+        this.projects = projects;
+    }
 }

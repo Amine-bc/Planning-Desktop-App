@@ -44,4 +44,18 @@ public class Project {
         return this.tasks;
     }
 
+    public void showTasks() {
+        System.out.println("Tasks for Project: " + this.name);
+        for (Task task : tasks) {
+            System.out.println("Task Name: " + task.getName());
+            System.out.println("Task Duration: " + task.getDuration());
+            System.out.println("Task Priority: " + task.getPriority());
+            System.out.println("Task Start Time: " + task.getStarttime());
+            System.out.println("Task End Time: " + task.getEndtime());
+            System.out.println("-----------------------------");
+        }
+    }
+
+
+
 }

@@ -48,7 +48,7 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser, Serializable {
     public int getMintimeslot(){
         return this.nb_mintasks ;
     }
-    private int Tasksdone ;
+    private int Tasksdone =0;
 
     public int gettaskdone(){
         return this.Tasksdone ;
@@ -169,19 +169,28 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser, Serializable {
 
     public float evaluate(){
         // number of tasks completed over number of all tasks
-        int nb_tasks = this.tasks.size();
+        int nb_tasks = this.getTasks().size();
+        //System.out.println("nb_tasks = " + nb_tasks);
         int nb_taskscompleted = 0;
-        for (int i = 0; i < nb_tasks; i++) {
-            if (this.tasks.get(i).getState() == State.completed){
-                nb_taskscompleted++;
-            }
-        }
-        if(nb_tasks==0){
-            return 0;
-        }else{
-            return nb_taskscompleted/nb_tasks;
-        }
+        //for (int i = 0; i < nb_tasks; i++) {
+          //  if (this.tasks.get(i).getState() == State.completed){
+            //    Tasksdone++;
+           // }
+        // }
 
+        //if(nb_tasks==0){
+
+          //  return 0;
+        //}else{
+
+          //  return (float) Tasksdone / (float)nb_tasks;
+        //}
+        System.out.println("Tasksdone = " + Tasksdone);
+        if(nb_tasks!=0)
+        {return (float) Tasksdone/(float) nb_tasks;}
+        else{
+            return 0;
+        }
 
     }
 

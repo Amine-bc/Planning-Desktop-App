@@ -13,6 +13,11 @@ public class User implements TaskUser,TimeslotUser, Serializable, HistoryInterfa
     //TODO do not forget to set the currentuser
     public static Calendar currentcalendar ;
     public ArrayList<Calendar> History ;
+
+    public void setHistory(ArrayList<Calendar> history) {
+        History = history;
+    }
+
     public ArrayList<Calendar> getHistorylist(){
         return History;
     }
@@ -218,6 +223,8 @@ public class User implements TaskUser,TimeslotUser, Serializable, HistoryInterfa
             // give a badge
 
             incnumfelecitations();
+            //calendar.getDays().get(task.getDay()).incrementdonetasks()   ;
+
             if ( getnumfelecitations() >=  5 ) {
                 // give a badge
                 this.addbadge(Badge.Good);
@@ -252,4 +259,52 @@ public class User implements TaskUser,TimeslotUser, Serializable, HistoryInterfa
     public void setbadgenum(int num, Badge badge){
         this.badgemap.put(badge,num);
     }
+
+    public  void ReadfromDbHistory(String FilePath)
+    {
+        try
+        {
+            FileInputStream fileOut2 = new FileInputStream(FilePath);
+            ObjectInputStream objectIn = new ObjectInputStream(fileOut2);
+            // read the user object
+            ArrayList<Calendar> history= (ArrayList<Calendar>) objectIn.readObject();
+            this.setHistory(history);
+            System.out.println("History deserialized successfully.");
+
+        }
+        catch (FileNotFoundException e)
+        {
+            System.out.println("File not Found");
+        }
+        catch (Exception e1){
+            System.out.println(e1.getStackTrace());
+        }
+
+
+    }
+    public static void ShowCalendar()
+    {
+        System.out.println("---------------------Calendar----------------------");
+        System.out.println("<----------------------Days----------------------->");
+        User.currentcalendar.getDays().forEach(
+                (dayname,day) -> {
+                    System.out.println(">    -   -       "+dayname+"     -    -    <\n"+"Timeslots");
+                    if ( day.getTimeslot().isEmpty() ){ System.out.println("\nNo timeslots for this day\n");}
+                    day.getTimeslot().forEach(
+                            (timeslot) -> {
+                                System.out.println("Start:   "+timeslot.getstart()+"    End:   "+timeslot.getend()+" \n");
+                            }
+                    );
+                    System.out.println("Tasks");
+                    if ( day.getTasks().isEmpty() ){ System.out.println("\nNo tasks for this day\n");}
+                    day.getTasks().forEach(
+                            (task) -> {
+                                System.out.println("Task: "+task.getName()+"    Start: "+task.getStarttime()+"    End: "+task.getEndtime()+" \n");
+                            }
+                    );
+                    System.out.println("<----------------------------------------------->");
+                }
+        );
+    }
+
 }
