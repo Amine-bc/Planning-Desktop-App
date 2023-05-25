@@ -36,6 +36,10 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class CalendarController implements Initializable {
+
+    @FXML
+    private Button customButton;
+
     @FXML
     private Label monthYearLabel;
 
@@ -58,6 +62,7 @@ public class CalendarController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //TODO user Calendar is a static proprety it must called :
+        customButton.setStyle("-fx-background-color: #0598FF; -fx-background-radius: 25%;-fx-cursor: hand;-fx-font-weight: bold; -fx-text-fill: white;");
         calendarModel = new Calendar();
         updateView();
     }
@@ -68,6 +73,8 @@ public class CalendarController implements Initializable {
         calendarModel.goToPreviousMonth();
         updateView();
     }
+
+
 
     public void handleNextMonthButton() {
         calendarModel.goToNextMonth();
@@ -203,7 +210,21 @@ public class CalendarController implements Initializable {
 
     }
 
+     public void stats() throws IOException {
+         try {
+             Stage stage = (Stage) monthYearLabel.getScene().getWindow();
+             stage.close();
+             FXMLLoader loader = new FXMLLoader(getClass().getResource("/PlanningApp/View/statistics.fxml"));
+             Parent root = loader.load();
+             Stage stage1=new Stage();
+             stage1.setTitle("Calendar");
+             stage1.setScene(new Scene(root));
+             stage1.show();
 
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+     }
 
 }
 

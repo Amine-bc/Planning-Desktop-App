@@ -18,13 +18,11 @@ public class Calendar implements TaskUser,TimeslotUser, Serializable, TimeCalcs 
     private String firstday ;
     private String lastday ;
 
-    public void setTaskstobeplanned(ArrayList<Task> taskstobeplanned) {
-        this.taskstobeplanned = taskstobeplanned;
-    }
+
 
 
     //private ArrayList<Task> tasks; if needed use it if not it's okat it's commented
-    private ArrayList<Task> taskstobeplanned;
+    private  ArrayList<Task> taskstobeplanned;
     private ArrayList<Project> Projects;
     public static void addtask(Task task){
         tasks.add(task);
@@ -136,6 +134,7 @@ public class Calendar implements TaskUser,TimeslotUser, Serializable, TimeCalcs 
         Collections.sort(taskstobeplanned);
     }
     public boolean planifyauto(String startDate, String endDate) {
+        System.out.println("Calendar.planifyauto");
         // IMPORTANT before planifying auto you have to fill tasks is an arraylist
 //        if (this.tasks.isEmpty()){
 //            throw new IllegalArgumentException("There is no tasks to be planned");
@@ -153,12 +152,16 @@ public class Calendar implements TaskUser,TimeslotUser, Serializable, TimeCalcs 
 //        taskstobeplanned.addAll(tasks);
         // for tasks in the arraylist taskstobeplanned
         boolean planified = true ;
+        if(taskstobeplanned.isEmpty()){
+            System.out.println(" ray fargha la liste ");
+        }
         while ( !taskstobeplanned.isEmpty()) {
             System.out.println("\n\n\nThe tasks to be planned are");
             taskstobeplanned.forEach((n) -> System.out.println(n.getName()));
             Task task = taskstobeplanned.get(0);
             // for each day in the arraylist dayslist
             planified = task.planifyauto(startDate,endDate) && planified;
+            //taskstobeplanned.remove(0);
             System.out.println("\n\n\n");
         }
         return planified;

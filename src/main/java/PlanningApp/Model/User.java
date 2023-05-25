@@ -137,6 +137,7 @@ public class User implements TaskUser,TimeslotUser, Serializable, HistoryInterfa
 
     @Override
     public boolean planifyauto(String startperiod, String endperiod) {
+        System.out.println("User.planifyauto");
             return User.currentcalendar.planifyauto(startperiod,endperiod);
     }
     @Override

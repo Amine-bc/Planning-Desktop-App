@@ -64,7 +64,7 @@
                 </padding>
             </HBox>
             <HBox style="-fx-padding: 10px; -fx-background-color: #0598FF;">
-                <Label fx:id="logoutLabel" style="-fx-font-weight: bold;" text="Logout" textFill="white">
+                <Label fx:id="logoutLabel" style="-fx-font-weight: bold;" text="Logout"  textFill="white">
                     <font>
                         <Font size="17.0" />
                     </font>

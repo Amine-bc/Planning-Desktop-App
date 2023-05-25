@@ -63,7 +63,7 @@ public class AutoTask {
     @FXML
     private TextField TaskNum;
 
-    static int numnum;
+
 
 
 
@@ -75,8 +75,9 @@ public class AutoTask {
         @FXML
         private Button button;
 
-        private  static int reloadCount = 0;
+        private  static int reloadCount ;
 
+        private static int numnum;
 
         @FXML
         public void PerTask() throws IOException {
@@ -116,6 +117,7 @@ public class AutoTask {
 
             try {
                 numnum = Integer.parseInt(TaskNum.getText());
+                reloadCount=numnum-1;
             }catch (Exception e){
                 System.out.println("i'm here");
             }
@@ -128,7 +130,6 @@ public class AutoTask {
             stage1.setTitle("Calendar Application");
             stage1.setScene(new Scene(root));
             stage1.show();
-            reloadCount++;
 
         }
 
@@ -138,25 +139,28 @@ public class AutoTask {
             System.out.println("numnum = " + numnum);
             System.out.println("reloadCount = " + reloadCount);
 
+            String name ="hero";
+            String duration ="02:00";
+            int priority =0;
+            int repetition = 1;
+            String decomposable = "NO";
+            //if (decomposable.equals("yes")) {
+            //  Task task = new DecompTask(name,duration,priority,repetition);
+            // AppController.currentuser.getCalendar().getTaskstobeplanned().add(task);
+            //}else{
+            Task task = new SimpleTask(name,duration,priority, repetition);
+            System.out.println("ref ="+AppController.currentuser.getCalendar());
+            AppController.currentuser.getCalendar().getTaskstobeplanned().add(task);
 
-                if (reloadCount < numnum) {
+                if (reloadCount > 0) {
                     try {
 
-                            String name ="hero";
-                            String duration ="02:00";
-                            int priority =0;
-                            int repetition = 1;
-                            String decomposable = "NO";
-                            if (decomposable.equals("yes")) {
-                                Task task = new DecompTask(name,duration,priority,repetition);
-                                AppController.currentuser.getCalendar().getTaskstobeplanned().add(task);
-                            }else{
-                                Task task = new SimpleTask(name,duration,priority, repetition);
-                                AppController.currentuser.getCalendar().getTaskstobeplanned().add(task);
-                            }
-                        Collections.sort(AppController.currentuser.getCalendar().getTaskstobeplanned());
 
-                            Stage stage = (Stage) hero.getScene().getWindow();
+
+                            //}
+                        Collections.sort(AppController.currentuser.getCalendar().getTaskstobeplanned());
+                        AutoTask.reloadCount--;
+                        Stage stage = (Stage) hero.getScene().getWindow();
                         stage.close();
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/PlanningApp/View/AutoTask.fxml"));
 
@@ -165,20 +169,27 @@ public class AutoTask {
                         stage1.setTitle("Task");
                         stage1.setScene(new Scene(root));
                         stage1.show();
-                        reloadCount++;
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }else{
+
                     System.out.println("------------------------------------------------------");
                     System.out.println("rani wsselt");
                     User.currentcalendar=AppController.currentcalendar;
-                    try {
-                        App.currentuser.planifyauto("2023-05-15Monday","2023-05-29Monday");
-                        App.ShowCalendar();
-                    }catch (Exception e4){
-                        e4.printStackTrace();
+                    System.out.println("hna ni hna");
+                    for (Task t:AppController.currentcalendar.getTaskstobeplanned()){
+                        System.out.println("the taskto add is heree ::"+t.getName());
                     }
+
+                    System.out.println("after tasks");
+                    User.currentcalendar.planifyauto("2023-05-15Monday","2023-05-29Monday");
+                    AppController.currentcalendar=User.currentcalendar;
+                        //AppController.currentuser.planifyauto("2023-05-15Monday","2023-05-29Monday");
+                        //AppController.currentcalendar=App.currentuser.getCalendar();
+                        //App.ShowCalendar();
+
 
 
                     Stage stage = (Stage) hero.getScene().getWindow();
