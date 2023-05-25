@@ -11,7 +11,7 @@ import java.util.Map;
 public class Statistics {
 
     static ArrayList<Tasksstates> taskstate = new ArrayList<>();
-    static ArrayList<Float> dayseval = new ArrayList<>();
+    public static ArrayList<Float> dayseval = new ArrayList<>();
     public static Statistics Createstats( String day){
         Statistics stats = new Statistics();
         // iterate over the tasks in the day
@@ -28,7 +28,8 @@ public class Statistics {
                 numtasksdone ++ ;
             }
         }
-        float evaluation = (float) numtasksdone / (float)daytostats.getTasks().size() ;
+
+        float evaluation = daytostats.evaluate(); ;
         Statistics.dayseval.add( evaluation);
         // no projects stats in a day
         return stats;
@@ -41,16 +42,18 @@ public class Statistics {
         // then Projects
         // iterate over projects
         // generate projectstate
+        System.out.println("hnaaautryrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
         String day = null;
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddEEEE");
 
         // Parse the start and end dates into LocalDate objects
-        LocalDate start = LocalDate.parse(startday, formatter);
+        LocalDate start1 = LocalDate.parse(startday, formatter);
         LocalDate end = LocalDate.parse(endday, formatter);
 
         // Generate the list of days between the start and end dates
         ArrayList<String> daysList = new ArrayList<>();
-        LocalDate currentDate = start;
+        LocalDate currentDate = start1;
         while (!currentDate.isAfter(end)) {
             daysList.add(currentDate.format(formatter));
             currentDate = currentDate.plusDays(1);

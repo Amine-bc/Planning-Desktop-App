@@ -1,10 +1,7 @@
 package PlanningApp.Controller;
 
-import PlanningApp.Model.App;
-import PlanningApp.Model.SimpleTask;
-import PlanningApp.Model.User;
+import PlanningApp.Model.*;
 import PlanningApp.View.FirstPageView;
-import  PlanningApp.Model.Task;
 
 
 public class LaunchApp {
@@ -35,6 +32,7 @@ public class LaunchApp {
         user.getCalendar().getTaskstobeplanned().add(task1);
         user.getCalendar().getTaskstobeplanned().add(task2);
         user.planifyauto(date,date2);
+        Statistics.Createstats("2023-05-15Monday","2023-05-29Monday");
 
 
         App.ShowCalendar();

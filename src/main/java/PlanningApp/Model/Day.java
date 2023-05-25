@@ -167,7 +167,7 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser, Serializable {
 
     }
 
-    public int evaluate(){
+    public float evaluate(){
         // number of tasks completed over number of all tasks
         int nb_tasks = this.tasks.size();
         int nb_taskscompleted = 0;
@@ -176,7 +176,13 @@ public class Day implements TaskUser,TimeCalcs,TimeslotUser, Serializable {
                 nb_taskscompleted++;
             }
         }
-        return nb_taskscompleted/nb_tasks;
+        if(nb_tasks==0){
+            return 0;
+        }else{
+            return nb_taskscompleted/nb_tasks;
+        }
+
+
     }
 
     @Override

@@ -1,8 +1,6 @@
 package PlanningApp.Controller;
 
-import PlanningApp.Model.SimpleTask;
-import PlanningApp.Model.Task;
-import PlanningApp.Model.User;
+import PlanningApp.Model.*;
 import PlanningApp.View.FirstPageView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +22,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
-import PlanningApp.Model.Calendar;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -36,6 +33,17 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class CalendarController implements Initializable {
+
+    @FXML
+     private Button Good;
+    @FXML
+    private Button VeryGood;
+    @FXML
+    private Button Excellent;
+
+    @FXML
+    private  Button Felicite;
+
 
     @FXML
     private Button customButton;
@@ -62,6 +70,11 @@ public class CalendarController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //TODO user Calendar is a static proprety it must called :
+        Good.setText("Good: "+String.valueOf(App.currentuser.getbadgenum(Badge.Good)));
+        VeryGood.setText("VeryGood: "+String.valueOf(App.currentuser.getbadgenum(Badge.VeryGood)));
+        Excellent.setText("Excellent: "+String.valueOf(App.currentuser.getbadgenum(Badge.Excellent)));
+
+        Felicite.setText("Felecitations: "+String.valueOf(App.currentuser.getnumfelecitations()));
         customButton.setStyle("-fx-background-color: #0598FF; -fx-background-radius: 25%;-fx-cursor: hand;-fx-font-weight: bold; -fx-text-fill: white;");
         calendarModel = new Calendar();
         updateView();

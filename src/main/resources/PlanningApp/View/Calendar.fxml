@@ -11,9 +11,10 @@
     <content>
         <VBox spacing="10">
             <HBox>
-                 <Button onAction="#stats" layoutX="30" layoutY="20" text="Good" style="-fx-background-color: #0598ff; -fx-background-radius: 25;-fx-cursor: hand; -fx-text-fill: white;" />
-                 <Button onAction="#stats" layoutX="60" layoutY="20" text="Very-Good" style="-fx-background-color: #0598ff; -fx-background-radius: 25;-fx-cursor: hand; -fx-text-fill: white;"/>
-                <Button onAction="#stats" layoutX="90" layoutY="20" text="Excellent"  style="-fx-background-color: #0598ff; -fx-background-radius: 25;-fx-cursor: hand; -fx-text-fill: white;"/>
+                 <Button fx:id="Good"       text="Good: " style="-fx-background-color: #0598ff; -fx-background-radius: 25;-fx-cursor: hand; -fx-text-fill: white;" />
+                 <Button fx:id="VeryGood"   text="Very-Good: " style="-fx-background-color: #0598ff; -fx-background-radius: 25;-fx-cursor: hand; -fx-text-fill: white;"/>
+                <Button  fx:id="Excellent"  text="Excellent: "  style="-fx-background-color: #0598ff; -fx-background-radius: 25;-fx-cursor: hand; -fx-text-fill: white;"/>
+                <Button  fx:id="Felicite"   text="Felicite: "  style="-fx-background-color: #0598ff; -fx-background-radius: 25;-fx-cursor: hand; -fx-text-fill: white;"/>
             </HBox>
             <HBox spacing="10" style="-fx-padding: 20 0 20 210;">
 
