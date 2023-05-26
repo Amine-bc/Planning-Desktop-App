@@ -40,7 +40,7 @@ public class LaunchApp {
         //Statistics.Createstats("2023-05-15Monday","2023-05-29Monday");
 
 
-       // User.ShowCalendar();
+        User.ShowCalendar();
 
 
         System.out.println("-------------------------------------------------------------------");
@@ -68,7 +68,9 @@ public class LaunchApp {
         user.getProfile().addProject(prj3);
         user.getProfile().addProject(prj4);
 
-        //user.getProfile().showProject();
+        user.getProfile().showProject();
+
+
         System.out.println("---------------------------------------------------------------------");
         System.out.println("--------------------* History *--------------------------------------");
         user.addCalendartoHistory(user.getCalendar());
